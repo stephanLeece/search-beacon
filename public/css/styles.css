@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: inherit;
+}
+
+#reactBody {
+  height: inherit;
+display: flex;
+flex-direction: column;
+background-color: rgb(68, 51, 204)
+}
+
+#reactBody > * {
+  border: 1px solid black;
+}
+
+#landing {
+  flex-grow: 1;
+}
+
+header {
+  height: 10%;
+}
+
+content {
+  flex-grow: 1;
+}
+
+footer {
+  height: 5%;
+}
