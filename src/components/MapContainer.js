@@ -7,20 +7,30 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 class MapContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedPlace: {}
-    };
+    this.state = {};
+    this.onMarkerClick = this.onMarkerClick.bind(this);
+  }
+
+  onMarkerClick(props, marker, e) {
+    console.log('marker clicked');
+    this.setState({selectedPlace: props, activeMarker: marker, showingInfoWindow: true});
   }
 
   render() {
-    console.log('rendering');
     const style = {
-      width: '100vw',
+      width: '50vw',
       height: '100vh',
       border: '1px solid yellow'
     }
-    return (
-      <Map google={this.props.google} style={style} />    );
+    return (<Map google={this.props.google} style={style}>
+      <Marker onClick={this.onMarkerClick} name={'SOMA'} position={{
+          lat: 37.778519,
+          lng: -122.405640
+        }}/>
+      <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
+        <h1>You Here</h1>
+      </InfoWindow>
+    </Map>);
 
   }
 }
