@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link, browserHistory} from 'react-router';
-import axios from './axios';
-import {getSocket} from './socket';
+import axios from '../axios';
+import {getSocket} from '../socket';
 
 export class Landing extends React.Component {
   constructor(props) {
@@ -11,7 +11,9 @@ export class Landing extends React.Component {
   render() {
     return (<div id='reactBody'>
 
-<div id='landing'>Content</div>
+<div id='landing'>
+{this.props.children}
+</div>
 
 </div>
     )
