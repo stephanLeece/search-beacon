@@ -59,15 +59,22 @@ app.use(express.static('./public'));
 
 
 app.get('/', function(req, res) {
+  // res.sendFile(__dirname + '/index.html');
+  res.redirect('/landing/');
+});
+
+app.get('/landing', function(req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-
 app.get('/logout', function(req, res) {
   req.session = null;
-  res.redirect('/welcome/');
+  res.redirect('/landing/');
 });
 
+app.get('*', function(req, res) {
+  res.sendFile(__dirname + '/index.html');
+  });
 
 
 app.listen(process.env.PORT || 8080, function() {

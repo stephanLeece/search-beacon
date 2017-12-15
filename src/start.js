@@ -2,8 +2,11 @@ import React from 'react';
 import * as io from 'socket.io-client';
 import ReactDOM from 'react-dom';
 import {Router, Route, Link, IndexRoute, redirect, hashHistory, browserHistory} from 'react-router';
-import {Landing} from './components/Landing';
+import {Main} from './components/Main';
 import MapContainer from './components/MapContainer';
+import {Landing} from './components/LandingComponents/Landing';
+import Register from './components/LandingComponents/Register';
+import {LoginPage} from './components/LoginPage';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import reducer from './reducers';
@@ -15,12 +18,14 @@ export const store = createStore(reducer, composeWithDevTools(applyMiddleware(re
 
 
 
-const loggedInRouter = (<Provider store={store}>
-  <Router history={browserHistory}>
-    <Route path="/" component={Landing}>
-    <IndexRoute component={MapContainer}/>
+const notLoggedInRouter = (<Provider store={store}>
+  <Router history={hashHistory}>
+    <Route path="/" component={Main}>
+    <Route path="/register" component={Register}/>
+    <Route path="/login" component={LoginPage}/>
+      <IndexRoute component={Landing}/>
     </Route>
-  </Router>
+    </Router>
 </Provider>);
 
 // const notLoggedInRouter = (<Provider store={store}>
@@ -37,4 +42,4 @@ const loggedInRouter = (<Provider store={store}>
 //   router = loggedInRouter;
 // }
 
-ReactDOM.render(loggedInRouter, document.querySelector('#root'));
+ReactDOM.render(notLoggedInRouter, document.querySelector('#root'));
