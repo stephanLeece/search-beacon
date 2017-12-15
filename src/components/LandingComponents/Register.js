@@ -1,79 +1,75 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import {postForm} from '../../actions';
-// import {Link, browserHistory} from 'react-router';
-// import axios from '../axios';
-// import {getSocket} from '../socket';
-const mapStateToProps = (state) => ({
-});
+import {postRegisterForm} from '../../actions';
 
-const mapDispatchToProps = (dispatch) => ({
-  postForm: (payload) => dispatch(postForm(payload)),
+const mapStateToProps = state => ({error: state.error});
+
+const mapDispatchToProps = dispatch => ({
+  postForm: payload => dispatch(postRegisterForm(payload))
 });
 
 class Register extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {}
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
-
   handleChange(e) {
-      this.setState({
-        [e.target.name]: e.target.value
-      }, () => {
-        console.log('new state', this.state);
-      })
-    }
+    this.setState({
+      [e.target.name]: e.target.value
+    }, () => {
+      console.log('new state', this.state);
+    })
+  }
 
   handleSubmit(event) {
     event.preventDefault();
-    const {fname, lname, email, pword, userType} = this.state;
-const registerData = {
-  fname,
-  lname,
-  email,
-  pword,
-  userType
-};
-this.props.postForm(registerData)
+    const {fname, lname, email, pword, usertype} = this.state;
+    const data = {
+      fname,
+      lname,
+      email,
+      pword,
+      usertype
+    };
+    this.props.postForm(data)
   }
 
   render() {
-    console.log('rendered');
-    return (
-      <div id='register'>
+    console.log('rendered', this.props);
+    return (<div id='register'>
+
       <form className='beaconForm' onSubmit={this.handleSubmit}>
-      <label>
-        First Name:
-        <input onChange={this.handleChange} name="fname" type="text"/>
-      </label>
-      <label>
-        Surname:
-        <input onChange={this.handleChange} name="lname" type="text"/>
-      </label>
-      <label>
-        Email:
-        <input onChange={this.handleChange} name="email" type="text"/>
-      </label>
-      <label>
-        Password:
-        <input onChange={this.handleChange} name="pWord" type="text"/>
-      </label>
-      <label>
-        Register as:
-        <input onChange={this.handleChange} type="radio" name="userType" value="Volunteer"/>
-        Volunteer
- <input onChange={this.handleChange} type="radio" name="userType" value="Charity"/>
- Charity
-      </label>
-        <input type="submit" value="Submit" />
+        <label>
+          First Name:
+          <input onChange={this.handleChange} name="fname" type="text"/>
+        </label>
+        <label>
+          Surname:
+          <input onChange={this.handleChange} name="lname" type="text"/>
+        </label>
+        <label>
+          Email:
+          <input onChange={this.handleChange} name="email" type="text"/>
+        </label>
+        <label>
+          Password:
+          <input onChange={this.handleChange} name="pword" type="password"/>
+        </label>
+        <label>
+          Register as:
+          <input onChange={this.handleChange} type="radio" name="usertype" value="0"/>
+          Charity
+          <input onChange={this.handleChange} type="radio" name="usertype" value="1"/>
+          Volunteerd
+        </label>
+        <input type="submit" value="Submit"/>
       </form>
-      </div>
-    );
+      {this.props.error && <p>{this.props.error}</p>}
+    </div>);
   }
 }
 

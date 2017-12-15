@@ -1,7 +1,8 @@
 export default function reducer(state = {}, action) {
 
-  if (action.type == 'REGISTER_FORM_POST') {
-    console.log('REGISTER_FORM_POST reducer got', action.payload);
+  if (action.type == 'FORM_POST') {
+    console.log('FORM_POST reducer got', action.postStatus);
+    state = Object.assign({}, state, {error: action.postStatus});
   }
 
 

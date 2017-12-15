@@ -1,10 +1,15 @@
 import React from 'react';
-import {Link, browserHistory} from 'react-router';
-// import axios from '../axios';
-// import {getSocket} from '../socket';
+import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import {postLoginForm} from '../actions';
 
+const mapStateToProps = state => ({error: state.error});
 
-export class LoginPage extends React.Component {
+const mapDispatchToProps = dispatch => ({
+  postLoginForm: payload => dispatch(postLoginForm(payload))
+});
+
+class LoginPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -23,12 +28,18 @@ export class LoginPage extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const {email, pword} = this.state;
+    const data = {
+      email,
+      pword
+    };
+    this.props.postLoginForm(data)
   }
 
   render() {
     console.log('rendered');
     return (
-      <div id='UserRegister'>
+      <div id='login'>
       <form className='beaconForm' onSubmit={this.handleSubmit}>
         <label>
           Email:
@@ -36,7 +47,7 @@ export class LoginPage extends React.Component {
         </label>
         <label>
           Password:
-          <input onChange={this.handleChange} name="pWord" type="text"/>
+          <input onChange={this.handleChange} name="pword" type="text"/>
         </label>
         <input type="submit" value="Submit" />
       </form>
@@ -44,3 +55,6 @@ export class LoginPage extends React.Component {
     );
   }
 }
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

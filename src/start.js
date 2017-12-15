@@ -6,7 +6,7 @@ import {Main} from './components/Main';
 import MapContainer from './components/MapContainer';
 import {Landing} from './components/LandingComponents/Landing';
 import Register from './components/LandingComponents/Register';
-import {LoginPage} from './components/LoginPage';
+import LoginPage from './components/LoginPage';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import reducer from './reducers';
