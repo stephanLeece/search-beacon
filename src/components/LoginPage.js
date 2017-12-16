@@ -12,8 +12,7 @@ const mapDispatchToProps = dispatch => ({
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
-
-
+    this.state = {}
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -33,7 +32,9 @@ class LoginPage extends React.Component {
       email,
       pword
     };
-    this.props.postLoginForm(data)
+    this.props.postLoginForm(data).then(function() {
+      location.replace('/');
+    })
   }
 
   render() {
@@ -47,7 +48,7 @@ class LoginPage extends React.Component {
         </label>
         <label>
           Password:
-          <input onChange={this.handleChange} name="pword" type="text"/>
+          <input onChange={this.handleChange} name="pword" type="password"/>
         </label>
         <input type="submit" value="Submit" />
       </form>

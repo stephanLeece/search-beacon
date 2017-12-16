@@ -18,7 +18,7 @@ export const store = createStore(reducer, composeWithDevTools(applyMiddleware(re
 
 
 
-const notLoggedInRouter = (<Provider store={store}>
+const landingRouter = (<Provider store={store}>
   <Router history={hashHistory}>
     <Route path="/" component={Main}>
     <Route path="/register" component={Register}/>
@@ -28,18 +28,18 @@ const notLoggedInRouter = (<Provider store={store}>
     </Router>
 </Provider>);
 
-// const notLoggedInRouter = (<Provider store={store}>
-//   <Router history={hashHistory}>
-//     <Route path="/" component={Map}/>
-//   </Router>
-// </Provider>);
+const loggedInRouter = (<Provider store={store}>
+  <Router history={browserHistory}>
+    <Route path="/" component={MapContainer}/>
+  </Router>
+</Provider>);
 
 
-// let router;
-// if (location.pathname === '/welcome/') {
-//   router = notLoggedInRouter;
-// } else {
-//   router = loggedInRouter;
-// }
+let router;
+if (location.pathname === '/landing/') {
+  router = landingRouter;
+} else {
+  router = loggedInRouter;
+}
 
-ReactDOM.render(notLoggedInRouter, document.querySelector('#root'));
+ReactDOM.render(router, document.querySelector('#root'));

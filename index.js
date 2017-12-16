@@ -51,17 +51,21 @@ app.use(express.static('./public'));
 
 
 
-
-
 app.get('/', function(req, res) {
-  // res.sendFile(__dirname + '/index.html');
-  res.redirect('/landing/');
+  if (!req.session.user && req.url != '/landing/') {
+    res.redirect('/landing/');
+    return;
+  } else {
+    res.sendFile(__dirname + '/index.html');
+  }
 });
 
-
-
 app.get('/landing', function(req, res) {
-  res.sendFile(__dirname + '/index.html');
+  if (req.session.user) {
+      res.redirect('/');
+    } else {
+      res.sendFile(__dirname + '/index.html');
+    }
 });
 
 app.post('/register', function(req,res) {
@@ -84,36 +88,50 @@ app.post('/authorize', function(req, res) {
   if (req.body.email && req.body.pword) {
     dbGets.getUserByEmail(req.body.email).then(function(user) {
       console.log('users details are', user);
-      let id = user.id;
+
+      let id = user.id
       bcrypt.checkPassword(req.body.pword, user.hashedpass).then(function(doesMatch, id) {
         if (doesMatch) {
           req.session.user = {
             email: req.body.email,
-            id: user.id
+            id: user.id,
+            fname: user.fname,
+            lname: user.lname,
+            usertype: user.usertype,
           };
-
+          let userDetails = {
+          email: req.body.email,
+          id: user.id,
+          fname: user.fname,
+          lname: user.lname,
+          usertype: user.usertype,
+        };
           console.log('LOGGED IN');
-          res.json({error: false});
+          res.json({userDetails: userDetails});
         } else {
           res.json({error: 'There seems to be a mistake..'});
         }
       });
     });
   } else {
-    res.json({error: 'There seems to be a mistake..'});
+    res.json({error: 'Somethings Missing...'});
   }
 });
-
 
 app.get('/logout', function(req, res) {
   req.session = null;
   res.redirect('/landing/');
 });
 
-app.get('*', function(req, res) {
-  res.sendFile(__dirname + '/index.html');
-  });
 
+app.get('*', function(req, res) {
+  if (!req.session.user && req.url != '/landing/') {
+    res.redirect('/landing/');
+    return;
+  } else {
+    res.sendFile(__dirname + '/index.html');
+  }
+});
 
 app.listen(process.env.PORT || 8080, function() {
   console.log("I'm listening.");
