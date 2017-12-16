@@ -2,9 +2,12 @@ import React from 'react';
 import * as io from 'socket.io-client';
 import ReactDOM from 'react-dom';
 import {Router, Route, Link, IndexRoute, redirect, hashHistory, browserHistory} from 'react-router';
-import {Main} from './components/Main';
-import MapContainer from './components/MapContainer';
+import {ReactBody} from './components/ReactBody';
 import {Landing} from './components/LandingComponents/Landing';
+import UserHome from './components/LoggedInComponents/UserHome';
+import {HeaderLanding, HeaderLoggedIn} from './components/Header';
+import MapContainer from './components/MapContainer';
+
 import Register from './components/LandingComponents/Register';
 import LoginPage from './components/LoginPage';
 import {Provider} from 'react-redux';
@@ -20,17 +23,26 @@ export const store = createStore(reducer, composeWithDevTools(applyMiddleware(re
 
 const landingRouter = (<Provider store={store}>
   <Router history={hashHistory}>
-    <Route path="/" component={Main}>
-    <Route path="/register" component={Register}/>
-    <Route path="/login" component={LoginPage}/>
-      <IndexRoute component={Landing}/>
+    <Route path="/" component={ReactBody}>
+    <Route path="/register" component={{header: HeaderLanding, main: Register}}/>
+    <Route path="/login" component={{header: HeaderLanding, main: LoginPage}}/>
+    <IndexRoute component={{header: HeaderLanding, main: Landing}}/>
     </Route>
     </Router>
 </Provider>);
 
+
+
+
+
+
+
+
 const loggedInRouter = (<Provider store={store}>
   <Router history={browserHistory}>
-    <Route path="/" component={MapContainer}/>
+  <Route path="/" component={ReactBody}>
+    <IndexRoute component={{header: HeaderLoggedIn, main: UserHome}}/>
+    </Route>
   </Router>
 </Provider>);
 

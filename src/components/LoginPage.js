@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {postLoginForm} from '../actions';
 
@@ -21,7 +20,7 @@ class LoginPage extends React.Component {
     this.setState({
       [e.target.name]: e.target.value
     }, () => {
-      console.log('new state', this.state);
+
     })
   }
 
@@ -32,15 +31,13 @@ class LoginPage extends React.Component {
       email,
       pword
     };
-    this.props.postLoginForm(data).then(function() {
-      location.replace('/');
-    })
+    this.props.postLoginForm(data);
   }
 
   render() {
-    console.log('rendered');
+
     return (
-      <div id='login'>
+      <div className='main' id='loginPage'>
       <form className='beaconForm' onSubmit={this.handleSubmit}>
         <label>
           Email:
@@ -52,6 +49,7 @@ class LoginPage extends React.Component {
         </label>
         <input type="submit" value="Submit" />
       </form>
+      {this.props.error && <p>{this.props.error}</p>}
       </div>
     );
   }

@@ -3,17 +3,33 @@ import React from 'react';
 // import axios from '../axios';
 // import {getSocket} from '../socket';
 
-export class Header extends React.Component {
+export class HeaderLanding extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
   render() {
-    return (<header id='header'>
+    return (<div id='headerLanding'>
 
-<h1>Header</h1>
+<h1>header landing!</h1>
 
-</header>
+</div>
+    )
+  }
+}
+
+
+export class HeaderLoggedIn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  render() {
+    return (<div id='headerLoggedin'>
+
+<h1>header logged in</h1>
+<a href="/logout">Logout</a>
+</div>
     )
   }
 }

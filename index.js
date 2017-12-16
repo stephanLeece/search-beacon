@@ -29,9 +29,7 @@ var uploader = multer({
 });
 
 app.use(compression());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cookieSession({
   secret: 'never reveal the wu tang secret',
@@ -43,13 +41,9 @@ app.use(function(req, res, next) {
   next();
 });
 if (process.env.NODE_ENV != 'production') {
-  app.use('/bundle.js', require('http-proxy-middleware')({
-    target: 'http://localhost:8081/'
-  }));
+  app.use('/bundle.js', require('http-proxy-middleware')({target: 'http://localhost:8081/'}));
 }
 app.use(express.static('./public'));
-
-
 
 app.get('/', function(req, res) {
   if (!req.session.user && req.url != '/landing/') {
@@ -62,13 +56,13 @@ app.get('/', function(req, res) {
 
 app.get('/landing', function(req, res) {
   if (req.session.user) {
-      res.redirect('/');
-    } else {
-      res.sendFile(__dirname + '/index.html');
-    }
+    res.redirect('/');
+  } else {
+    res.sendFile(__dirname + '/index.html');
+  }
 });
 
-app.post('/register', function(req,res) {
+app.post('/register', function(req, res) {
   if (req.body.fname && req.body.lname && req.body.email && req.body.pword && req.body.usertype) {
     var password = req.body.pword.trim();
     bcrypt.hashPassword(password).then(function(hash) {
@@ -84,11 +78,8 @@ app.post('/register', function(req,res) {
 });
 
 app.post('/authorize', function(req, res) {
-  console.log('post to authorize');
   if (req.body.email && req.body.pword) {
     dbGets.getUserByEmail(req.body.email).then(function(user) {
-      console.log('users details are', user);
-
       let id = user.id
       bcrypt.checkPassword(req.body.pword, user.hashedpass).then(function(doesMatch, id) {
         if (doesMatch) {
@@ -97,17 +88,9 @@ app.post('/authorize', function(req, res) {
             id: user.id,
             fname: user.fname,
             lname: user.lname,
-            usertype: user.usertype,
+            usertype: user.usertype
           };
-          let userDetails = {
-          email: req.body.email,
-          id: user.id,
-          fname: user.fname,
-          lname: user.lname,
-          usertype: user.usertype,
-        };
-          console.log('LOGGED IN');
-          res.json({userDetails: userDetails});
+            res.redirect('/');
         } else {
           res.json({error: 'There seems to be a mistake..'});
         }
@@ -118,11 +101,29 @@ app.post('/authorize', function(req, res) {
   }
 });
 
+app.get('/authorize', function(req, res) {
+  if (req.session.user) {
+
+    dbGets.getUserByEmail(req.session.user.email).then(function(user) {
+
+      let userDetails = {
+        email: user.email,
+        id: user.id,
+        fname: user.fname,
+        lname: user.lname,
+        usertype: user.usertype
+      };
+      res.json({userDetails: userDetails});
+    })
+  } else {
+    res.redirect('/landing/');
+  }
+});
+
 app.get('/logout', function(req, res) {
   req.session = null;
   res.redirect('/landing/');
 });
-
 
 app.get('*', function(req, res) {
   if (!req.session.user && req.url != '/landing/') {

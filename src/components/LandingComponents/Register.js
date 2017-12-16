@@ -1,7 +1,7 @@
 import React from 'react';
-import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {postRegisterForm} from '../../actions';
+import {Router, Route, Link, IndexRoute, redirect, hashHistory, browserHistory} from 'react-router';
 
 const mapStateToProps = state => ({error: state.error});
 
@@ -21,7 +21,7 @@ class Register extends React.Component {
     this.setState({
       [e.target.name]: e.target.value
     }, () => {
-      console.log('new state', this.state);
+
     })
   }
 
@@ -35,12 +35,13 @@ class Register extends React.Component {
       pword,
       usertype
     };
-    this.props.postForm(data)
+    this.props.postForm(data).then(function() {
+    })
   }
 
   render() {
-    console.log('rendered', this.props);
-    return (<div id='register'>
+
+    return (<div className='main' id='register'>
 
       <form className='beaconForm' onSubmit={this.handleSubmit}>
         <label>

@@ -11,7 +11,7 @@ export class Landing extends React.Component {
   render() {
     return (
 
-<div id='landing'>
+<div className='main' id='landing'>
 <h1>Landing!</h1>
 <Link to="/register">Sign Up</Link>
 <Link to="/login">Login</Link>
