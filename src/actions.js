@@ -28,7 +28,7 @@ export function postRegisterForm(payload) {
 }
 
 export function postLoginForm(payload) {
-  return axios.post('/authorize/', payload).then(function(results) {
+  return axios.post('/authorize', payload).then(function(results) {
     if (results.data.error) {
       const error = results.data.error
       return {
@@ -47,7 +47,7 @@ export function postLoginForm(payload) {
 
 export function fetchUserDetails(payload) {
   if (location.pathname != '/landing/') {
-    return axios.get('/authorize/', payload).then(function(results) {
+    return axios.get('/authorize.json', payload).then(function(results) {
       const userDetails = results.data.userDetails
       return {
         type: 'USERS_DETAILS',
@@ -71,3 +71,13 @@ export function submitPicture (payload) {
     }
   })
 }
+
+// export function fetchUserProfile (payload) {
+//   return axios.get('/usersProfile.json', payload).then(function(results) {
+//     console.log(results.data);
+//     const imageDetails = results.data
+//     return {
+//       type: 'USERS_PROFILE', imageDetails
+//     }
+//   })
+// }

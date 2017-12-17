@@ -2,7 +2,17 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {submitPicture} from '../../actions';
 
-const mapStateToProps = state => ({loggedInUserEmail: state.loggedInUserEmail, loggedInUserFname: state.loggedInUserFname, loggedInUserId: state.loggedInUserId, loggedInUserLname: state.loggedInUserLname, loggedInUsertype: state.loggedInUsertype});
+const mapStateToProps = state => (
+  {
+    loggedInUserEmail: state.loggedInUserEmail,
+    loggedInUserFname: state.loggedInUserFname,
+    loggedInUserId: state.loggedInUserId,
+    loggedInUserLname: state.loggedInUserLname,
+    loggedInUsertype: state.loggedInUsertype,
+    userImage1: state.image1,
+    userImage2: state.image2,
+    userImage3: state.image3,
+  });
 
 const mapDispatchToProps = dispatch => ({
   submitPicture: payload => dispatch(submitPicture(payload))
@@ -47,7 +57,10 @@ class EditProfile extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    // const {email, pword} = this.state;
+    if (this.state.Teaching) {
+      console.log('teaching');
+    }
+    // const {title, descrip, responsibilities} = this.state;
     // dispatch an action to post everything else
     // };
   }
@@ -73,7 +86,7 @@ class EditProfile extends React.Component {
   }
 
   render() {
-    console.log(this.props);
+    console.log('props', this.props);
     let usertype = this.props.loggedInUsertype;
     let form;
     if (usertype == 0) {
@@ -93,18 +106,35 @@ class EditProfile extends React.Component {
         </div>
         <h1>Add up to three images</h1>
         <div className='imageBox'>
+
+        <div className='singleImage'>
+        <img src={this.props.userImage1} alt=""/>
           <div className="fileContainer">
+          Picture
             <input onChange={this.handleImageChange} name="image1" type="file"/>
           </div>
           <button name="image1b" onClick={this.handleSubmitPicture}>Add</button>
+          </div>
+
+            <div className='singleImage'>
+            <img src={this.props.userImage2} alt=""/>
           <div className="fileContainer">
+          Picture
             <input onChange={this.handleImageChange} name="image2" type="file"/>
           </div>
           <button name="image2b" onClick={this.handleSubmitPicture}>Add</button>
+            </div>
+
+
+          <div className='singleImage'>
+          <img src={this.props.userImage3} alt=""/>
           <div className="fileContainer">
+          Picture
             <input onChange={this.handleImageChange} name="image3" type="file"/>
           </div>
           <button name="image3b" onClick={this.handleSubmitPicture}>Add</button>
+        </div>
+
         </div>
         <button onClick={this.handleSubmit}>Save Details</button>
       </form>

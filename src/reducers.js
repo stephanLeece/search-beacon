@@ -16,7 +16,16 @@ export default function reducer(state = {}, action) {
     });
   }
 
-
+  // if (action.type == 'USERS_PROFILE') {
+  //
+  //   state = Object.assign({}, state, {
+  //     loggedInUserEmail: action.userDetails.email,
+  //     loggedInUserFname: action.userDetails.fname,
+  //     loggedInUserId: action.userDetails.id,
+  //     loggedInUserLname: action.userDetails.lname,
+  //     loggedInUsertype: action.userDetails.usertype
+  //   });
+  // }
 
   if (action.type == 'PICTURE_UPDATED') {
     console.log('reducer got', action.imageDetails);

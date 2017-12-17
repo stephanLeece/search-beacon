@@ -102,7 +102,7 @@ app.post('/authorize', function(req, res) {
   }
 });
 
-app.get('/authorize', function(req, res) {
+app.get('/authorize.json', function(req, res) {
   if (req.session.user) {
     dbGets.getUserByEmail(req.session.user.email).then(function(user) {
       let userDetails = {
@@ -118,6 +118,24 @@ app.get('/authorize', function(req, res) {
     res.redirect('/landing/');
   }
 });
+
+
+// app.get('/usersProfile.json', function(req, res) {
+//   if (req.session.user) {
+//     dbGets.getUserByEmail(req.session.user.email).then(function(user) {
+//       let userDetails = {
+//         email: user.email,
+//         id: user.id,
+//         fname: user.fname,
+//         lname: user.lname,
+//         usertype: user.usertype
+//       };
+//       res.json({userDetails: userDetails});
+//     })
+//   } else {
+//     res.redirect('/landing/');
+//   }
+// });
 
 app.post('/uploadImage', uploader.single('image'), function(req, res) {
   console.log('imageNumber', req.body.imageNo);
