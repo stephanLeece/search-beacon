@@ -13,11 +13,14 @@ console.log('userid', results.rows[0].id, 'usertype', results.rows[0].usertype);
 };
 
 
-// module.exports.saveImage = function(image, id) {
-//   return db.query('UPDATE users SET profilepic = $1 Where id = $2 RETURNING profilepic', [image, email]).then(function(results) {
-//     results.rows.forEach(function(row) {
-//       row.profilepic = config.s3Url + row.profilepic;
-//     })
-//     return results.rows[0];
-//   });
-// };
+module.exports.saveImage = function(imageNo, image, id) {
+  return db.query(`UPDATE userProfile SET ${imageNo} = $1 Where id = $2 RETURNING ${imageNo}`, [image, id]).then(function(results) {
+    results.rows.forEach(function(row) {
+      row.image1 = config.s3Url + row.image1;
+      row.image2 = config.s3Url + row.image2;
+      row.image3 = config.s3Url + row.image3;
+    })
+    let imageList = results.rows[0]
+    return imageList[imageNo];
+  });
+};

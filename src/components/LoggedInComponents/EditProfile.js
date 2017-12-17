@@ -1,13 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {submitPicture} from '../../actions';
 
 const mapStateToProps = state => ({loggedInUserEmail: state.loggedInUserEmail, loggedInUserFname: state.loggedInUserFname, loggedInUserId: state.loggedInUserId, loggedInUserLname: state.loggedInUserLname, loggedInUsertype: state.loggedInUsertype});
+
+const mapDispatchToProps = dispatch => ({
+  submitPicture: payload => dispatch(submitPicture(payload))
+});
 
 class EditProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
     this.handleChange = this.handleChange.bind(this);
+    this.handleImageChange = this.handleImageChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitPicture = this.handleSubmitPicture.bind(this);
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
@@ -26,38 +32,51 @@ class EditProfile extends React.Component {
     this.setState({
       [event.target.name]: event.target.checked
     }, () => {
-  console.log('new state', this.state);
+      console.log('new state', this.state);
+    })
+  }
+
+  handleImageChange(e) {
+    this.setState({
+      [e.target.name]: e.target.files[0]
+
+    }, () => {
+      console.log('new state', this.state);
     })
   }
 
   handleSubmit(event) {
     event.preventDefault();
     // const {email, pword} = this.state;
-  // dispatch an action to post everything else
+    // dispatch an action to post everything else
     // };
   }
+
+
+
 
   handleSubmitPicture(event) {
+    let imageNo = event.target.name
     event.preventDefault();
-    // dispatch an action to post request for images
-    // const {email, pword} = this.state;
-    // const data = {
-    //   email,
-    //   pword
-    // };
+    let data = new FormData();
+    if (imageNo == 'image1b') {
+      data.append('image', this.state.image1);
+      data.append('imageNo', `image1`);
+    } else if (imageNo == 'image2b') {
+      data.append('image', this.state.image2);
+      data.append('imageNo', `image2`);
+    } else {
+      data.append('image', this.state.image3);
+      data.append('imageNo', `image3`);
+    }
+    this.props.submitPicture(data);
   }
-
-
-
-  // checkBox(event){
-  //      console.log(event.target.checked, event.target.name);
-  //  };
 
   render() {
     console.log(this.props);
     let usertype = this.props.loggedInUsertype;
     let form;
-    if (usertype == 1) {
+    if (usertype == 0) {
       form = <form className='beaconForm'>
         <label for="title">Title:</label>
         <input onChange={this.handleChange} type="text" name="title" value=""/>
@@ -75,17 +94,17 @@ class EditProfile extends React.Component {
         <h1>Add up to three images</h1>
         <div className='imageBox'>
           <div className="fileContainer">
-            <input onChange={this.handleChange} name="image1" type="file"/>
+            <input onChange={this.handleImageChange} name="image1" type="file"/>
           </div>
-          <button onClick={this.handleSubmitPicture}>Add</button>
+          <button name="image1b" onClick={this.handleSubmitPicture}>Add</button>
           <div className="fileContainer">
-            <input onChange={this.handleChange} name="image2" type="file"/>
+            <input onChange={this.handleImageChange} name="image2" type="file"/>
           </div>
-          <button onClick={this.handleSubmitPicture}>Add</button>
+          <button name="image2b" onClick={this.handleSubmitPicture}>Add</button>
           <div className="fileContainer">
-            <input onChange={this.handleChange} name="image3" type="file"/>
+            <input onChange={this.handleImageChange} name="image3" type="file"/>
           </div>
-          <button onClick={this.handleSubmitPicture}>Add</button>
+          <button name="image3b" onClick={this.handleSubmitPicture}>Add</button>
         </div>
         <button onClick={this.handleSubmit}>Save Details</button>
       </form>
@@ -95,10 +114,10 @@ class EditProfile extends React.Component {
         <h1>Add a profile picture</h1>
         <div className='imageBox'>
           <div className="fileContainer">
-            <input onChange={this.handleChange} name="image1" type="file"></input>
+            <input onChange={this.handleImageChange} name="image1" type="file"></input>
           </div>
         </div>
-        <button onClick={this.handleSubmitPicture}>Add</button>
+        <button name="image1b" onClick={this.handleSubmitPicture}>Add</button>
         <label for="descrip">About you:</label>
         <textarea onChange={this.handleChange} name="descrip" rows="8" cols="80"></textarea>
         <label for="responsibilities">What you're looking for:</label>
@@ -120,4 +139,4 @@ class EditProfile extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(EditProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);

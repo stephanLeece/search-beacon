@@ -60,3 +60,14 @@ export function fetchUserDetails(payload) {
     }
   }
 }
+
+
+export function submitPicture (payload) {
+  return axios.post('/uploadImage', payload).then(function(results) {
+    console.log(results.data);
+    const imageDetails = results.data
+    return {
+      type: 'PICTURE_UPDATED', imageDetails
+    }
+  })
+}

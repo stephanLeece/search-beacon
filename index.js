@@ -91,7 +91,7 @@ app.post('/authorize', function(req, res) {
             lname: user.lname,
             usertype: user.usertype
           };
-            res.redirect('/');
+          res.redirect('/');
         } else {
           res.json({error: 'There seems to be a mistake..'});
         }
@@ -119,53 +119,20 @@ app.get('/authorize', function(req, res) {
   }
 });
 
-// app.post('/uploadImage', uploader.single('profilepic'), function(req, res) {
-//   console.log('starting upload');
-//   if (req.file) {
-//     console.log("found a file");
-//     s3.upload(req.file).then(function() {
-//       dbSets.saveImage(req.file.filename, req.session.user.email).then(function(image) {
-//         res.json({success: true, image: image});
-//       });
-//     });
-//   } else {
-//     res.json({error: 'A smaller picture, perhaps?'});
-//   }
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.post('/uploadImage', uploader.single('image'), function(req, res) {
+  console.log('imageNumber', req.body.imageNo);
+  if (req.file) {
+    console.log("found a file", req.file);
+    s3.upload(req.file).then(function() {
+      dbSets.saveImage(req.body.imageNo, req.file.filename, req.session.user.id).then(function(image) {
+        console.log('groovy', req.body.imageNo, image);
+        res.json({imageNo: req.body.imageNo, image: image})
+      });
+    });
+  } else {
+    res.json({error: 'A smaller picture, perhaps?'});
+  }
+});
 
 app.get('/logout', function(req, res) {
   req.session = null;

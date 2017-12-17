@@ -16,6 +16,17 @@ export default function reducer(state = {}, action) {
     });
   }
 
+
+
+  if (action.type == 'PICTURE_UPDATED') {
+    console.log('reducer got', action.imageDetails);
+    let imageNo = action.imageDetails.imageNo
+    state = Object.assign({}, state, {
+        [imageNo]: action.imageDetails.image
+    });
+  }
+
+
   return state;
 
 }
