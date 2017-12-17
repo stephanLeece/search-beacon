@@ -17,18 +17,20 @@ CREATE TABLE users(
 );
 
 
--- CREATE TABLE userProfile(
---     id SERIAL PRIMARY KEY,
---     title VARCHAR(200) NOT NULL,
+CREATE TABLE userProfile(
+    id SERIAL PRIMARY KEY,
+    userid INTEGER,
+    usertype INTEGER,
+    title VARCHAR(200),
 -- location
---     description VARCHAR(200) NOT NULL,
---     tags VARCHAR(200) NOT NULL UNIQUE,
---     image1 VARCHAR(200) NOT NULL,
---     image2 VARCHAR(200) NOT NULL,
---     image3 VARCHAR(200) NOT NULL,
---     usertype INTEGER NOT NULL,
---     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
--- );
+    description text,
+    responsibilites text,
+    skills text,
+    image1 text,
+    image2 text,
+    image3 text,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 -- CREATE TABLE messages(
 --     id SERIAL PRIMARY KEY,

@@ -69,6 +69,7 @@ app.post('/register', function(req, res) {
       dbSets.saveUserDetails(req.body.fname, req.body.lname, req.body.email, hash, req.body.usertype).then(function(results) {
         res.json({error: false});
       }).catch(function(err) {
+        console.log(err);
         res.json({error: 'That E-Mail is in use..'});
       });
     });
@@ -103,9 +104,7 @@ app.post('/authorize', function(req, res) {
 
 app.get('/authorize', function(req, res) {
   if (req.session.user) {
-
     dbGets.getUserByEmail(req.session.user.email).then(function(user) {
-
       let userDetails = {
         email: user.email,
         id: user.id,
@@ -119,6 +118,54 @@ app.get('/authorize', function(req, res) {
     res.redirect('/landing/');
   }
 });
+
+// app.post('/uploadImage', uploader.single('profilepic'), function(req, res) {
+//   console.log('starting upload');
+//   if (req.file) {
+//     console.log("found a file");
+//     s3.upload(req.file).then(function() {
+//       dbSets.saveImage(req.file.filename, req.session.user.email).then(function(image) {
+//         res.json({success: true, image: image});
+//       });
+//     });
+//   } else {
+//     res.json({error: 'A smaller picture, perhaps?'});
+//   }
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.get('/logout', function(req, res) {
   req.session = null;

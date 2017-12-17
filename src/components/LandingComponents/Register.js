@@ -43,7 +43,7 @@ class Register extends React.Component {
 
     return (<div className='main' id='register'>
 
-      <form className='beaconForm' onSubmit={this.handleSubmit}>
+      <form className='beaconForm'>
         <label>
           First Name:
           <input onChange={this.handleChange} name="fname" type="text"/>
@@ -67,7 +67,7 @@ class Register extends React.Component {
           <input onChange={this.handleChange} type="radio" name="usertype" value="1"/>
           Volunteerd
         </label>
-        <input type="submit" value="Submit"/>
+        <button onClick={this.handleSubmit}>Submit</button>
       </form>
       {this.props.error && <p>{this.props.error}</p>}
     </div>);

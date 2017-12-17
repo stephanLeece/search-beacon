@@ -38,7 +38,7 @@ class LoginPage extends React.Component {
 
     return (
       <div className='main' id='loginPage'>
-      <form className='beaconForm' onSubmit={this.handleSubmit}>
+      <form className='beaconForm'>
         <label>
           Email:
           <input onChange={this.handleChange} name="email" type="text"/>
@@ -47,7 +47,7 @@ class LoginPage extends React.Component {
           Password:
           <input onChange={this.handleChange} name="pword" type="password"/>
         </label>
-        <input type="submit" value="Submit" />
+        <button onClick={this.handleSubmit}>Submit</button>
       </form>
       {this.props.error && <p>{this.props.error}</p>}
       </div>
