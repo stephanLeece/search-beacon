@@ -1,14 +1,24 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {fetchUserDetails} from '../actions';
 
-import {Link, browserHistory} from 'react-router';
-// import axios from '../axios';
-// import {getSocket} from '../socket';
+const mapStateToProps = state => ({loggedInUserEmail: state.loggedInUserEmail, loggedInUserFname: state.loggedInUserFname, loggedInUserId: state.loggedInUserId, loggedInUserLname: state.loggedInUserLname, loggedInUsertype: state.loggedInUsertype});
 
-export class ReactBody extends React.Component {
+const mapDispatchToProps = dispatch => ({
+  fetchUserDetails: payload => dispatch(fetchUserDetails(payload))
+});
+
+class ReactBody extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  componentDidMount() {
+        this.props.fetchUserDetails()
+  }
+
+
   render() {
     return (<div id='reactBody'>
     <header id='header'>
@@ -24,3 +34,5 @@ export class ReactBody extends React.Component {
     )
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReactBody);

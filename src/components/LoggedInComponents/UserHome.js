@@ -5,9 +5,7 @@ import {fetchUserDetails} from '../../actions';
 
 const mapStateToProps = state => ({loggedInUserEmail: state.loggedInUserEmail, loggedInUserFname: state.loggedInUserFname, loggedInUserId: state.loggedInUserId, loggedInUserLname: state.loggedInUserLname, loggedInUsertype: state.loggedInUsertype});
 
-const mapDispatchToProps = dispatch => ({
-  fetchUserDetails: payload => dispatch(fetchUserDetails(payload))
-});
+
 
 class UserHome extends React.Component {
   constructor(props) {
@@ -15,13 +13,11 @@ class UserHome extends React.Component {
     this.state = {};
   }
 
-componentDidMount() {
-      this.props.fetchUserDetails()
-}
 
 
 
   render() {
+    console.log(this.props);
     let usertype = this.props.loggedInUsertype;
     let message;
      if (usertype == 0) {
@@ -37,4 +33,4 @@ componentDidMount() {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserHome);
+export default connect(mapStateToProps)(UserHome);
