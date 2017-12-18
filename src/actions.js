@@ -53,6 +53,13 @@ export function submitPicture(payload) {
   })
 }
 
+export function submitAddrss(payload) {
+  return axios.post('/uploadImage', payload).then(function(results) {
+    const imageDetails = results.data
+    return {type: 'PICTURE_UPDATED', imageDetails}
+  })
+}
+
 export function saveProfile(payload) {
   return axios.post('/saveProfile', payload).then(function(results) {
     if (results.data.error) {
@@ -97,5 +104,9 @@ export function searchUsers(payload) {
 }
 
 export function propChange(payload) {
+  return {type: 'PROP_CHANGE', payload}
+}
+
+export function multiPropChange(payload) {
   return {type: 'PROP_CHANGE', payload}
 }

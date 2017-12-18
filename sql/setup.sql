@@ -21,7 +21,6 @@ CREATE TABLE userProfile(
     id SERIAL PRIMARY KEY,
     userid INTEGER,
     title VARCHAR(200),
-    -- location
     description text,
     responsibilites text,
     skills text,
@@ -30,6 +29,16 @@ CREATE TABLE userProfile(
     image3 text,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- CREATE TABLE locations(
+--     id SERIAL PRIMARY KEY,
+--     userid INTEGER,
+--     address text,
+--     latitude text,
+--     longitude text,
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
+
 
 -- CREATE TABLE messages(
 --     id SERIAL PRIMARY KEY,

@@ -1,6 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {submitPicture, saveProfile, fetchUserProfile, propChange} from '../../actions';
+import AutoComplete from './AutoComplete'
+import PlacesAutocomplete, {  geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+
 
 const mapStateToProps = state => ({
   userEmail: state.userEmail,
@@ -15,7 +18,10 @@ const mapStateToProps = state => ({
   image1: state.userImage1,
   image2: state.userImage2,
   image3: state.userImage3,
-  profileSaved: state.profileSaved
+  profileSaved: state.profileSaved,
+  userAddress: state.address,
+  userLat: state.lat,
+  userLng: state.lng
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -36,20 +42,21 @@ class EditProfile extends React.Component {
 
   }
 
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    }, () => {
-      console.log('new state', this.state);
-    })
-  }
+  // handleChange(e) {
+  //   this.setState({
+  //     [e.target.name]: e.target.value
+  //   }, () => {
+  //     console.log('new state', this.state);
+  //   })
+  // }
 
   handleChange(e) {
     let data = {
       name: e.target.name,
       value: e.target.value
     }
-    this.props.propChange(data)
+    this.props.propChange(data);
+    console.log('new state', this.state);
   }
 
   handleImageChange(e) {
@@ -169,6 +176,7 @@ class EditProfile extends React.Component {
     return (<div className='main'>
       {this.props.profileSaved && <h1>Profile Saved</h1>}
       {form}
+      <AutoComplete/>
     </div>)
   }
 }

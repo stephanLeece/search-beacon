@@ -79,6 +79,14 @@ if (action.type == 'USER_RESULTS') {
     });
   }
 
+  if (action.type == 'MULTI_PROP_CHANGE') {
+    state = Object.assign({}, state, {
+        address: action.payload.address,
+        lat: action.payload.lat,
+        lng: action.payload.lng
+    });
+  }
+
   return state;
 
 }
