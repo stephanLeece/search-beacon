@@ -34,7 +34,7 @@ class UserHome extends React.Component {
 
     return (<div className='main' id='UserHome'>
 {message}
-from here you can <Link to='/search'>search</Link>,<Link to='/edit'>edit your profile</Link>, send or receive messages.
+from here you can check the map <Link to='/search'>search</Link>,<Link to='/edit'>edit your profile</Link>, check messages.
     </div>)
   }
 }

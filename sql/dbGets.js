@@ -39,12 +39,13 @@ module.exports.getUserProfile = function(userid) {
   })
 };
 
-
 module.exports.search = function(aTerm, anId, aType) {
   return db.query(`SELECT * FROM users
-    JOIN userProfile ON (users.id = userProfile.userid AND users.usertype <> $1)
-    WHERE to_tsvector('english', userProfile.skills) @@ to_tsquery('english', '${aTerm}')
-    AND users.id <> $2;`, [anId, aType]).then(function(results) {
+    JOIN userProfile ON (users.id = userProfile.userid AND users.usertype <> $1 AND users.id <> $2)
+    WHERE (to_tsvector('english', userProfile.skills) @@ to_tsquery('english', '${aTerm}'))
+    OR (to_tsvector('english', userProfile.title) @@ to_tsquery('english', '${aTerm}'))
+    OR (to_tsvector('english', userProfile.description) @@ to_tsquery('english', '${aTerm}'))
+    OR (to_tsvector('english', userProfile.responsibilites) @@ to_tsquery('english', '${aTerm}'));`, [anId, aType]).then(function(results) {
     if (!results.rows[0]) {
       return 0
     } else {
