@@ -20,9 +20,8 @@ CREATE TABLE users(
 CREATE TABLE userProfile(
     id SERIAL PRIMARY KEY,
     userid INTEGER,
-    usertype INTEGER,
     title VARCHAR(200),
--- location
+    -- location
     description text,
     responsibilites text,
     skills text,

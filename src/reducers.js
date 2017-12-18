@@ -1,7 +1,6 @@
 export default function reducer(state = {}, action) {
 
   if (action.type == 'FORM_POST_STATUS') {
-
     state = Object.assign({}, state, {error: action.error});
   }
 
@@ -31,18 +30,19 @@ export default function reducer(state = {}, action) {
 
 
 if (action.type == 'OTHER_USER_PROFILE') {
+  console.log('reducer got', action.otherUserProfile);
   state = Object.assign({}, state, {
-    OtherUserFname: action.otherUserProfile.fname,
-    OtherUserLname: action.otherUserProfile.lname,
-    OtherUserType: action.otherUserProfile.usertype,
-    OtherUserTitle: action.otherUserProfile.title,
-    OtherUserDescription: action.otherUserProfile.description,
-    OtherUserResponsibilites: action.otherUserProfile.responsibilites,
-    OtherUserSkills: action.otherUserProfile.skills,
-    OtherImage1: action.otherUserProfile.image1,
-    OtherImage2: action.otherUserProfile.image2,
-    OtherImage3: action.otherUserProfile.image3,
-    OtherUserId: action.otherUserProfile.userid
+    OtherUserFname: action.otherUserProfile.OtherUserFname,
+    OtherUserLname: action.otherUserProfile.OtherUserLname,
+    OtherUserType: action.otherUserProfile.OtherUserType,
+    OtherUserTitle: action.otherUserProfile.OtherUserTitle,
+    OtherUserDescription: action.otherUserProfile.OtherUserDescription,
+    OtherUserResponsibilites: action.otherUserProfile.OtherUserResponsibilites,
+    OtherUserSkills: action.otherUserProfile.OtherUserSkills,
+    OtherImage1: action.otherUserProfile.OtherImage1,
+    OtherImage2: action.otherUserProfile.OtherImage2,
+    OtherImage3: action.otherUserProfile.OtherImage3,
+    OtherUserId: action.otherUserProfile.OtherUserId
   });
 }
 
@@ -53,7 +53,18 @@ if (action.type == 'OTHER_USER_PROFILE') {
   }
 
 
+if (action.type == 'USER_RESULTS') {
+    console.log('reducer got', action.userResults);
+  if (action.userResults.error) {
+    state = Object.assign({}, state, {error: action.userResults.error });
+  } else {
+    state = Object.assign({}, state, {
+      userResults: action.userResults,
+      error: false
+    });
+  }
 
+}
 
   if (action.type == 'PICTURE_UPDATED') {
     let imageNo = action.imageDetails.imageNo

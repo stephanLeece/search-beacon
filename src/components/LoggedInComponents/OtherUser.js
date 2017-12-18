@@ -31,9 +31,6 @@ class OtherUser extends React.Component {
     this.state = {};
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-  }
 
   componentDidMount() {
     let id = this.props.params.id
@@ -46,7 +43,7 @@ class OtherUser extends React.Component {
     let userType = this.props.OtherUserType;
     let content;
     if (userType == 0) {
-      content = <div className='otherProfile'>
+      content = <div className='main' id='otherProfile'>
 <h1>Charity</h1>
 <h1>{this.props.OtherUserTitle}</h1>
 <h1>{this.props.OtherUserDescription}</h1>

@@ -119,7 +119,6 @@ app.get('/authorize.json', function(req, res) {
   }
 });
 
-
 app.get('/userProfile.json', function(req, res) {
   if (req.session.user) {
     dbGets.getUserProfile(req.session.user.id).then(function(user) {
@@ -141,7 +140,6 @@ app.get('/userProfile.json', function(req, res) {
   }
 });
 
-
 app.get('/otherUserProfile.json/:id', function(req, res) {
   const id = req.params.id;
   if (id == req.session.user.id) {
@@ -153,24 +151,44 @@ app.get('/otherUserProfile.json/:id', function(req, res) {
         res.json({error: 'An error!', redirect: true});
       } else {
         console.log('results are in', results);
-        res.json(results);
+        let otherUserProfile = {
+          OtherUserFname: results.fname,
+          OtherUserLname: results.lname,
+          OtherUserType: results.usertype,
+          OtherUserTitle: results.title,
+          OtherUserDescription: results.description,
+          OtherUserResponsibilites: results.responsibilites,
+          OtherUserSkills: [],
+          OtherImage1: results.image1,
+          OtherImage2: results.image2,
+          OtherImage3: results.image3,
+          OtherUserId: results.userid
+        };
+        let skillsSplit = results.skills.split(' ');
+        let trimmedSkills = []
+        for (let i = 0; i < skillsSplit.length; i++) {
+          trimmedSkills.push(skillsSplit[i].trim())
+        }
+        for (let i = 0; i < trimmedSkills.length; i++) {
+          if (otherUserProfile.OtherUserSkills.indexOf(trimmedSkills[i]) == -1) {
+            otherUserProfile.OtherUserSkills.push(trimmedSkills[i])
+          }
+        }
+        res.json(otherUserProfile);
       }
-
     });
   }
 });
 
 app.post('/saveProfile', function(req, res) {
   console.log(req.body);
-      dbSets.saveProfile(req.body.userTitle, req.body.userDescription, req.body.userResponsibilites, req.body.userSkills, req.session.user.id).then(function(results) {
-res.json({error: false});
-      }).catch(function(err) {
-        console.log(err);
-        res.json({error: 'Somethings gone wrong'});
-      });
-    });
-
-
+  dbSets.saveProfile(req.body.userTitle, req.body.userDescription, req.body.userResponsibilites, req.body.userSkills, req.session.user.id).then(function(results) {
+    res.json({error: false});
+  }).catch(function(err) {
+    console.log(err);
+    res.json({error: 'Somethings gone wrong'});
+  });
+});
 
 app.post('/uploadImage', uploader.single('image'), function(req, res) {
   console.log('imageNumber', req.body.imageNo);
@@ -185,6 +203,22 @@ app.post('/uploadImage', uploader.single('image'), function(req, res) {
   } else {
     res.json({error: 'A smaller picture, perhaps?'});
   }
+});
+
+app.post('/search.json', function(req, res) {
+  console.log('server got', req.body);
+  dbGets.search(req.body.searchTerm, req.body.userType, req.session.user.id).then(function(results) {
+    if (results === 0) {
+      console.log('no results');
+      res.json({error: 'No Results...'});
+    } else {
+      console.log('results', results);
+      res.json(results);
+    }
+  }).catch(function(err) {
+    console.log(err);
+    res.json({error: 'Somethings gone wrong'});
+  });
 });
 
 app.get('/logout', function(req, res) {

@@ -12,7 +12,7 @@ if (results.rows[0].usertype == 0) {
 } else {
   placeholder = '8PkYpU3KqHK2uRegWmVQP0fr0196-OJK.png'
 }
-    return db.query(`INSERT INTO userProfile (userid, usertype, image1, image2, image3) VALUES ($1,$2,$3,$4,$5) RETURNING userid`, [results.rows[0].id, results.rows[0].usertype, placeholder,placeholder,placeholder]).then(function(results) {
+    return db.query(`INSERT INTO userProfile (userid, image1, image2, image3) VALUES ($1,$2,$3,$4) RETURNING userid`, [results.rows[0].id, placeholder,placeholder,placeholder]).then(function(results) {
         return results.rows[0].userid;
       })
   })

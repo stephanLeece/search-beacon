@@ -4,7 +4,9 @@ const db = spicedPg(process.env.DATABASE_URL || 'postgres:Stephan:postgres@local
 const config = require('./config.json');
 
 module.exports.getUserByEmail = function(email) {
-  return db.query(`SELECT * FROM users WHERE email = $1`, [email]).then(function(results) {
+  return db.query(`SELECT * FROM users
+    JOIN userProfile ON (users.id = userProfile.userid)
+    WHERE users.email = $1`, [email]).then(function(results) {
     return results.rows[0];
   })
 };
@@ -26,7 +28,6 @@ module.exports.getUserById = function(id) {
   })
 };
 
-
 module.exports.getUserProfile = function(userid) {
   return db.query(`SELECT * FROM userProfile WHERE userid = $1`, [userid]).then(function(results) {
     results.rows.forEach(function(row) {
@@ -35,5 +36,24 @@ module.exports.getUserProfile = function(userid) {
       row.image3 = config.s3Url + row.image3;
     })
     return results.rows[0];
+  })
+};
+
+
+module.exports.search = function(aTerm, anId, aType) {
+  return db.query(`SELECT * FROM users
+    JOIN userProfile ON (users.id = userProfile.userid AND users.usertype <> $1)
+    WHERE to_tsvector('english', userProfile.skills) @@ to_tsquery('english', '${aTerm}')
+    AND users.id <> $2;`, [anId, aType]).then(function(results) {
+    if (!results.rows[0]) {
+      return 0
+    } else {
+      results.rows.forEach(function(row) {
+        row.image1 = config.s3Url + row.image1;
+        row.image2 = config.s3Url + row.image2;
+        row.image3 = config.s3Url + row.image3;
+      })
+      return results.rows;
+    }
   })
 };
