@@ -12,6 +12,12 @@ body {
   height: inherit;
 }
 
+
+img {
+  height: 10vh;
+  width: 10vw;
+}
+
 #reactBody {
   height: inherit;
 display: flex;

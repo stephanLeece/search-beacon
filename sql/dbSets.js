@@ -12,11 +12,27 @@ if (results.rows[0].usertype == 0) {
 } else {
   placeholder = '8PkYpU3KqHK2uRegWmVQP0fr0196-OJK.png'
 }
-    return db.query(`INSERT INTO userProfile (userid, usertype, image1, image2, image3) VALUES ($1,$2,$3,$3,$3) RETURNING userid`, [results.rows[0].id, results.rows[0].usertype, placeholder]).then(function(results) {
+    return db.query(`INSERT INTO userProfile (userid, usertype, image1, image2, image3) VALUES ($1,$2,$3,$4,$5) RETURNING userid`, [results.rows[0].id, results.rows[0].usertype, placeholder,placeholder,placeholder]).then(function(results) {
         return results.rows[0].userid;
       })
   })
 };
+
+module.exports.saveProfile = function(title, description, responsibilites, skills, userid) {
+    return db.query(`UPDATE userProfile SET title = $1, description = $2, responsibilites= $3, skills = $4 Where userid = $5`, [title || null, description || null, responsibilites || null, skills || null, userid]).then(function() {
+    console.log('success');
+  })
+};
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports.saveImage = function(imageNo, image, id) {

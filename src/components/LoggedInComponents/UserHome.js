@@ -3,8 +3,13 @@ import {connect} from 'react-redux';
 import {fetchUserDetails} from '../../actions';
 
 
-const mapStateToProps = state => ({loggedInUserEmail: state.loggedInUserEmail, loggedInUserFname: state.loggedInUserFname, loggedInUserId: state.loggedInUserId, loggedInUserLname: state.loggedInUserLname, loggedInUsertype: state.loggedInUsertype});
-
+const mapStateToProps = state => ({
+  userEmail: state.userEmail,
+  userFname: state.userFname,
+  userId: state.userId,
+  userLname: state.userLname,
+  userType: state.userType,
+});
 
 
 class UserHome extends React.Component {
@@ -18,7 +23,7 @@ class UserHome extends React.Component {
 
   render() {
     console.log(this.props);
-    let usertype = this.props.loggedInUsertype;
+    let usertype = this.props.userType;
     let message;
      if (usertype == 0) {
        message = <h1>hello charity</h1>;

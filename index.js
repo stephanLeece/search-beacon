@@ -120,22 +120,38 @@ app.get('/authorize.json', function(req, res) {
 });
 
 
-// app.get('/usersProfile.json', function(req, res) {
-//   if (req.session.user) {
-//     dbGets.getUserByEmail(req.session.user.email).then(function(user) {
-//       let userDetails = {
-//         email: user.email,
-//         id: user.id,
-//         fname: user.fname,
-//         lname: user.lname,
-//         usertype: user.usertype
-//       };
-//       res.json({userDetails: userDetails});
-//     })
-//   } else {
-//     res.redirect('/landing/');
-//   }
-// });
+app.get('/userProfile.json', function(req, res) {
+  if (req.session.user) {
+    dbGets.getUserProfile(req.session.user.id).then(function(user) {
+      let userProfile = {
+        id: user.id,
+        usertype: user.usertype,
+        title: user.title,
+        description: user.description,
+        responsibilites: user.responsibilites,
+        skills: user.skills,
+        image1: user.image1,
+        image2: user.image2,
+        image3: user.image3
+      };
+      res.json({userProfile: userProfile});
+    })
+  } else {
+    res.redirect('/landing/');
+  }
+});
+
+app.post('/saveProfile', function(req, res) {
+  console.log(req.body);
+      dbSets.saveProfile(req.body.userTitle, req.body.userDescription, req.body.userResponsibilites, req.body.userSkills, req.session.user.id).then(function(results) {
+res.json({error: false});
+      }).catch(function(err) {
+        console.log(err);
+        res.json({error: 'Somethings gone wrong'});
+      });
+    });
+
+
 
 app.post('/uploadImage', uploader.single('image'), function(req, res) {
   console.log('imageNumber', req.body.imageNo);

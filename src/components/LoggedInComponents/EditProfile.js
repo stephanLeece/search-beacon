@@ -1,21 +1,28 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {submitPicture} from '../../actions';
+import {submitPicture, saveProfile, fetchUserProfile, propChange} from '../../actions';
 
-const mapStateToProps = state => (
-  {
-    loggedInUserEmail: state.loggedInUserEmail,
-    loggedInUserFname: state.loggedInUserFname,
-    loggedInUserId: state.loggedInUserId,
-    loggedInUserLname: state.loggedInUserLname,
-    loggedInUsertype: state.loggedInUsertype,
-    userImage1: state.image1,
-    userImage2: state.image2,
-    userImage3: state.image3,
-  });
+const mapStateToProps = state => ({
+  userEmail: state.userEmail,
+  userFname: state.userFname,
+  userId: state.userId,
+  userLname: state.userLname,
+  userType: state.userType,
+  userTitle: state.userTitle,
+  userDescription: state.userDescription,
+  userResponsibilites: state.userResponsibilites,
+  userSkills: state.userSkills,
+  image1: state.userImage1,
+  image2: state.userImage2,
+  image3: state.userImage3,
+  profileSaved: state.profileSaved
+});
 
 const mapDispatchToProps = dispatch => ({
-  submitPicture: payload => dispatch(submitPicture(payload))
+  submitPicture: payload => dispatch(submitPicture(payload)),
+  saveProfile: payload => dispatch(saveProfile(payload)),
+  fetchUserProfile: payload => dispatch(fetchUserProfile(payload)),
+  propChange: payload => dispatch(propChange(payload))
 });
 
 class EditProfile extends React.Component {
@@ -26,7 +33,6 @@ class EditProfile extends React.Component {
     this.handleImageChange = this.handleImageChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitPicture = this.handleSubmitPicture.bind(this);
-    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
 
   }
 
@@ -38,12 +44,12 @@ class EditProfile extends React.Component {
     })
   }
 
-  handleCheckboxChange(event) {
-    this.setState({
-      [event.target.name]: event.target.checked
-    }, () => {
-      console.log('new state', this.state);
-    })
+  handleChange(e) {
+    let data = {
+      name: e.target.name,
+      value: e.target.value
+    }
+    this.props.propChange(data)
   }
 
   handleImageChange(e) {
@@ -55,18 +61,19 @@ class EditProfile extends React.Component {
     })
   }
 
+
+
   handleSubmit(event) {
     event.preventDefault();
-    if (this.state.Teaching) {
-      console.log('teaching');
-    }
-    // const {title, descrip, responsibilities} = this.state;
-    // dispatch an action to post everything else
-    // };
+    const {userTitle, userDescription, userResponsibilites, userSkills} = this.props;
+    const data = {
+      userTitle,
+      userDescription,
+      userResponsibilites,
+      userSkills
+    };
+    this.props.saveProfile(data);
   }
-
-
-
 
   handleSubmitPicture(event) {
     let imageNo = event.target.name
@@ -85,55 +92,54 @@ class EditProfile extends React.Component {
     this.props.submitPicture(data);
   }
 
+  componentDidMount() {
+    this.props.fetchUserProfile()
+    console.log('profile props on mount', this.props);
+  }
+
   render() {
-    console.log('props', this.props);
-    let usertype = this.props.loggedInUsertype;
+    console.log('profile props', this.props);
+    let userType = this.props.userType;
     let form;
-    if (usertype == 0) {
+    if (userType == 0) {
       form = <form className='beaconForm'>
         <label for="title">Title:</label>
-        <input onChange={this.handleChange} type="text" name="title" value=""/>
-        <label for="descrip">Description:</label>
-        <textarea onChange={this.handleChange} name="descrip" rows="8" cols="80"></textarea>
+        <input onChange={this.handleChange} type="text" name="userTitle" value={this.props.userTitle}/>
+        <label for="description">Description:</label>
+        <textarea onChange={this.handleChange} name="userDescription" rows="8" cols="80"value={this.props.userDescription}/>
         <label for="responsibilities">Responsibilities:</label>
-        <textarea onChange={this.handleChange} name="responsibilities" rows="8" cols="80"></textarea>
+        <textarea onChange={this.handleChange} name="userResponsibilites" rows="8" cols="80"value={this.props.userResponsibilites}/>
         <label>Skills You're looking for:</label>
-        <div class="fieldset">
-          <label>
-            <input type="checkbox" name="Teaching" onChange={this.handleCheckboxChange} defaultChecked={false}/>
-            Teaching
-          </label>
-        </div>
+        <textarea onChange={this.handleChange} name="userSkills" rows="8" cols="80"value={this.props.userSkills}/>
         <h1>Add up to three images</h1>
         <div className='imageBox'>
 
-        <div className='singleImage'>
-        <img src={this.props.userImage1} alt=""/>
-          <div className="fileContainer">
-          Picture
-            <input onChange={this.handleImageChange} name="image1" type="file"/>
-          </div>
-          <button name="image1b" onClick={this.handleSubmitPicture}>Add</button>
-          </div>
-
-            <div className='singleImage'>
-            <img src={this.props.userImage2} alt=""/>
-          <div className="fileContainer">
-          Picture
-            <input onChange={this.handleImageChange} name="image2" type="file"/>
-          </div>
-          <button name="image2b" onClick={this.handleSubmitPicture}>Add</button>
+          <div className='singleImage'>
+            <img src={this.props.image1} alt=""/>
+            <div className="fileContainer">
+              Picture
+              <input onChange={this.handleImageChange} name="image1" type="file"/>
             </div>
-
+            <button name="image1b" onClick={this.handleSubmitPicture}>Add</button>
+          </div>
 
           <div className='singleImage'>
-          <img src={this.props.userImage3} alt=""/>
-          <div className="fileContainer">
-          Picture
-            <input onChange={this.handleImageChange} name="image3" type="file"/>
+            <img src={this.props.image2} alt=""/>
+            <div className="fileContainer">
+              Picture
+              <input onChange={this.handleImageChange} name="image2" type="file"/>
+            </div>
+            <button name="image2b" onClick={this.handleSubmitPicture}>Add</button>
           </div>
-          <button name="image3b" onClick={this.handleSubmitPicture}>Add</button>
-        </div>
+
+          <div className='singleImage'>
+            <img src={this.props.image3} alt=""/>
+            <div className="fileContainer">
+              Picture
+              <input onChange={this.handleImageChange} name="image3" type="file"/>
+            </div>
+            <button name="image3b" onClick={this.handleSubmitPicture}>Add</button>
+          </div>
 
         </div>
         <button onClick={this.handleSubmit}>Save Details</button>
@@ -142,28 +148,26 @@ class EditProfile extends React.Component {
     } else {
       form = <form className='beaconForm'>
         <h1>Add a profile picture</h1>
-        <div className='imageBox'>
+        <div className='singleImage'>
+          <img src={this.props.image1} alt=""/>
           <div className="fileContainer">
-            <input onChange={this.handleImageChange} name="image1" type="file"></input>
+            Picture
+            <input onChange={this.handleImageChange} name="image1" type="file"/>
           </div>
+          <button name="image1b" onClick={this.handleSubmitPicture}>Add</button>
         </div>
-        <button name="image1b" onClick={this.handleSubmitPicture}>Add</button>
-        <label for="descrip">About you:</label>
-        <textarea onChange={this.handleChange} name="descrip" rows="8" cols="80"></textarea>
+        <label for="description">About you:</label>
+        <textarea onChange={this.handleChange} name="userDescription" rows="8" cols="80" value={this.props.userDescription}/>
         <label for="responsibilities">What you're looking for:</label>
-        <textarea onChange={this.handleChange} name="responsibilities" rows="8" cols="80"></textarea>
+        <textarea onChange={this.handleChange} name="userResponsibilites" rows="8" cols="80" value={this.props.userResponsibilites}/>
         <label>Skills:</label>
-        <div class="fieldset">
-          <label>
-            <input type="checkbox" name="Teaching" onChange={this.handleCheckboxChange} defaultChecked={false}/>
-            Teaching
-          </label>
-        </div>
+        <textarea onChange={this.handleChange} name="userSkills" rows="8" cols="80" value={this.props.userSkills}/>
         <button onClick={this.handleSubmit}>Save Details</button>
       </form>
     }
 
     return (<div className='main'>
+      {this.props.profileSaved && <h1>Profile Saved</h1>}
       {form}
     </div>)
   }

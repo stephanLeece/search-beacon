@@ -2,7 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {fetchUserDetails} from '../actions';
 
-const mapStateToProps = state => ({loggedInUserEmail: state.loggedInUserEmail, loggedInUserFname: state.loggedInUserFname, loggedInUserId: state.loggedInUserId, loggedInUserLname: state.loggedInUserLname, loggedInUsertype: state.loggedInUsertype});
+const mapStateToProps = state => ({
+  userEmail: state.userEmail,
+  userFname: state.userFname,
+  userId: state.userId,
+  userLname: state.userLname,
+  userType: state.userType,
+});
+
+
 
 const mapDispatchToProps = dispatch => ({
   fetchUserDetails: payload => dispatch(fetchUserDetails(payload))
@@ -20,6 +28,7 @@ class ReactBody extends React.Component {
 
 
   render() {
+    console.log('body props', this.props);
     return (<div id='reactBody'>
     <header id='header'>
     <h1>Logo!</h1>
