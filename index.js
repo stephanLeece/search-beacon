@@ -141,6 +141,25 @@ app.get('/userProfile.json', function(req, res) {
   }
 });
 
+
+app.get('/otherUserProfile.json/:id', function(req, res) {
+  const id = req.params.id;
+  if (id == req.session.user.id) {
+    res.json({success: false, redirect: true});
+  } else {
+    dbGets.getUserById(id).then(function(results) {
+      if (results === 0) {
+        console.log('nowt there');
+        res.json({error: 'An error!', redirect: true});
+      } else {
+        console.log('results are in', results);
+        res.json(results);
+      }
+
+    });
+  }
+});
+
 app.post('/saveProfile', function(req, res) {
   console.log(req.body);
       dbSets.saveProfile(req.body.userTitle, req.body.userDescription, req.body.userResponsibilites, req.body.userSkills, req.session.user.id).then(function(results) {

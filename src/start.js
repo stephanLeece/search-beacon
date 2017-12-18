@@ -6,6 +6,7 @@ import ReactBody from './components/ReactBody';
 import {Landing} from './components/LandingComponents/Landing';
 import UserHome from './components/LoggedInComponents/UserHome';
 import EditProfile from './components/LoggedInComponents/EditProfile';
+import OtherUser from './components/LoggedInComponents/OtherUser';
 import {HeaderLanding, HeaderLoggedIn} from './components/Header';
 import MapContainer from './components/MapContainer';
 import Register from './components/LandingComponents/Register';
@@ -34,14 +35,11 @@ const landingRouter = (<Provider store={store}>
 
 
 
-
-
-
-
 const loggedInRouter = (<Provider store={store}>
   <Router history={browserHistory}>
   <Route path="/" component={ReactBody}>
   <Route path="/edit" component={{header: HeaderLoggedIn, main: EditProfile}}/>
+  <Route path="/result/:id" component={{header: HeaderLoggedIn, main: OtherUser}}/>
     <IndexRoute component={{header: HeaderLoggedIn, main: UserHome}} />
     </Route>
   </Router>

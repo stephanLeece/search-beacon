@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router'
 import {fetchUserDetails} from '../../actions';
 
 
@@ -33,7 +34,7 @@ class UserHome extends React.Component {
 
     return (<div className='main' id='UserHome'>
 {message}
-<h1>from here you can search, edit your profile, send or receive messages</h1>
+from here you can search,<Link to='/edit'>edit your profile</Link>, send or receive messages.
     </div>)
   }
 }
