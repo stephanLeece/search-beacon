@@ -51,7 +51,6 @@ showState() {
 
 componentDidMount() {
   this.props.fetchUserProfile()
-  let address= this.props
 }
 
 // pick off address, lat, lng, then dispatch

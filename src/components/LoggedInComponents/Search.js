@@ -52,9 +52,6 @@ userList = this.props.userResults.map((user) => <div key={user.id}>
   <p>{user.skills}</p>
       </div>);
 }
-
-
-
 }
 
 

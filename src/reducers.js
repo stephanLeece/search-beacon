@@ -66,8 +66,22 @@ if (action.type == 'USER_RESULTS') {
       error: false
     });
   }
-
 }
+
+
+if (action.type == 'ALL_CHARITIES') {
+    console.log('reducer got', action.charities);
+  if (action.charities.error) {
+    state = Object.assign({}, state, {error: action.charities.error });
+  } else {
+    state = Object.assign({}, state, {
+      charities: action.charities,
+      error: false
+    });
+  }
+}
+
+
 
   if (action.type == 'PICTURE_UPDATED') {
     let imageNo = action.imageDetails.imageNo

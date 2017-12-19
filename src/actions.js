@@ -104,6 +104,15 @@ export function searchUsers(payload) {
   })
 }
 
+export function getAllCharities(payload) {
+  return axios.get('/allUsers.json', payload).then(function(results) {
+    const charities = results.data.allUsers
+    return {type: 'ALL_CHARITIES', charities}
+  })
+
+
+}
+
 export function propChange(payload) {
   return {type: 'PROP_CHANGE', payload}
 }

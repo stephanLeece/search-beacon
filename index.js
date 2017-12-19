@@ -184,6 +184,17 @@ app.get('/otherUserProfile.json/:id', function(req, res) {
   }
 });
 
+app.get('/allUsers.json', function(req, res) {
+  if (req.session.user) {
+    dbGets.getAllUsers(0).then(function(results) {
+      console.log('server user results', results);
+      res.json({allUsers: results});
+    })
+  } else {
+    res.redirect('/landing/');
+  }
+});
+
 app.post('/saveProfile', function(req, res) {
   dbSets.saveProfile(req.body.userTitle, req.body.userDescription, req.body.userResponsibilites, req.body.userSkills, req.session.user.id).then(function(results) {
     res.json({error: false});

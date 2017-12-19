@@ -28,6 +28,19 @@ module.exports.getUserById = function(id) {
   })
 };
 
+module.exports.getAllUsers = function(aNum) {
+  return db.query(`SELECT * FROM users
+    JOIN userProfile ON (users.id = userProfile.userid)
+    WHERE usertype = $1`, [aNum]).then(function(results) {
+    results.rows.forEach(function(row) {
+      row.image1 = config.s3Url + row.image1;
+      row.image2 = config.s3Url + row.image2;
+      row.image3 = config.s3Url + row.image3;
+    })
+    return results.rows;
+  })
+};
+
 module.exports.getUserProfile = function(userid) {
   return db.query(`SELECT * FROM userProfile WHERE userid = $1`, [userid]).then(function(results) {
     results.rows.forEach(function(row) {
@@ -38,6 +51,7 @@ module.exports.getUserProfile = function(userid) {
     return results.rows[0];
   })
 };
+
 
 module.exports.search = function(aTerm, anId, aType) {
   return db.query(`SELECT * FROM users
