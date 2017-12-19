@@ -8,6 +8,9 @@ const mapStateToProps = state => ({
   userId: state.userId,
   userLname: state.userLname,
   userType: state.userType,
+  image1: state.image1,
+  image2: state.image2,
+  image3: state.image3,
   OtherUserType: state.OtherUserType,
   OtherUserTitle: state.OtherUserTitle,
   OtherUserDescription: state.OtherUserDescription,
@@ -19,7 +22,8 @@ const mapStateToProps = state => ({
   OtherUserId: state.OtherUserId,
   OtherUserFname: state.OtherUserFname,
   OtherUserLname: state.OtherUserLname,
-  message: state.message
+  message: state.message,
+  latestMessage: state.latestMessage
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -53,7 +57,7 @@ class Convo extends React.Component {
       senderId: this.props.userId,
       recevierId: this.props.OtherUserId
     };
-    console.log(data);
+    this.props.postMessage(data);
   }
 
   componentDidMount() {
@@ -66,6 +70,7 @@ class Convo extends React.Component {
     return (<div className='main'>
       <h1>A convo!</h1>
       <div>Messages</div>
+      <h1>{this.props.latestMessage}</h1>
       <textarea onChange={this.handleChange} name="message" rows="8" cols="80" value={this.props.message}/>
       <button onClick={this.handleSubmit}>Send</button>
     </div>)

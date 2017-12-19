@@ -234,7 +234,6 @@ app.post('/uploadImage', uploader.single('image'), function(req, res) {
 });
 
 app.post('/search.json', function(req, res) {
-  console.log('server got', req.body);
   dbGets.search(req.body.searchTerm, req.body.userType, req.session.user.id).then(function(results) {
     if (results === 0) {
       console.log('no results');
@@ -248,6 +247,24 @@ app.post('/search.json', function(req, res) {
     res.json({error: 'Somethings gone wrong'});
   });
 });
+
+app.post('/convo.json', function(req, res) {
+  dbSets.saveMessage(req.body.message,req.body.senderId,req.body.recevierId).then(function(results){
+    res.json({error: false});
+  }).catch(function(err) {
+    console.log(err);
+    res.json({error: 'Somethings gone wrong'});
+  });
+});
+
+
+
+
+
+
+
+
+
 
 app.get('/logout', function(req, res) {
   req.session = null;

@@ -107,6 +107,16 @@ if (action.type == 'ALL_CHARITIES') {
     });
   }
 
+  if (action.type == 'MESSAGE_SENT') {
+    console.log('reducer message', action.payload.message);
+    state = Object.assign({}, state, {
+      latestMessage: action.payload.message,
+        messageSent: true
+    });
+  }
+
+
+
   return state;
 
 }

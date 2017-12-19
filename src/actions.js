@@ -122,24 +122,26 @@ export function multiPropChange(payload) {
 }
 
 export function postMessage(payload) {
-  console.log('action sending message:', message);
-  let data = {
-  messageContents: message
-  }
-  return axios.post('/chat.json/', data).then(function(results) {
-    return {type: 'NEW_MESSAGE', message};
+  console.log('action sending message:', payload);
+  return axios.post('/convo.json', payload).then(function(results) {
+    if (results.data.error) {
+      const error = results.data.error
+      return {type: 'FORM_POST_STATUS', error}
+    } else {
+      return {type: 'MESSAGE_SENT', payload}
+    }
   })
 }
 
 export function getMessagesFromConvo(payload) {
-
-  return axios.get('/convo/', payload).then(function({data}) {
+    console.log('action getting messages:', payload);
+  return axios.get('/convo', payload).then(function({data}) {
     return {type: 'ALL_MESSAGES', messages: data};
   });
 }
 
-  export function getAllLatestMessages(payload) {
-    return axios.get('/messages.json/').then(function({data}) {
-      return {type: 'ALL_MESSAGES', messages: data};
-    });
-}
+//   export function getAllLatestMessages(payload) {
+//     return axios.get('/messages.json/').then(function({data}) {
+//       return {type: 'ALL_MESSAGES', messages: data};
+//     });
+// }
