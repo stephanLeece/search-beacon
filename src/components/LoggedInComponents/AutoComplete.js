@@ -1,15 +1,21 @@
 import React from 'react'
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
-import {multiPropChange} from '../../actions';
+import {fetchUserProfile, submitAddress} from '../../actions';
 import {connect} from 'react-redux';
 
 
-const mapStateToProps = state => ({
 
-});
+  const mapStateToProps = state => ({
+    userAddress: state.userAddress,
+    userLat: state.userLat,
+    userLng: state.userLng,
+    addressSaved: state.addressSaved
+  });
+
 
 const mapDispatchToProps = dispatch => ({
-  multiPropChange: payload => dispatch(multiPropChange(payload))
+  fetchUserProfile: payload => dispatch(fetchUserProfile(payload)),
+  submitAddress: payload => dispatch(submitAddress(payload))
 });
 
 
@@ -17,7 +23,7 @@ export class AutoComplete extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      address: 'Update Address'
+      address: ''
     }
     this.showState = this.showState.bind(this);
     this.onChange = (address) => this.setState({address})
@@ -30,21 +36,29 @@ showState() {
       console.log('Successfully got latitude and longitude', { lat, lng })
       this.setState({lat})
       this.setState({lng})
+
       let data = {
         address: this.state.address,
         lat: this.state.lat,
         lng: this.state.lng
       }
       console.log('data', data);
-      this.props.multiPropChange(data);
+      this.props.submitAddress(data);
+
     })
 }
 
-
+componentDidMount() {
+  this.props.fetchUserProfile()
+  let address= this.props
+}
 
 // pick off address, lat, lng, then dispatch
 
   render() {
+console.log('state address', this.state);
+console.log('prop address', this.props);
+
     const inputProps = {
       value: this.state.address,
       onChange: this.onChange
@@ -61,12 +75,14 @@ showState() {
     };
 
     return (<div>
+
       <PlacesAutocomplete
       inputProps={inputProps}
       styles={myStyles}
       googleLogo={false}/>
 
       <button onClick={this.showState}>Submit</button>
+      {this.props.addressSaved && <h1>Addrsss updated</h1>}
     </div>)
   }
 }

@@ -24,6 +24,12 @@ module.exports.saveProfile = function(title, description, responsibilites, skill
   })
 };
 
+module.exports.saveAddress = function(address, lat, lng, userid) {
+    return db.query(`UPDATE userProfile SET address = $1, lat = $2, lng= $3 Where userid = $4`, [address || null, lat || null, lng || null, userid]).then(function() {
+    console.log('success');
+  })
+};
+
 
 
 

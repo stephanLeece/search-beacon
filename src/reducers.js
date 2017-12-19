@@ -23,7 +23,10 @@ export default function reducer(state = {}, action) {
       userSkills: action.userProfile.skills,
       userImage1: action.userProfile.image1,
       userImage2: action.userProfile.image2,
-      userImage3: action.userProfile.image3
+      userImage3: action.userProfile.image3,
+      userAddress: action.userProfile.address,
+      userLat: action.userProfile.lat,
+      userLng: action.userProfile.lng
     });
   }
 
@@ -79,11 +82,13 @@ if (action.type == 'USER_RESULTS') {
     });
   }
 
-  if (action.type == 'MULTI_PROP_CHANGE') {
+  if (action.type == 'ADDRESS_UPDATED') {
+    console.log('reducer address');
     state = Object.assign({}, state, {
         address: action.payload.address,
         lat: action.payload.lat,
-        lng: action.payload.lng
+        lng: action.payload.lng,
+        addressSaved: true
     });
   }
 

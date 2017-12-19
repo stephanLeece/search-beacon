@@ -27,17 +27,13 @@ CREATE TABLE userProfile(
     image1 text,
     image2 text,
     image3 text,
+    address text,
+    lat decimal,
+    lng decimal,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- CREATE TABLE locations(
---     id SERIAL PRIMARY KEY,
---     userid INTEGER,
---     address text,
---     latitude text,
---     longitude text,
---     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
--- );
+
 
 
 -- CREATE TABLE messages(

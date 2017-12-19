@@ -19,10 +19,13 @@ const mapStateToProps = state => ({
   image2: state.userImage2,
   image3: state.userImage3,
   profileSaved: state.profileSaved,
-  userAddress: state.address,
-  userLat: state.lat,
-  userLng: state.lng
+  userAddress: state.userAddress,
+  userLat: state.userLat,
+  userLng: state.userLng
 });
+
+
+
 
 const mapDispatchToProps = dispatch => ({
   submitPicture: payload => dispatch(submitPicture(payload)),
@@ -34,12 +37,12 @@ const mapDispatchToProps = dispatch => ({
 class EditProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {showAuto: false};
     this.handleChange = this.handleChange.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitPicture = this.handleSubmitPicture.bind(this);
-
+    this.toggleAuto = this.toggleAuto.bind(this);
   }
 
   // handleChange(e) {
@@ -99,9 +102,14 @@ class EditProfile extends React.Component {
     this.props.submitPicture(data);
   }
 
+  toggleAuto() {
+    this.setState({
+    showAuto: !this.state.showAuto
+  })
+  }
+
   componentDidMount() {
     this.props.fetchUserProfile()
-    console.log('profile props on mount', this.props);
   }
 
   render() {
@@ -176,7 +184,9 @@ class EditProfile extends React.Component {
     return (<div className='main'>
       {this.props.profileSaved && <h1>Profile Saved</h1>}
       {form}
-      <AutoComplete/>
+        {!this.state.showAuto && <p>Current Address: {this.props.userAddress}</p>}
+        {!this.state.showAuto && <button onClick={this.toggleAuto}>toggleAuto</button>}
+          {this.state.showAuto && <AutoComplete/>}
     </div>)
   }
 }

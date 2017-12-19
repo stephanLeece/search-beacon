@@ -122,6 +122,7 @@ app.get('/authorize.json', function(req, res) {
 app.get('/userProfile.json', function(req, res) {
   if (req.session.user) {
     dbGets.getUserProfile(req.session.user.id).then(function(user) {
+      console.log('server user results', user);
       let userProfile = {
         id: user.id,
         usertype: user.usertype,
@@ -131,7 +132,10 @@ app.get('/userProfile.json', function(req, res) {
         skills: user.skills,
         image1: user.image1,
         image2: user.image2,
-        image3: user.image3
+        image3: user.image3,
+        address: user.address,
+        lat: user.lat,
+        lng: user.lng
       };
       res.json({userProfile: userProfile});
     })
@@ -181,7 +185,6 @@ app.get('/otherUserProfile.json/:id', function(req, res) {
 });
 
 app.post('/saveProfile', function(req, res) {
-  console.log(req.body);
   dbSets.saveProfile(req.body.userTitle, req.body.userDescription, req.body.userResponsibilites, req.body.userSkills, req.session.user.id).then(function(results) {
     res.json({error: false});
   }).catch(function(err) {
@@ -189,6 +192,19 @@ app.post('/saveProfile', function(req, res) {
     res.json({error: 'Somethings gone wrong'});
   });
 });
+
+
+app.post('/saveAddress', function(req, res) {
+  console.log('save address',  req.body);
+  dbSets.saveAddress(req.body.address, req.body.lat, req.body.lng, req.session.user.id).then(function(results) {
+    res.json({error: false});
+  }).catch(function(err) {
+    console.log(err);
+    res.json({error: 'Somethings gone wrong'});
+  });
+});
+
+
 
 app.post('/uploadImage', uploader.single('image'), function(req, res) {
   console.log('imageNumber', req.body.imageNo);

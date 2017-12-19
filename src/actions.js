@@ -53,10 +53,10 @@ export function submitPicture(payload) {
   })
 }
 
-export function submitAddrss(payload) {
-  return axios.post('/uploadImage', payload).then(function(results) {
-    const imageDetails = results.data
-    return {type: 'PICTURE_UPDATED', imageDetails}
+export function submitAddress(payload) {
+  console.log('address action', payload);
+  return axios.post('/saveAddress', payload).then(function(results) {
+    return {type: 'ADDRESS_UPDATED', payload}
   })
 }
 
@@ -73,6 +73,7 @@ export function saveProfile(payload) {
 
 export function fetchUserProfile(payload) {
   return axios.get('/userProfile.json', payload).then(function(results) {
+    console.log('action fetched', results);
     const userProfile = results.data.userProfile
     return {type: 'USER_PROFILE', userProfile}
   })
