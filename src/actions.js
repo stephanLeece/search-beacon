@@ -48,6 +48,7 @@ export function fetchUserDetails(payload) {
 
 export function submitPicture(payload) {
   return axios.post('/uploadImage', payload).then(function(results) {
+    console.log("submit deets", results.data);
     const imageDetails = results.data
     return {type: 'PICTURE_UPDATED', imageDetails}
   })
@@ -110,8 +111,6 @@ export function getAllCharities(payload) {
     const charities = results.data.allUsers
     return {type: 'ALL_CHARITIES', charities}
   })
-
-
 }
 
 export function propChange(payload) {
@@ -120,4 +119,27 @@ export function propChange(payload) {
 
 export function multiPropChange(payload) {
   return {type: 'PROP_CHANGE', payload}
+}
+
+export function postMessage(payload) {
+  console.log('action sending message:', message);
+  let data = {
+  messageContents: message
+  }
+  return axios.post('/chat.json/', data).then(function(results) {
+    return {type: 'NEW_MESSAGE', message};
+  })
+}
+
+export function getMessagesFromConvo(payload) {
+
+  return axios.get('/convo/', payload).then(function({data}) {
+    return {type: 'ALL_MESSAGES', messages: data};
+  });
+}
+
+  export function getAllLatestMessages(payload) {
+    return axios.get('/messages.json/').then(function({data}) {
+      return {type: 'ALL_MESSAGES', messages: data};
+    });
 }

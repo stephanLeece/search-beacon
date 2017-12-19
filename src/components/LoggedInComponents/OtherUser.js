@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router'
 import {fetchOtherUserProfile} from '../../actions';
 
 const mapStateToProps = state => ({
@@ -68,7 +69,7 @@ class OtherUser extends React.Component {
 
     return (<div className='main'>
       {content}
-      {(this.props.userType != this.props.OtherUserType) && <h1>Different!</h1>}
+      {(this.props.userType != this.props.OtherUserType) && <Link to={`/convo/${this.props.OtherUserId}`}>Send a Message!</Link>}
     </div>)
   }
 }

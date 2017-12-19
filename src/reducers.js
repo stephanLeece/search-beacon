@@ -16,14 +16,15 @@ export default function reducer(state = {}, action) {
   }
 
   if (action.type == 'USER_PROFILE') {
+    console.log('reducer got', action.userProfile);
     state = Object.assign({}, state, {
       userTitle: action.userProfile.title,
       userDescription: action.userProfile.description,
       userResponsibilites: action.userProfile.responsibilites,
       userSkills: action.userProfile.skills,
-      userImage1: action.userProfile.image1,
-      userImage2: action.userProfile.image2,
-      userImage3: action.userProfile.image3,
+      image1: action.userProfile.image1,
+      image2: action.userProfile.image2,
+      image3: action.userProfile.image3,
       userAddress: action.userProfile.address,
       userLat: action.userProfile.lat,
       userLng: action.userProfile.lng
@@ -84,9 +85,9 @@ if (action.type == 'ALL_CHARITIES') {
 
 
   if (action.type == 'PICTURE_UPDATED') {
-    let imageNo = action.imageDetails.imageNo
+    console.log('im gonna update', action.imageDetails);
     state = Object.assign({}, state, {
-        [imageNo]: action.imageDetails.image
+        [action.imageDetails.imageNo]: action.imageDetails.image
     });
   }
 

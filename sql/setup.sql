@@ -34,13 +34,22 @@ CREATE TABLE userProfile(
 );
 
 
+CREATE TABLE messages(
+    id SERIAL PRIMARY KEY,
+    sender_id INTEGER,
+    recevier_id INTEGER,
+    message text,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
+-- generate convo id
 
--- CREATE TABLE messages(
---     id SERIAL PRIMARY KEY,
---     sender_id VARCHAR(200) NOT NULL,
--- sender_type
--- recevier_id
--- receiver_type
---     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
--- );
+CREATE TABLE convo(
+  id SERIAL PRIMARY KEY,
+  sender_id INTEGER,
+  sender_type INTEGER,
+  recevier_id INTEGER,
+  receiver_type INTEGER,
+  latestMessage text,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
