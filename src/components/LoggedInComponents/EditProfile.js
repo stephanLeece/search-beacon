@@ -1,6 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import AutoComplete from './AutoComplete'
+import PlacesAutocomplete, {  geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+import {Helmet} from "react-helmet";
 import {submitPicture, saveProfile, fetchUserProfile, propChange} from '../../actions';
+
+
 
 const mapStateToProps = state => ({
   userEmail: state.userEmail,
@@ -15,6 +20,7 @@ const mapStateToProps = state => ({
   image1: state.image1,
   image2: state.image2,
   image3: state.image3,
+  address: state.address,
   profileSaved: state.profileSaved
 });
 
@@ -33,6 +39,8 @@ class EditProfile extends React.Component {
     this.handleImageChange = this.handleImageChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitPicture = this.handleSubmitPicture.bind(this);
+    this.handleUpdateAddress = this.handleUpdateAddress.bind(this);
+  this.toggleAuto = this.toggleAuto.bind(this);
 
   }
 
@@ -75,6 +83,16 @@ class EditProfile extends React.Component {
     this.props.saveProfile(data);
   }
 
+handleUpdateAddress(){
+  console.log('update');
+}
+
+toggleAuto() {
+  this.setState({
+  showAuto: !this.state.showAuto
+})
+}
+
   handleSubmitPicture(event) {
     let imageNo = event.target.name
     event.preventDefault();
@@ -105,6 +123,9 @@ class EditProfile extends React.Component {
       form = <form className='beaconForm'>
         <label for="title">Title:</label>
         <input onChange={this.handleChange} type="text" name="userTitle" value={this.props.userTitle}/>
+        {!this.state.showAuto && <p>Current Address: {this.props.userAddress}</p>}
+              {!this.state.showAuto && <button type='button' onClick={this.toggleAuto}>toggleAuto</button>}
+                {this.state.showAuto && <AutoComplete/>}
         <label for="description">Description:</label>
         <textarea onChange={this.handleChange} name="userDescription" rows="8" cols="80"value={this.props.userDescription}/>
         <label for="responsibilities">Responsibilities:</label>
@@ -167,6 +188,9 @@ class EditProfile extends React.Component {
     }
 
     return (<div className='main'>
+    <Helmet>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYnCrdS4AwE6GbSG-jy-4hYB1ltz7t0UY&libraries=places"></script>
+        </Helmet>
       {this.props.profileSaved && <h1>Profile Saved</h1>}
       {form}
     </div>)
