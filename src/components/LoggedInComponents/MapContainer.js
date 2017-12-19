@@ -1,8 +1,8 @@
-import React, {PropTypes} from "react"
-import {Link, browserHistory} from 'react-router';
-import axios from '../axios';
-import {getSocket} from '../socket';
+import React from 'react';
+import {connect} from 'react-redux';
+import {searchUsers} from '../../actions';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+
 
 class MapContainer extends React.Component {
   constructor(props) {

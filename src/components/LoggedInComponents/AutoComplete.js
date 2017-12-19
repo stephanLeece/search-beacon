@@ -2,6 +2,7 @@ import React from 'react'
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
 import {fetchUserProfile, submitAddress} from '../../actions';
 import {connect} from 'react-redux';
+import {Helmet} from "react-helmet";
 
 
 

@@ -36,6 +36,28 @@ class Search extends React.Component {
   }
 
   render() {
+    let userList = '';
+    if (this.props.userResults) {
+if(this.props.userType == 0) {
+
+userList = this.props.userResults.map((user) => <div key={user.id}>
+<p>{user.fname}{user.lname}</p>
+<img src={user.image1} alt=""/>
+<p>{user.skills}</p>
+    </div>);
+} else {
+  userList = this.props.userResults.map((user) => <div key={user.id}>
+  <p>{user.title}</p>
+  <img src={user.image1} alt=""/>
+  <p>{user.skills}</p>
+      </div>);
+}
+
+
+
+}
+
+
 
     return (<div className='main' id='search'>
 
@@ -44,6 +66,7 @@ class Search extends React.Component {
       <input onChange={this.handleChange} name="searchBox" type="text"/>
       <button onClick={this.handleSubmit}>Submit</button>
     </label>
+    {this.props.userResults && !this.props.error && <div>{userList}</div>}
       {this.props.error && <p>{this.props.error}</p>}
     </div>);
   }

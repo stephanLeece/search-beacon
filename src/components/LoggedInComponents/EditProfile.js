@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {submitPicture, saveProfile, fetchUserProfile, propChange} from '../../actions';
 import AutoComplete from './AutoComplete'
 import PlacesAutocomplete, {  geocodeByAddress, getLatLng } from 'react-places-autocomplete'
-
+import {Helmet} from "react-helmet";
 
 const mapStateToProps = state => ({
   userEmail: state.userEmail,
@@ -120,6 +120,9 @@ class EditProfile extends React.Component {
       form = <form className='beaconForm'>
         <label for="title">Title:</label>
         <input onChange={this.handleChange} type="text" name="userTitle" value={this.props.userTitle}/>
+        {!this.state.showAuto && <p>Current Address: {this.props.userAddress}</p>}
+        {!this.state.showAuto && <button onClick={this.toggleAuto}>toggleAuto</button>}
+          {this.state.showAuto && <AutoComplete/>}
         <label for="description">Description:</label>
         <textarea onChange={this.handleChange} name="userDescription" rows="8" cols="80"value={this.props.userDescription}/>
         <label for="responsibilities">Responsibilities:</label>
@@ -128,7 +131,6 @@ class EditProfile extends React.Component {
         <textarea onChange={this.handleChange} name="userSkills" rows="8" cols="80"value={this.props.userSkills}/>
         <h1>Add up to three images</h1>
         <div className='imageBox'>
-
           <div className='singleImage'>
             <img src={this.props.image1} alt=""/>
             <div className="fileContainer">
@@ -182,11 +184,12 @@ class EditProfile extends React.Component {
     }
 
     return (<div className='main'>
+    <Helmet>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYnCrdS4AwE6GbSG-jy-4hYB1ltz7t0UY&libraries=places"></script>
+
+        </Helmet>
       {this.props.profileSaved && <h1>Profile Saved</h1>}
       {form}
-        {!this.state.showAuto && <p>Current Address: {this.props.userAddress}</p>}
-        {!this.state.showAuto && <button onClick={this.toggleAuto}>toggleAuto</button>}
-          {this.state.showAuto && <AutoComplete/>}
     </div>)
   }
 }
