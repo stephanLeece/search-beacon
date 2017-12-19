@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {getAllCharities} from '../../actions';
+import {Link} from 'react-router'
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 const mapStateToProps = state => ({error: state.error, userType: state.userType, charities: state.charities});
@@ -44,7 +45,7 @@ class MapContainer extends React.Component {
 let charities;
     if (this.props.charities) {
       charities = this.props.charities.map(charity =>
-        <Marker onClick={this.onMarkerClick} name={charity.fname} position={{
+        <Marker onClick={this.onMarkerClick} id={charity.userid} title={charity.fname} name={charity.image1} id={charity.id} position={{
               lat: charity.lat,
               lng: charity.lng
             }}/>
@@ -67,7 +68,12 @@ let charities;
     return (<Map google={this.props.google} style={style} onClick={this.onMapClicked}>
       {charities}
       <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
-        <h1>{this.state.selectedPlace.name}</h1>
+<div>
+
+      <a href={`/result/${this.state.selectedPlace.id}`}><h1>{this.state.selectedPlace.title}</h1></a>
+          <img src={this.state.selectedPlace.name}/>
+</div>
+
       </InfoWindow>
     </Map>);
 

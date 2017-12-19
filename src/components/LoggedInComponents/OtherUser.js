@@ -35,7 +35,6 @@ class OtherUser extends React.Component {
   componentDidMount() {
     let id = this.props.params.id
     this.props.fetchOtherUserProfile(id)
-
   }
 
   render() {

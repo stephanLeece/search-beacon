@@ -80,11 +80,12 @@ export function fetchUserProfile(payload) {
 }
 
 export function fetchOtherUserProfile(payload) {
-  return axios.get('/otherUserProfile.json' + payload).then(function(results) {
+  return axios.get('/otherUserProfile.json/' + payload).then(function(results) {
     if (results.data.redirect) {
       location.replace('/')
       return {type: 'ALL_GOOD', results}
     } else {
+      console.log('action got', results.data);
       const otherUserProfile = results.data
       return {type: 'OTHER_USER_PROFILE', otherUserProfile}
     }

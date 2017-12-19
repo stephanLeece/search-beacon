@@ -155,7 +155,7 @@ app.get('/otherUserProfile.json/:id', function(req, res) {
         res.json({error: 'An error!', redirect: true});
       } else {
         console.log('results are in', results);
-        let otherUserProfile = {
+        let otherUserProfileObj = {
           OtherUserFname: results.fname,
           OtherUserLname: results.lname,
           OtherUserType: results.usertype,
@@ -174,11 +174,12 @@ app.get('/otherUserProfile.json/:id', function(req, res) {
           trimmedSkills.push(skillsSplit[i].trim())
         }
         for (let i = 0; i < trimmedSkills.length; i++) {
-          if (otherUserProfile.OtherUserSkills.indexOf(trimmedSkills[i]) == -1) {
-            otherUserProfile.OtherUserSkills.push(trimmedSkills[i])
+          if (otherUserProfileObj.OtherUserSkills.indexOf(trimmedSkills[i]) == -1) {
+            otherUserProfileObj.OtherUserSkills.push(trimmedSkills[i])
           }
         }
-        res.json(otherUserProfile);
+        console.log('server sending back', otherUserProfileObj);
+        res.json(otherUserProfileObj);
       }
     });
   }
