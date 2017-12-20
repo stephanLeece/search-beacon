@@ -32,43 +32,74 @@ class OtherUser extends React.Component {
     this.state = {};
   }
 
-
   componentDidMount() {
     let id = this.props.params.id
     this.props.fetchOtherUserProfile(id)
   }
 
   render() {
-      console.log('other profile props on render', this.props);
+    const charPlaceHolder = "https://s3.amazonaws.com/bucketoftheether/zPw8bZdswK-3M-7MW0QTbQN-L3LGSRyl.png"
+    const volPlaceHolder = 'https://s3.amazonaws.com/bucketoftheether/8PkYpU3KqHK2uRegWmVQP0fr0196-OJK.png'
+    console.log(this.props.OtherImage1);
+    console.log('other profile props on render', this.props);
     let content;
     if (this.props.OtherUserType == 0) {
       content = <div className='main' id='otherProfile'>
-<h1>{this.props.OtherUserTitle}</h1>
-<h1>{this.props.OtherUserDescription}</h1>
-<h1>{this.props.OtherUserResponsibilites}</h1>
-<h1>{this.props.OtherUserSkills}</h1>
-<h1>{this.props.OtherUserTitle}</h1>
-<div>
-<img src={this.props.OtherImage1} alt=""/>
-<img src={this.props.OtherImage2} alt=""/>
-<img src={this.props.OtherImage3} alt=""/>
-</div>
+        <h1>{this.props.OtherUserTitle}</h1>
+        <div className='imageBox'>
+          <div className='singleImage'>
+            {charPlaceHolder != this.props.OtherImage1 && <img src={this.props.OtherImage1} alt=""/>}
+          </div>
+          <div className='singleImage'>
+            {charPlaceHolder != this.props.OtherImage2 && <img src={this.props.OtherImage2} alt=""/>}
+          </div>
+          <div className='singleImage'>
+        {charPlaceHolder != this.props.OtherImage3 && <img src={this.props.OtherImage3} alt=""/>}
+          </div>
+        </div>
+        <div>
+          <p>About:
+            <h1>{this.props.OtherUserDescription}</h1>
+          </p>
+        </div>
+        <div>
+          <p>What you'll be doing:
+          </p>
+          <h1>{this.props.OtherUserResponsibilites}</h1>
+        </div>
+        <div>
+          <p>looking for the following skills:
+          </p>
+          <h1>{this.props.OtherUserSkills}</h1>
+        </div>
+{(this.props.userType != this.props.OtherUserType) && <Link to={`/convo/${this.props.OtherUserId}`}>Send a Message!</Link>}
       </div>
     } else {
       content = <div className='otherProfile'>
-      <h1>{this.props.OtherUserFname}</h1>
-      <h1>{this.props.OtherUserLname}</h1>
-      <img src={this.props.OtherImage1} alt=""/>
-      <h1>{this.props.OtherUserDescription}</h1>
-      <h1>{this.props.OtherUserResponsibilites}</h1>
-      <h1>{this.props.OtherUserSkills}</h1>
-      <h1>{this.props.OtherUserTitle}</h1>
+        <div>
+          <h1>{this.props.OtherUserFname}{this.props.OtherUserLname}</h1>
+          <img src={this.props.OtherImage1} alt=""/></div>
+        <div>
+          <p>About me:
+          </p>
+          <h1>{this.props.OtherUserDescription}</h1>
+        </div>
+        <div>
+          <p>I'm interested in:
+          </p>
+          <h1>{this.props.OtherUserResponsibilites}</h1>
+        </div>
+        <div>I'm good at:
+          <h1>{this.props.OtherUserSkills}</h1>
+        </div>
+        {(this.props.userType != this.props.OtherUserType) && <Link to={`/convo/${this.props.OtherUserId}`}>Send a Message!</Link>}
+{(this.props.userType != this.props.OtherUserType) && <Link to={`/convo/${this.props.OtherUserId}`}>Send a Message!</Link>}
       </div>
     }
 
-    return (<div className='main'>
+    return (<div className='main' id='otherUser'>
       {content}
-      {(this.props.userType != this.props.OtherUserType) && <Link to={`/convo/${this.props.OtherUserId}`}>Send a Message!</Link>}
+
     </div>)
   }
 }

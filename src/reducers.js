@@ -106,25 +106,28 @@ export default function reducer(state = {}, action) {
       })
     } else {
       state = Object.assign({}, state, {
-      messages: [action.payload]
+        messages: [action.payload]
       })
     }
   }
 
   if (action.type == 'CONVO_HISTORY') {
-    if (action.data ==0) {
+    if (action.data == 0) {
       state = Object.assign({}, state, {messages: false});
     } else {
       state = Object.assign({}, state, {messages: action.data});
     }
 
-
-
   }
 
   if (action.type == 'SENT_MESSAGES') {
     if (action.data.error) {
-      state = Object.assign({}, state, {messageError: true});
+      state = Object.assign({}, state, {
+        allMessages: false,
+        messageError: true,
+        showingSent: true,
+        showingRecevied: false
+      });
     } else {
       state = Object.assign({}, state, {
         allMessages: action.data,
@@ -137,7 +140,12 @@ export default function reducer(state = {}, action) {
 
   if (action.type == 'RECEIVED_MESSAGES') {
     if (action.data.error) {
-      state = Object.assign({}, state, {messageError: true});
+      state = Object.assign({}, state, {
+        allMessages: false,
+        messageError: true,
+        showingRecevied: true,
+        showingSent: false
+      });
     } else {
       state = Object.assign({}, state, {
         allMessages: action.data,

@@ -16,7 +16,7 @@ class MapContainer extends React.Component {
     this.state = {
       showingInfoWindow: false,
       activeMarker: {},
-      selectedPlace: {},
+      selectedPlace: {}
     };
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
@@ -28,28 +28,25 @@ class MapContainer extends React.Component {
   }
 
   onMapClicked(props) {
-     if (this.state.showingInfoWindow) {
-       this.setState({
-         showingInfoWindow: false,
-         activeMarker: null
-       })
-     }
-   }
+    if (this.state.showingInfoWindow) {
+      this.setState({showingInfoWindow: false, activeMarker: null})
+    }
+  }
 
   componentDidMount() {
     this.props.getAllCharities()
   }
 
   render() {
+    const charPlaceHolder = "https://s3.amazonaws.com/bucketoftheether/zPw8bZdswK-3M-7MW0QTbQN-L3LGSRyl.png"
+
     console.log('charities on render', this.props.charities);
-let charities;
+    let charities;
     if (this.props.charities) {
-      charities = this.props.charities.map(charity =>
-        <Marker onClick={this.onMarkerClick} id={charity.userid} title={charity.fname} name={charity.image1} id={charity.id} position={{
-              lat: charity.lat,
-              lng: charity.lng
-            }}/>
-    );
+      charities = this.props.charities.map(charity => <Marker onClick={this.onMarkerClick} id={charity.id} title={charity.title} name={charity.image1} position={{
+          lat: charity.lat,
+          lng: charity.lng
+        }}/>);
       console.log('charities mapped', charities);
     }
 
@@ -58,21 +55,22 @@ let charities;
     //       lng: -122.405640
     //     }}/>
 
-//
+    //
 
     const style = {
-      width: '50vw',
-      height: '100vh',
-      border: '1px solid yellow'
+      width: '100vw',
+      height: '100vh'
     }
     return (<Map google={this.props.google} style={style} onClick={this.onMapClicked}>
       {charities}
       <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
-<div>
+        <div>
 
-      <a href={`/result/${this.state.selectedPlace.id}`}><h1>{this.state.selectedPlace.title}</h1></a>
-          <img src={this.state.selectedPlace.name}/>
-</div>
+          <a href={`/result/${this.state.selectedPlace.id}`}>
+            <h1>{this.state.selectedPlace.title}</h1>
+          </a>
+              {charPlaceHolder != this.state.selectedPlace.name && <img src={this.state.selectedPlace.name}/>}
+        </div>
 
       </InfoWindow>
     </Map>);

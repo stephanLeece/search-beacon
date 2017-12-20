@@ -37,7 +37,7 @@ class ReactBody extends React.Component {
 
       {this.props.main}
 
-      <footer><h1>BADMAN</h1></footer>
+      <footer><p>BADMAN</p></footer>
 </div>
     )
   }

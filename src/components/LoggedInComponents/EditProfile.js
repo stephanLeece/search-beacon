@@ -168,17 +168,17 @@ class EditProfile extends React.Component {
             </div>
           </div>
         </div>
-        <button onClick={this.handleSubmit}>Save Details</button>
+        {!this.props.profileSaved && <button onClick={this.handleSubmit}>Save Details</button>}
+        {this.props.profileSaved && <button onClick={this.handleSubmit}>Saved!</button>}
       </form>
 
     } else {
       form = <form className='profileForm'>
-        <h1>Add a profile picture</h1>
         <div className='singleImage'>
           <img src={this.props.image1} alt=""/>
           <div>
             <div className="fileContainer">
-              Change
+              Change Profile Picture
               <input onChange={this.handleImageChange} name="image1" type="file"/>
             </div>
             <button name="image1b" onClick={this.handleSubmitPicture}>Save</button>
@@ -190,7 +190,8 @@ class EditProfile extends React.Component {
         <textarea onChange={this.handleChange} name="userResponsibilites" rows="8" cols="80" value={this.props.userResponsibilites}/>
         <label>What are you good at? (single words, seperated by a space please! e.g teaching painting etc)</label>
         <textarea onChange={this.handleChange} name="userSkills" rows="8" cols="80" value={this.props.userSkills}/>
-        <button onClick={this.handleSubmit}>Save Details</button>
+          {!this.props.profileSaved && <button onClick={this.handleSubmit}>Save Details</button>}
+          {this.props.profileSaved && <button onClick={this.handleSubmit}>Saved!</button>}
       </form>
     }
 
@@ -200,7 +201,7 @@ class EditProfile extends React.Component {
       </Helmet>
 
       {form}
-        {this.props.profileSaved && <h1>Profile Saved</h1>}
+
     </div>)
   }
 }

@@ -72,6 +72,9 @@ class Convo extends React.Component {
   }
 
   render() {
+    const charPlaceHolder = "https://s3.amazonaws.com/bucketoftheether/zPw8bZdswK-3M-7MW0QTbQN-L3LGSRyl.png"
+
+    const volPlaceHolder = 'https://s3.amazonaws.com/bucketoftheether/8PkYpU3KqHK2uRegWmVQP0fr0196-OJK.png'
 
     let messageList;
     if (this.props.messages) {
@@ -81,9 +84,10 @@ class Convo extends React.Component {
     }
 
     return (<div className='main'>
-      <h1>A convo!</h1>
-      <div>Messages</div>
-      <div>{this.props.messages && messageList}</div>
+    <p>Chat with {this.props.OtherUserFname}</p>
+{charPlaceHolder != this.props.OtherImage2 && volPlaceHolder != this.props.OtherImage2 && <img src={this.props.OtherImage2} alt=""/>}
+      {!this.props.messages && <p>Why not say Hello?</p>}
+      <div id='messageList'>{this.props.messages && messageList}</div>
       <textarea onChange={this.handleChange} name="newMessage" rows="8" cols="80" value={this.props.newMessage}/>
       <button onClick={this.handleSubmit}>Send</button>
     </div>)

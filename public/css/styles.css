@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-border: 1px solid black;
+/* border: 1px solid black; */
 }
 
 ::-webkit-scrollbar {
@@ -10,9 +10,17 @@ border: 1px solid black;
 
 body {
 min-height: 99vh;
+font-size:24px;
 }
 
+h1 {
+  font-weight: bold;
+  font-size: 2em;
+}
 
+Button, Link, p, a, input {
+  font-size: 1em;
+}
 
 #reactBody {
   min-height: 100vh;
@@ -28,14 +36,14 @@ width: 100%;
 
 .main {
 flex-grow:1;
-background-color: white;
+
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
 }
 
-#landing, #UserHome, #search{
+#landing, #UserHome, #search, #messages, #otherUser{
   justify-content: flex-start;
 }
 
@@ -46,7 +54,7 @@ align-items: center;
 .beaconForm {
   min-height: 50vh;
   width: 50%;
-background-color: grey;
+
   display: flex;
   flex-direction: column;
     justify-content: flex-start;
@@ -58,7 +66,7 @@ background-color: grey;
 .profileForm {
   /* min-height: 50vh; */
   width: 80%;
-background-color: grey;
+
   display: flex;
   flex-direction: column;
     justify-content: flex-start;
@@ -79,11 +87,7 @@ header {
 
 /* -----------------------upload file button styling------------------- */
 
-.imageBox {
-display: flex;
-flex-direction: row;
-width: 80%;
-}
+
 
 .addressBox {
   width: 40%;
@@ -95,15 +99,30 @@ width: 80%;
   justify-content: space-around;
   align-items: center;
 }
+
+.imageBox {
+display: flex;
+flex-direction: row;
+padding: 0 5%;
+justify-content: center;
+
+}
+
 .singleImage {
-  width: 33%;
   height: 30vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-    border: 1px solid red;
+
 }
+
+.singleImage img {
+max-height: 80%;
+max-width: 100%;
+border: 2px solid black;
+}
+
 
 .singleImage > div {
   display: flex;
@@ -111,14 +130,10 @@ width: 80%;
   justify-content: space-between;
   align-items: center;
   height: inherit;
-  width: inherit;
+  width: 100%;
+    border: 1px solid red;
 }
 
-.singleImage img {
-
-max-height: 80%;
-max-width: 80%;
-}
 
 
 .fileContainer {
@@ -144,12 +159,12 @@ max-width: 80%;
   top: 0;
 }
 
-.fileContainer {
+.fileContainer, button {
   background: white;
   color: black;
   border-radius: 2px;
   padding: 4px;
-  font-family: 'Special Elite', cursive;
+  /* font-family: 'Special Elite', cursive; */
   font-weight: bold;
   font-size: 1em;
 }

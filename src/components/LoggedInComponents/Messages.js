@@ -56,7 +56,7 @@ class Messages extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getReceived()
+
   }
 
   render() {
@@ -74,14 +74,14 @@ class Messages extends React.Component {
       </Link>)
     }
 
-    return (<div className='main'>
-      <p>Your messages</p>
-      {this.props.showingReceived && <p>Showing Received</p>}
-      {this.props.showingSent && <p>Showing Sent</p>}
-{this.props.messageError && <p>No Messages</p>}
-      {messageList}
+    return (<div className='main' id='messages'>
+      <h1>Your messages</h1>
+
+      <div>
       <button type='button' onClick={this.props.getSent}>Show Sent</button>
       <button type='button' onClick={this.props.getReceived}>Show Received</button>
+      </div>
+        <div>{messageList} {this.props.messageError && <p>No Messages yet...</p>}</div>
     </div>)
   }
 }
