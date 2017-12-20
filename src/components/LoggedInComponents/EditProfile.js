@@ -1,11 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import AutoComplete from './AutoComplete'
-import PlacesAutocomplete, {  geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+import PlacesAutocomplete, {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
 import {Helmet} from "react-helmet";
 import {submitPicture, saveProfile, fetchUserProfile, propChange} from '../../actions';
-
-
 
 const mapStateToProps = state => ({
   userEmail: state.userEmail,
@@ -21,7 +19,8 @@ const mapStateToProps = state => ({
   image2: state.image2,
   image3: state.image3,
   address: state.address,
-  profileSaved: state.profileSaved
+  profileSaved: state.profileSaved,
+  userAddress: state.userAddress
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -40,17 +39,17 @@ class EditProfile extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitPicture = this.handleSubmitPicture.bind(this);
     this.handleUpdateAddress = this.handleUpdateAddress.bind(this);
-  this.toggleAuto = this.toggleAuto.bind(this);
+    this.toggleAuto = this.toggleAuto.bind(this);
 
   }
 
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    }, () => {
-      console.log('new state', this.state);
-    })
-  }
+  // handleChange(e) {
+  //   this.setState({
+  //     [e.target.name]: e.target.value
+  //   }, () => {
+  //     console.log('new state', this.state);
+  //   })
+  // }
 
   handleChange(e) {
     let data = {
@@ -69,8 +68,6 @@ class EditProfile extends React.Component {
     })
   }
 
-
-
   handleSubmit(event) {
     event.preventDefault();
     const {userTitle, userDescription, userResponsibilites, userSkills} = this.props;
@@ -83,15 +80,15 @@ class EditProfile extends React.Component {
     this.props.saveProfile(data);
   }
 
-handleUpdateAddress(){
-  console.log('update');
-}
+  handleUpdateAddress() {
+    console.log('update');
+  }
 
-toggleAuto() {
-  this.setState({
-  showAuto: !this.state.showAuto
-})
-}
+  toggleAuto() {
+    this.setState({
+      showAuto: !this.state.showAuto
+    })
+  }
 
   handleSubmitPicture(event) {
     let imageNo = event.target.name
@@ -120,79 +117,90 @@ toggleAuto() {
     let userType = this.props.userType;
     let form;
     if (userType == 0) {
-      form = <form className='beaconForm'>
-        <label for="title">Title:</label>
+      form = <form className='profileForm'>
+        <label for="title">Name of Organisation:</label>
         <input onChange={this.handleChange} type="text" name="userTitle" value={this.props.userTitle}/>
-        {!this.state.showAuto && <p>Current Address: {this.props.userAddress}</p>}
-              {!this.state.showAuto && <button type='button' onClick={this.toggleAuto}>toggleAuto</button>}
-                {this.state.showAuto && <AutoComplete/>}
-        <label for="description">Description:</label>
-        <textarea onChange={this.handleChange} name="userDescription" rows="8" cols="80"value={this.props.userDescription}/>
-        <label for="responsibilities">Responsibilities:</label>
-        <textarea onChange={this.handleChange} name="userResponsibilites" rows="8" cols="80"value={this.props.userResponsibilites}/>
-        <label>Skills You're looking for:</label>
-        <textarea onChange={this.handleChange} name="userSkills" rows="8" cols="80"value={this.props.userSkills}/>
-        <h1>Add up to three images</h1>
+
+        <div className='addressBox'>
+          {!this.state.showAuto && <div><p>Location: {this.props.userAddress}</p> <button type='button' onClick={this.toggleAuto}>Update</button></div>}
+          {this.state.showAuto && <AutoComplete/>}
+        </div>
+        <label for="description">Tell the world about your Organisation:</label>
+        <textarea onChange={this.handleChange} name="userDescription" rows="8" cols="80" value={this.props.userDescription}/>
+        <label for="responsibilities">What will volunteers be doing?:</label>
+        <textarea onChange={this.handleChange} name="userResponsibilites" rows="8" cols="80" value={this.props.userResponsibilites}/>
+        <label>Skills You're looking for (single words, seperated by a space please! e.g teaching painting etc)</label>
+        <textarea onChange={this.handleChange} name="userSkills" rows="8" cols="80" value={this.props.userSkills}/>
+        <p>Add up to three images</p>
+
         <div className='imageBox'>
 
           <div className='singleImage'>
             <img src={this.props.image1} alt=""/>
-            <div className="fileContainer">
-              Picture
-              <input onChange={this.handleImageChange} name="image1" type="file"/>
+            <div>
+              <div className="fileContainer">
+                Change
+                <input onChange={this.handleImageChange} name="image1" type="file"/>
+              </div>
+              <button name="image1b" onClick={this.handleSubmitPicture}>Save</button>
             </div>
-            <button name="image1b" onClick={this.handleSubmitPicture}>Add</button>
           </div>
 
           <div className='singleImage'>
             <img src={this.props.image2} alt=""/>
-            <div className="fileContainer">
-              Picture
-              <input onChange={this.handleImageChange} name="image2" type="file"/>
+            <div>
+              <div className="fileContainer">
+                Change
+                <input onChange={this.handleImageChange} name="image2" type="file"/>
+              </div>
+              <button name="image2b" onClick={this.handleSubmitPicture}>Save</button>
             </div>
-            <button name="image2b" onClick={this.handleSubmitPicture}>Add</button>
           </div>
 
           <div className='singleImage'>
             <img src={this.props.image3} alt=""/>
-            <div className="fileContainer">
-              Picture
-              <input onChange={this.handleImageChange} name="image3" type="file"/>
+            <div>
+              <div className="fileContainer">
+                Change
+                <input onChange={this.handleImageChange} name="image3" type="file"/>
+              </div>
+              <button name="image3b" onClick={this.handleSubmitPicture}>Save</button>
             </div>
-            <button name="image3b" onClick={this.handleSubmitPicture}>Add</button>
           </div>
-
         </div>
         <button onClick={this.handleSubmit}>Save Details</button>
       </form>
 
     } else {
-      form = <form className='beaconForm'>
+      form = <form className='profileForm'>
         <h1>Add a profile picture</h1>
         <div className='singleImage'>
           <img src={this.props.image1} alt=""/>
-          <div className="fileContainer">
-            Picture
-            <input onChange={this.handleImageChange} name="image1" type="file"/>
+          <div>
+            <div className="fileContainer">
+              Change
+              <input onChange={this.handleImageChange} name="image1" type="file"/>
+            </div>
+            <button name="image1b" onClick={this.handleSubmitPicture}>Save</button>
           </div>
-          <button name="image1b" onClick={this.handleSubmitPicture}>Add</button>
         </div>
-        <label for="description">About you:</label>
+        <label for="description">Tell the world about yourself:</label>
         <textarea onChange={this.handleChange} name="userDescription" rows="8" cols="80" value={this.props.userDescription}/>
-        <label for="responsibilities">What you're looking for:</label>
+        <label for="responsibilities">What are you looking to do:</label>
         <textarea onChange={this.handleChange} name="userResponsibilites" rows="8" cols="80" value={this.props.userResponsibilites}/>
-        <label>Skills:</label>
+        <label>What are you good at? (single words, seperated by a space please! e.g teaching painting etc)</label>
         <textarea onChange={this.handleChange} name="userSkills" rows="8" cols="80" value={this.props.userSkills}/>
         <button onClick={this.handleSubmit}>Save Details</button>
       </form>
     }
 
-    return (<div className='main'>
-    <Helmet>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYnCrdS4AwE6GbSG-jy-4hYB1ltz7t0UY&libraries=places"></script>
-        </Helmet>
-      {this.props.profileSaved && <h1>Profile Saved</h1>}
+    return (<div className='main' id='editProfile'>
+      <Helmet>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYnCrdS4AwE6GbSG-jy-4hYB1ltz7t0UY&libraries=places"></script>
+      </Helmet>
+
       {form}
+        {this.props.profileSaved && <h1>Profile Saved</h1>}
     </div>)
   }
 }

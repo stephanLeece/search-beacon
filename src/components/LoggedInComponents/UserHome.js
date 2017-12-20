@@ -23,17 +23,10 @@ class UserHome extends React.Component {
 
 
   render() {
-    console.log(this.props);
-    let usertype = this.props.userType;
-    let message;
-     if (usertype == 0) {
-       message = <h1>hello charity</h1>;
-     } else {
-     message = <h1>hello user</h1>;
-     }
 
     return (<div className='main' id='UserHome'>
-{message}
+{this.props.userType==0 && <h1>Hi {this.props.userLname}</h1>}
+{this.props.userType==1 && <h1>Hi {this.props.userFname}</h1>}
 from here you can:
 {this.props.userType != 0 && <Link to='/map'>check the map</Link>}
 <Link to='/search'>search</Link>

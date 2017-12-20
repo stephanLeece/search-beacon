@@ -37,11 +37,11 @@ CREATE TABLE userProfile(
 CREATE TABLE convo(
     id SERIAL PRIMARY KEY,
     senderId INTEGER,
-    senderFname text,
-    senderLname text,
+    senderfname text,
+    senderlname text,
     receiverid INTEGER,
-    receiverFname text,
-    receiverLname text,
+    receivierfname text,
+    receivierlname text,
     message text,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

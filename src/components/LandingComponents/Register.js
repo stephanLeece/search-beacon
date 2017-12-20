@@ -1,12 +1,21 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {postRegisterForm} from '../../actions';
-import {Router, Route, Link, IndexRoute, redirect, hashHistory, browserHistory} from 'react-router';
+import {postRegisterForm, propChange} from '../../actions';
+import {
+  Router,
+  Route,
+  Link,
+  IndexRoute,
+  redirect,
+  hashHistory,
+  browserHistory
+} from 'react-router';
 
 const mapStateToProps = state => ({error: state.error});
 
 const mapDispatchToProps = dispatch => ({
-  postForm: payload => dispatch(postRegisterForm(payload))
+  postForm: payload => dispatch(postRegisterForm(payload)),
+  propChange: payload => dispatch(propChange(payload))
 });
 
 class Register extends React.Component {
@@ -20,9 +29,7 @@ class Register extends React.Component {
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
-    }, () => {
-
-    })
+    }, () => {})
   }
 
   handleSubmit(event) {
@@ -35,21 +42,28 @@ class Register extends React.Component {
       pword,
       usertype
     };
-    this.props.postForm(data).then(function() {
-    })
+    this.props.postForm(data).then(function() {})
+  }
+
+  componentDidMount() {
+    let data = {
+      name: 'error',
+      value: false
+    }
+    this.props.propChange(data)
   }
 
   render() {
 
     return (<div className='main' id='register'>
-
+<h1>First we need a few details.</h1>
       <form className='beaconForm'>
         <label>
           First Name:
           <input onChange={this.handleChange} name="fname" type="text"/>
         </label>
         <label>
-          Surname:
+          Last Name:
           <input onChange={this.handleChange} name="lname" type="text"/>
         </label>
         <label>
@@ -61,15 +75,17 @@ class Register extends React.Component {
           <input onChange={this.handleChange} name="pword" type="password"/>
         </label>
         <label>
-          Register as:
           <input onChange={this.handleChange} type="radio" name="usertype" value="0"/>
-          Charity
+          Need volunteers
+        </label>
+        <label>
           <input onChange={this.handleChange} type="radio" name="usertype" value="1"/>
-          Volunteerd
+          Want to volunteer
         </label>
         <button onClick={this.handleSubmit}>Submit</button>
+        {this.props.error && <p>{this.props.error}</p>}
       </form>
-      {this.props.error && <p>{this.props.error}</p>}
+
     </div>);
   }
 }

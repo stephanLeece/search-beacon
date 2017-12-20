@@ -43,19 +43,19 @@ class OtherUser extends React.Component {
     let content;
     if (this.props.OtherUserType == 0) {
       content = <div className='main' id='otherProfile'>
-<h1>Charity</h1>
 <h1>{this.props.OtherUserTitle}</h1>
 <h1>{this.props.OtherUserDescription}</h1>
 <h1>{this.props.OtherUserResponsibilites}</h1>
 <h1>{this.props.OtherUserSkills}</h1>
 <h1>{this.props.OtherUserTitle}</h1>
+<div>
 <img src={this.props.OtherImage1} alt=""/>
 <img src={this.props.OtherImage2} alt=""/>
 <img src={this.props.OtherImage3} alt=""/>
+</div>
       </div>
     } else {
       content = <div className='otherProfile'>
-      <h1>User</h1>
       <h1>{this.props.OtherUserFname}</h1>
       <h1>{this.props.OtherUserLname}</h1>
       <img src={this.props.OtherImage1} alt=""/>

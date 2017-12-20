@@ -1,11 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {postLoginForm} from '../actions';
+import {postLoginForm, propChange} from '../actions';
 
 const mapStateToProps = state => ({error: state.error});
 
 const mapDispatchToProps = dispatch => ({
-  postLoginForm: payload => dispatch(postLoginForm(payload))
+  postLoginForm: payload => dispatch(postLoginForm(payload)),
+    propChange: payload => dispatch(propChange(payload))
 });
 
 class LoginPage extends React.Component {
@@ -34,10 +35,19 @@ class LoginPage extends React.Component {
     this.props.postLoginForm(data);
   }
 
+  componentDidMount() {
+    let data = {
+      name: 'error',
+      value: false
+    }
+    this.props.propChange(data)
+  }
+
   render() {
 
     return (
       <div className='main' id='loginPage'>
+      <h1>Almost there!</h1>
       <form className='beaconForm'>
         <label>
           Email:
@@ -48,8 +58,9 @@ class LoginPage extends React.Component {
           <input onChange={this.handleChange} name="pword" type="password"/>
         </label>
         <button onClick={this.handleSubmit}>Submit</button>
+            {this.props.error && <p>{this.props.error}</p>}
       </form>
-      {this.props.error && <p>{this.props.error}</p>}
+
       </div>
     );
   }

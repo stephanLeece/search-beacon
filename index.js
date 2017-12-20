@@ -252,7 +252,7 @@ app.post('/search.json', function(req, res) {
 });
 
 app.post('/convo.json', function(req, res) {
-  dbSets.saveMessage(req.body.senderId, req.body.senderFname, req.body.senderLname, req.body.receiverid, req.body.receiverFname, req.body.receiverLname, req.body.message).then(function(results){
+  dbSets.saveMessage(req.body.senderId, req.body.senderfname, req.body.senderlname, req.body.receiverid, req.body.receivierfname, req.body.receivierlname, req.body.message).then(function(results){
     res.json({error: false});
   }).catch(function(err) {
     console.log(err);

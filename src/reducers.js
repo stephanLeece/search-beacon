@@ -100,16 +100,26 @@ export default function reducer(state = {}, action) {
   }
 
   if (action.type == 'MESSAGE_SENT') {
-    state = Object.assign({}, state, {
-      messages: state.messages.concat(action.payload)
-    })
-
-    console.log('reducer message for new', action.payload);
+    if (state.messages) {
+      state = Object.assign({}, state, {
+        messages: state.messages.concat(action.payload)
+      })
+    } else {
+      state = Object.assign({}, state, {
+      messages: [action.payload]
+      })
+    }
   }
 
   if (action.type == 'CONVO_HISTORY') {
-    state = Object.assign({}, state, {messages: action.data});
-    console.log('reducer message for all', action.data);
+    if (action.data ==0) {
+      state = Object.assign({}, state, {messages: false});
+    } else {
+      state = Object.assign({}, state, {messages: action.data});
+    }
+
+
+
   }
 
   if (action.type == 'SENT_MESSAGES') {

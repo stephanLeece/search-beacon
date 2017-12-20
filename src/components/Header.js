@@ -1,7 +1,20 @@
 import React from 'react';
-// import {Link, browserHistory} from 'react-router';
-// import axios from '../axios';
-// import {getSocket} from '../socket';
+import {connect} from 'react-redux';
+
+
+const mapStateToProps = state => ({
+  userEmail: state.userEmail,
+  userFname: state.userFname,
+  userId: state.userId,
+  userLname: state.userLname,
+  userType: state.userType,
+});
+
+
+const mapDispatchToProps = dispatch => ({
+
+});
+
 
 export class HeaderLanding extends React.Component {
   constructor(props) {
@@ -11,25 +24,25 @@ export class HeaderLanding extends React.Component {
   render() {
     return (<div id='headerLanding'>
 
-<h1>header landing!</h1>
-
 </div>
     )
   }
 }
 
 
-export class HeaderLoggedIn extends React.Component {
+class HeaderLoggedIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
   render() {
     return (<div id='headerLoggedin'>
+<p>Hi {this.props.userFname}</p>
 
-<h1>header logged in</h1>
 <a href="/logout">Logout</a>
 </div>
     )
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderLoggedIn);

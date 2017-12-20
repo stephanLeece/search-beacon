@@ -33,7 +33,6 @@ class ReactBody extends React.Component {
     <header id='header'>
     <h1>Logo!</h1>
   {this.props.header}
-  <h1>Buttons!</h1>
     </header>
 
       {this.props.main}

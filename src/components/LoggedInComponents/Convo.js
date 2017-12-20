@@ -55,11 +55,11 @@ class Convo extends React.Component {
     const data = {
       message: this.props.newMessage,
       senderId: this.props.userId,
-      senderFname: this.props.userFname,
-      senderLname: this.props.userLname,
+      senderfname: this.props.userFname,
+      senderlname: this.props.userLname,
       receiverid: this.props.OtherUserId,
-      receiverFname: this.props.OtherUserFname,
-      receiverLname: this.props.OtherUserLname
+      receivierfname: this.props.OtherUserFname,
+      receivierlname: this.props.OtherUserLname
 
     };
     this.props.postMessage(data);
@@ -75,8 +75,8 @@ class Convo extends React.Component {
 
     let messageList;
     if (this.props.messages) {
-      messageList = this.props.messages.map((message) => <div id='chatMessage'>
-      <p>{message.senderFname} {message.senderLname}: {message.message}</p>
+      messageList = this.props.messages.map((message) => <div>
+      <p>{message.senderfname} {message.senderlname}: {message.message}</p>
       </div>);
     }
 

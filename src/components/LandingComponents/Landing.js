@@ -12,9 +12,11 @@ export class Landing extends React.Component {
     return (
 
 <div className='main' id='landing'>
-<h1>Landing!</h1>
-<Link to="/register">Sign Up</Link>
-<Link to="/login">Login</Link>
+<h1>LOGO WILL GO HERE</h1>
+<h1>Beacon connects volunteers with charities and non-profits across the world.</h1>
+<h1>pictures go here</h1>
+<div><Link to="/register">Register</Link> or <Link to="/login">Login</Link> to get started.</div>
+
 </div>
 
 
