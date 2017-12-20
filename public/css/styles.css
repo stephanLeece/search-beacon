@@ -65,20 +65,60 @@ align-items: center;
 
 .profileForm {
   /* min-height: 50vh; */
-  width: 80%;
-
+  width: 90%;
+  height: inherit;
+  background: white;
   display: flex;
   flex-direction: column;
     justify-content: flex-start;
+    align-items: center;
 align-items: center;
 }
 
-.profileForm * {
-  margin: 10px 0;
+.profileForm > * {
+  margin: 2% 0;
 }
+
+
+.profileFormField {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+  border: 1px solid red;
+}
+
+.addressBox {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  height: 20%;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.addressBox > div {
+  width: 50%;
+    border: 1px solid green;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
 
 header {
   height: 10vh;
+  /* border-bottom: 1px solid rgb(27, 92, 176) */
+}
+
+#headerLoggedin {
+  height: inherit;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -89,16 +129,7 @@ header {
 
 
 
-.addressBox {
-  width: 40%;
-}
 
-.addressBox > div {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
 
 .imageBox {
 display: flex;
@@ -131,7 +162,6 @@ border: 2px solid black;
   align-items: center;
   height: inherit;
   width: 100%;
-    border: 1px solid red;
 }
 
 
@@ -173,8 +203,18 @@ border: 2px solid black;
   /*cursor: pointer;*/
 }
 
+#bigLogo {
+  height: 50%;
+  width: 50%;
+}
 
+#smallLogo{
+  height: 90%;
+}
 
+#footerLogo  {
+  height: 75%;
+}
 /* ------------------------------------------------------------------ */
 
 footer {
@@ -183,4 +223,5 @@ footer {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+    /* border-top: 1px solid rgb(26, 75, 138) */
 }

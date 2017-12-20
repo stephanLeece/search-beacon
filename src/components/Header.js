@@ -37,6 +37,7 @@ class HeaderLoggedIn extends React.Component {
   }
   render() {
     return (<div id='headerLoggedin'>
+    <img id='smallLogo' src="/images/logoSmall.png" alt=""/>
 <p>Hi {this.props.userFname}</p>
 
 <a href="/logout">Logout</a>

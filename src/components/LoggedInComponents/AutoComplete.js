@@ -76,13 +76,14 @@ console.log('prop address', this.props);
 
     return (<div>
 
-      <PlacesAutocomplete
+      <PlacesAutocomplete id='Autocomplete'
       inputProps={inputProps}
       styles={myStyles}
       googleLogo={false}/>
 
-      <button type='button' onClick={this.showState}>Submit</button>
-  {this.props.addressSaved && <p>Location updated</p>}
+  <button type='button' onClick={this.showState}>  {!this.props.addressSaved && <p>Submit</p>}
+    {this.props.addressSaved && <p>Location updated</p>}</button>
+
     </div>)
   }
 }

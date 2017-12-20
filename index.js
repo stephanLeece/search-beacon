@@ -96,7 +96,10 @@ app.post('/authorize', function(req, res) {
           res.json({error: 'There seems to be a mistake..'});
         }
       });
-    });
+    }).catch(function(err) {
+      console.log(err);
+      res.json({error: 'Somethings gone wrong'});
+    })
   } else {
     res.json({error: 'Somethings Missing...'});
   }
@@ -237,7 +240,8 @@ app.post('/uploadImage', uploader.single('image'), function(req, res) {
 });
 
 app.post('/search.json', function(req, res) {
-  dbGets.search(req.body.searchTerm, req.body.userType, req.session.user.id).then(function(results) {
+  console.log('search term is',req.body.searchTerm );
+  dbGets.search(req.body.searchTerm, req.session.user.id, req.body.userType).then(function(results) {
     if (results === 0) {
       console.log('no results');
       res.json({error: 'No Results...'});

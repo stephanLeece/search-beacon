@@ -118,20 +118,29 @@ class EditProfile extends React.Component {
     let form;
     if (userType == 0) {
       form = <form className='profileForm'>
+      <div className='profileFormField'>
         <label for="title">Name of Organisation:</label>
         <input onChange={this.handleChange} type="text" name="userTitle" value={this.props.userTitle}/>
-
+</div>
         <div className='addressBox'>
           {!this.state.showAuto && <div><p>Location: {this.props.userAddress}</p> <button type='button' onClick={this.toggleAuto}>Update</button></div>}
           {this.state.showAuto && <AutoComplete/>}
         </div>
+
+          <div className='profileFormField'>
         <label for="description">Tell the world about your Organisation:</label>
         <textarea onChange={this.handleChange} name="userDescription" rows="8" cols="80" value={this.props.userDescription}/>
+</div>
+
+  <div className='profileFormField'>
         <label for="responsibilities">What will volunteers be doing?:</label>
         <textarea onChange={this.handleChange} name="userResponsibilites" rows="8" cols="80" value={this.props.userResponsibilites}/>
+        </div>
+
+          <div className='profileFormField'>
         <label>Skills You're looking for (single words, seperated by a space please! e.g teaching painting etc)</label>
         <textarea onChange={this.handleChange} name="userSkills" rows="8" cols="80" value={this.props.userSkills}/>
-        <p>Add up to three images</p>
+        </div>
 
         <div className='imageBox'>
 

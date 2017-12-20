@@ -53,9 +53,10 @@ module.exports.getUserProfile = function(userid) {
 };
 
 
+
 module.exports.search = function(aTerm, anId, aType) {
   return db.query(`SELECT * FROM users
-    JOIN userProfile ON (users.id = userProfile.userid AND users.usertype <> $1 AND users.id <> $2)
+    JOIN userProfile ON (users.id = userProfile.userid AND users.id <> $1 AND users.usertype <> $2)
     WHERE (to_tsvector('english', userProfile.skills) @@ to_tsquery('english', '${aTerm}'))
     OR (to_tsvector('english', userProfile.title) @@ to_tsquery('english', '${aTerm}'))
     OR (to_tsvector('english', userProfile.description) @@ to_tsquery('english', '${aTerm}'))
@@ -72,6 +73,7 @@ module.exports.search = function(aTerm, anId, aType) {
     }
   })
 };
+
 
 
 module.exports.getConvo = function(senderId, receiverid) {

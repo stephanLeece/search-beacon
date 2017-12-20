@@ -31,13 +31,12 @@ class ReactBody extends React.Component {
     console.log('body props', this.props);
     return (<div id='reactBody'>
     <header id='header'>
-    <h1>Logo!</h1>
   {this.props.header}
     </header>
 
       {this.props.main}
 
-      <footer><p>BADMAN</p></footer>
+      <footer><img id='footerLogo' src="/images/footerLogo.png" alt=""/></footer>
 </div>
     )
   }
