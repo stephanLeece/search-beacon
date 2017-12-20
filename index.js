@@ -252,7 +252,7 @@ app.post('/search.json', function(req, res) {
 });
 
 app.post('/convo.json', function(req, res) {
-  dbSets.saveMessage(req.body.senderId, req.body.senderfname, req.body.senderlname, req.body.recevierId, req.body.receiverfname, req.body.receiverlname, req.body.message).then(function(results){
+  dbSets.saveMessage(req.body.senderId, req.body.senderFname, req.body.senderLname, req.body.receiverid, req.body.receiverFname, req.body.receiverLname, req.body.message).then(function(results){
     res.json({error: false});
   }).catch(function(err) {
     console.log(err);
@@ -272,7 +272,39 @@ app.get('/convoHistory.json/:id', function(req, res) {
   });
 });
 
+app.post('/allMessages.json', function(req, res) {
+console.log(req.body);
+if(req.body.msg ==0 ) {
+  console.log('getting sent');
+  dbGets.getSent(req.session.user.id).then(function(results){
+    if (results === 0) {
+      console.log('nowt there');
+      res.json({error: 'No Results...'});
+    } else {
+      console.log('all history', results);
+      res.json(results);
+    }
+  }).catch(function(err) {
+    console.log(err);
+    res.json({error: 'Somethings gone wrong'});
+  });
+} else {
+  console.log('getting received');
+  dbGets.getReceived(req.session.user.id).then(function(results){
+    if (results === 0) {
+      console.log('nowt there');
+      res.json({error: 'No Results...'});
+    } else {
+      console.log('all history', results);
+      res.json(results);
+    }
+  }).catch(function(err) {
+    console.log(err);
+    res.json({error: 'Somethings gone wrong'});
+  });
+}
 
+});
 
 
 

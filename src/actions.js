@@ -135,14 +135,19 @@ export function postMessage(payload) {
 }
 
 export function getMessagesFromConvo(payload) {
-    console.log('action getting messages:', payload);
   return axios.get('/convoHistory.json/' + payload).then(function({data}) {
     return {type: 'CONVO_HISTORY', data};
   });
 }
 
-//   export function getAllLatestMessages(payload) {
-//     return axios.get('/messages.json/').then(function({data}) {
-//       return {type: 'ALL_MESSAGES', messages: data};
-//     });
-// }
+  export function getSent(payload) {
+    return axios.post('/allMessages.json/', {msg:0}).then(function({data}) {
+      return {type: 'SENT_MESSAGES', data};
+    });
+}
+
+export function getReceived(payload) {
+  return axios.post('/allMessages.json/', {msg:1}).then(function({data}) {
+    return {type: 'RECEIVED_MESSAGES', data};
+  });
+}

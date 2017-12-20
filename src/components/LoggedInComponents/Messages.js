@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchOtherUserProfile} from '../../actions';
+import {Link} from 'react-router'
+import {getReceived, getSent} from '../../actions';
 
 const mapStateToProps = state => ({
   userEmail: state.userEmail,
@@ -8,6 +9,9 @@ const mapStateToProps = state => ({
   userId: state.userId,
   userLname: state.userLname,
   userType: state.userType,
+  image1: state.image1,
+  image2: state.image2,
+  image3: state.image3,
   OtherUserType: state.OtherUserType,
   OtherUserTitle: state.OtherUserTitle,
   OtherUserDescription: state.OtherUserDescription,
@@ -18,30 +22,66 @@ const mapStateToProps = state => ({
   OtherImage3: state.OtherImage3,
   OtherUserId: state.OtherUserId,
   OtherUserFname: state.OtherUserFname,
-  OtherUserLname: state.OtherUserLname
+  OtherUserLname: state.OtherUserLname,
+  allMessages: state.allMessages,
+  showingSent: state.showingSent,
+  showingRecevied: state.showingRecevied,
+  messageError: state.messageError
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchOtherUserProfile: payload => dispatch(fetchOtherUserProfile(payload))
+  getReceived: payload => dispatch(getReceived(payload)),
+  getSent: payload => dispatch(getSent(payload))
 });
 
 class Messages extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  handleChange(e) {
+    let data = {
+      name: e.target.name,
+      value: e.target.value
+    }
+    this.props.propChange(data);
+    console.log('new props', this.props);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+  }
 
   componentDidMount() {
-      let id = this.props.params.id
-    this.props.fetchOtherUserProfile(id)
+    this.props.getReceived()
   }
 
   render() {
 
+    let messageList;
+    if (this.props.showingSent && this.props.allMessages) {
+      messageList = this.props.allMessages.map((message) => <Link to={`/result/${message.receiverid}`}>
+        <p>Message to: </p><p>{message.receiverFname}
+          {message.receiverLname}: {message.message}</p>
+      </Link>)
+    } else if (this.props.showingRecevied && this.props.allMessages) {
+      messageList = this.props.allMessages.map((message) => <Link to={`/result/${message.senderid}`}>
+        <p>Message from: </p><p>{message.senderFname}
+          {message.senderLname}: {message.message}</p>
+      </Link>)
+    }
 
     return (<div className='main'>
-    <h1>Messages!</h1>
+      <p>Your messages</p>
+      {this.props.showingReceived && <p>Showing Received</p>}
+      {this.props.showingSent && <p>Showing Sent</p>}
+{this.props.messageError && <p>No Messages</p>}
+      {messageList}
+      <button type='button' onClick={this.props.getSent}>Show Sent</button>
+      <button type='button' onClick={this.props.getReceived}>Show Received</button>
     </div>)
   }
 }

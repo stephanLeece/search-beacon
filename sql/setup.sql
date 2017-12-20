@@ -3,7 +3,6 @@
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS userProfile;
-DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS convo;
 
 
@@ -35,32 +34,14 @@ CREATE TABLE userProfile(
 );
 
 
-CREATE TABLE messages(
+CREATE TABLE convo(
     id SERIAL PRIMARY KEY,
     senderId INTEGER,
     senderFname text,
     senderLname text,
-    senderImage text,
-    recevierId INTEGER,
+    receiverid INTEGER,
     receiverFname text,
     receiverLname text,
-    receiverImage text,
     message text,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-
-
-CREATE TABLE convo(
-  id SERIAL PRIMARY KEY,
-  senderId INTEGER,
-  senderFname text,
-  senderLname text,
-  senderImage text,
-  recevierId INTEGER,
-  receiverFname text,
-  receiverLname text,
-  receiverImage text,
-  latest text,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

@@ -24,8 +24,8 @@ module.exports.saveProfile = function(title, description, responsibilites, skill
   })
 };
 
-module.exports.saveMessage = function(senderId, senderFname, senderLname, recevierId, receiverFname, receiverLname, message) {
-    return db.query(`INSERT INTO messages (senderId, senderFname, senderLname, recevierId, receiverFname, receiverLname, message) VALUES ($1,$2,$3,$4,$5,$6,$7)`, [senderId, senderFname, senderLname, recevierId, receiverFname, receiverLname, message]).then(function() {
+module.exports.saveMessage = function(senderId, senderFname, senderLname, receiverid, receiverFname, receiverLname, message) {
+    return db.query(`INSERT INTO convo (senderId, senderFname, senderLname, receiverid, receiverFname, receiverLname, message) VALUES ($1,$2,$3,$4,$5,$6,$7)`, [senderId, senderFname, senderLname, receiverid, receiverFname, receiverLname, message]).then(function() {
     console.log('message success');
   })
 };

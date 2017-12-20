@@ -74,8 +74,40 @@ module.exports.search = function(aTerm, anId, aType) {
 };
 
 
-module.exports.getConvo = function(senderId, recevierId) {
-  return db.query(`SELECT * FROM messages WHERE senderId = $1 AND recevierId = $2 OR senderId = $2 AND recevierId = $1`, [senderId, recevierId]).then(function(results) {
+module.exports.getConvo = function(senderId, receiverid) {
+  return db.query(`SELECT * FROM convo WHERE senderId = $1 AND receiverid = $2 OR senderId = $2 AND receiverid = $1`, [senderId, receiverid]).then(function(results) {
+    if (!results.rows[0]) {
+      return 0
+    } else {
+      results.rows.forEach(function(row) {
+        row.image1 = config.s3Url + row.image1;
+        row.image2 = config.s3Url + row.image2;
+        row.image3 = config.s3Url + row.image3;
+      })
+      return results.rows;
+    }
+  })
+};
+
+
+module.exports.getReceived = function(userId) {
+  return db.query(`SELECT * FROM  (SELECT DISTINCT ON (senderId) * FROM  convo WHERE  receiverid = $1) p ORDER BY created_at DESC;`, [userId]).then(function(results) {
+    if (!results.rows[0]) {
+      return 0
+    } else {
+      results.rows.forEach(function(row) {
+        row.image1 = config.s3Url + row.image1;
+        row.image2 = config.s3Url + row.image2;
+        row.image3 = config.s3Url + row.image3;
+      })
+      return results.rows;
+    }
+  })
+};
+
+
+module.exports.getSent = function(userId) {
+  return db.query(`SELECT * FROM  (SELECT DISTINCT ON (receiverid)  * FROM  convo WHERE  senderId = $1) p ORDER BY created_at DESC;`, [userId]).then(function(results) {
     if (!results.rows[0]) {
       return 0
     } else {

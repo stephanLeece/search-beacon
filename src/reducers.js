@@ -31,79 +31,71 @@ export default function reducer(state = {}, action) {
     });
   }
 
-
-
-if (action.type == 'OTHER_USER_PROFILE') {
-  console.log('reducer got', action.otherUserProfile);
-  state = Object.assign({}, state, {
-    OtherUserFname: action.otherUserProfile.OtherUserFname,
-    OtherUserLname: action.otherUserProfile.OtherUserLname,
-    OtherUserType: action.otherUserProfile.OtherUserType,
-    OtherUserTitle: action.otherUserProfile.OtherUserTitle,
-    OtherUserDescription: action.otherUserProfile.OtherUserDescription,
-    OtherUserResponsibilites: action.otherUserProfile.OtherUserResponsibilites,
-    OtherUserSkills: action.otherUserProfile.OtherUserSkills,
-    OtherImage1: action.otherUserProfile.OtherImage1,
-    OtherImage2: action.otherUserProfile.OtherImage2,
-    OtherImage3: action.otherUserProfile.OtherImage3,
-    OtherUserId: action.otherUserProfile.OtherUserId
-  });
-}
+  if (action.type == 'OTHER_USER_PROFILE') {
+    console.log('reducer got', action.otherUserProfile);
+    state = Object.assign({}, state, {
+      OtherUserFname: action.otherUserProfile.OtherUserFname,
+      OtherUserLname: action.otherUserProfile.OtherUserLname,
+      OtherUserType: action.otherUserProfile.OtherUserType,
+      OtherUserTitle: action.otherUserProfile.OtherUserTitle,
+      OtherUserDescription: action.otherUserProfile.OtherUserDescription,
+      OtherUserResponsibilites: action.otherUserProfile.OtherUserResponsibilites,
+      OtherUserSkills: action.otherUserProfile.OtherUserSkills,
+      OtherImage1: action.otherUserProfile.OtherImage1,
+      OtherImage2: action.otherUserProfile.OtherImage2,
+      OtherImage3: action.otherUserProfile.OtherImage3,
+      OtherUserId: action.otherUserProfile.OtherUserId
+    });
+  }
 
   if (action.type == 'PROFILE_SAVED') {
-    state = Object.assign({}, state, {
-      profileSaved: true
-    });
+    state = Object.assign({}, state, {profileSaved: true});
   }
 
-
-if (action.type == 'USER_RESULTS') {
+  if (action.type == 'USER_RESULTS') {
     console.log('reducer got', action.userResults);
-  if (action.userResults.error) {
-    state = Object.assign({}, state, {error: action.userResults.error });
-  } else {
-    state = Object.assign({}, state, {
-      userResults: action.userResults,
-      error: false
-    });
+    if (action.userResults.error) {
+      state = Object.assign({}, state, {error: action.userResults.error});
+    } else {
+      state = Object.assign({}, state, {
+        userResults: action.userResults,
+        error: false
+      });
+    }
   }
-}
 
-
-if (action.type == 'ALL_CHARITIES') {
+  if (action.type == 'ALL_CHARITIES') {
     console.log('reducer got', action.charities);
-  if (action.charities.error) {
-    state = Object.assign({}, state, {error: action.charities.error });
-  } else {
-    state = Object.assign({}, state, {
-      charities: action.charities,
-      error: false
-    });
+    if (action.charities.error) {
+      state = Object.assign({}, state, {error: action.charities.error});
+    } else {
+      state = Object.assign({}, state, {
+        charities: action.charities,
+        error: false
+      });
+    }
   }
-}
-
-
 
   if (action.type == 'PICTURE_UPDATED') {
     console.log('im gonna update', action.imageDetails);
     state = Object.assign({}, state, {
-        [action.imageDetails.imageNo]: action.imageDetails.image
+      [action.imageDetails.imageNo]: action.imageDetails.image
     });
   }
 
   if (action.type == 'PROP_CHANGE') {
     state = Object.assign({}, state, {
-        [action.payload.name]: action.payload.value
+      [action.payload.name]: action.payload.value
     });
   }
 
   if (action.type == 'ADDRESS_UPDATED') {
     console.log('reducer address');
     state = Object.assign({}, state, {
-        address: action.payload.address,
-        lat: action.payload.lat,
-        lng: action.payload.lng,
-        addressSaved: true
+      address: action.payload.address,
+      lat: action.payload.lat,
+      lng: action.payload.lng,
+      addressSaved: true
     });
   }
 
@@ -112,13 +104,39 @@ if (action.type == 'ALL_CHARITIES') {
       messages: state.messages.concat(action.payload)
     })
 
-    console.log('reducer message for new', action.message);
+    console.log('reducer message for new', action.payload);
   }
 
   if (action.type == 'CONVO_HISTORY') {
-      state = Object.assign({}, state, {messages: action.data});
+    state = Object.assign({}, state, {messages: action.data});
+    console.log('reducer message for all', action.data);
+  }
+
+  if (action.type == 'SENT_MESSAGES') {
+    if (action.data.error) {
+      state = Object.assign({}, state, {messageError: true});
+    } else {
+      state = Object.assign({}, state, {
+        allMessages: action.data,
+        showingSent: true,
+        showingRecevied: false
+      });
       console.log('reducer message for all', action.data);
     }
+  }
+
+  if (action.type == 'RECEIVED_MESSAGES') {
+    if (action.data.error) {
+      state = Object.assign({}, state, {messageError: true});
+    } else {
+      state = Object.assign({}, state, {
+        allMessages: action.data,
+        showingRecevied: true,
+        showingSent: false
+      });
+      console.log('reducer message for all', action.data);
+    }
+  }
 
   return state;
 

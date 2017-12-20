@@ -12,7 +12,6 @@ import {HeaderLanding, HeaderLoggedIn} from './components/Header';
 import MapContainer from './components/LoggedInComponents/MapContainer';
 import Convo from './components/LoggedInComponents/Convo';
 import Messages from './components/LoggedInComponents/Messages';
-
 import Register from './components/LandingComponents/Register';
 import LoginPage from './components/LoginPage';
 import {Provider} from 'react-redux';

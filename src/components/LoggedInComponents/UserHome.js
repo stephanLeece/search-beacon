@@ -34,7 +34,11 @@ class UserHome extends React.Component {
 
     return (<div className='main' id='UserHome'>
 {message}
-from here you can <Link to='/map'>check the map</Link> <Link to='/search'>search</Link>,<Link to='/edit'>edit your profile</Link>, check messages.
+from here you can:
+{this.props.userType != 0 && <Link to='/map'>check the map</Link>}
+<Link to='/search'>search</Link>
+<Link to='/edit'>edit your profile</Link>
+<Link to='/messages'>check messages</Link>.
     </div>)
   }
 }
