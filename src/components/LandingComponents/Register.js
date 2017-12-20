@@ -58,30 +58,24 @@ class Register extends React.Component {
     return (<div className='main' id='register'>
 <h1>First we need a few details.</h1>
       <form className='beaconForm'>
-        <label>
-          First Name:
+          <p>First Name:</p>
           <input onChange={this.handleChange} name="fname" type="text"/>
-        </label>
-        <label>
-          Last Name:
+          <p>Last Name:</p>
           <input onChange={this.handleChange} name="lname" type="text"/>
-        </label>
-        <label>
-          Email:
+          <p>Email:</p>
           <input onChange={this.handleChange} name="email" type="text"/>
-        </label>
-        <label>
-          Password:
+          <p>Password:</p>
           <input onChange={this.handleChange} name="pword" type="password"/>
-        </label>
-        <label>
+        <div id='checkboxes'>
+        <div>
           <input onChange={this.handleChange} type="radio" name="usertype" value="0"/>
           Need volunteers
-        </label>
-        <label>
+          </div>
+<div>
           <input onChange={this.handleChange} type="radio" name="usertype" value="1"/>
           Want to volunteer
-        </label>
+          </div>
+</div>
         <button onClick={this.handleSubmit}>Submit</button>
         {this.props.error && <p>{this.props.error}</p>}
       </form>

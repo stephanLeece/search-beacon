@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {searchUsers} from '../../actions';
+import {Link} from 'react-router'
 
 const mapStateToProps = state => ({
   error: state.error,
@@ -41,18 +42,26 @@ class Search extends React.Component {
 if(this.props.userType == 0) {
 
 userList = this.props.userResults.map((user) => <div key={user.id}>
-<p>{user.fname}{user.lname}</p>
-<img src={user.image1} alt=""/>
-<p>{user.skills}</p>
+  <Link to={`/result/${user.id}`}>
+<p>{user.fname}{user.lname}</p><img src={user.image1} alt=""/>
+  </Link>
+
     </div>);
 } else {
   userList = this.props.userResults.map((user) => <div key={user.id}>
-  <p>{user.title}</p>
-  <img src={user.image1} alt=""/>
-  <p>{user.skills}</p>
+  <Link to={`/result/${user.id}`}>
+    <p>{user.title}</p><img src={user.image1} alt=""/>
+  </Link>
+
+
       </div>);
 }
 }
+
+
+
+
+
 
 
 

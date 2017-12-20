@@ -49,14 +49,13 @@ class LoginPage extends React.Component {
       <div className='main' id='loginPage'>
       <h1>Almost there!</h1>
       <form className='beaconForm'>
-        <label>
-          Email:
+
+          <p>Email:</p>
           <input onChange={this.handleChange} name="email" type="text"/>
-        </label>
-        <label>
-          Password:
+
+        <p>Password:</p> 
           <input onChange={this.handleChange} name="pword" type="password"/>
-        </label>
+
         <button onClick={this.handleSubmit}>Submit</button>
             {this.props.error && <p>{this.props.error}</p>}
       </form>
