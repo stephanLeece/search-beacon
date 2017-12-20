@@ -108,14 +108,17 @@ if (action.type == 'ALL_CHARITIES') {
   }
 
   if (action.type == 'MESSAGE_SENT') {
-    console.log('reducer message', action.payload.message);
     state = Object.assign({}, state, {
-      latestMessage: action.payload.message,
-        messageSent: true
-    });
+      messages: state.messages.concat(action.payload)
+    })
+
+    console.log('reducer message for new', action.message);
   }
 
-
+  if (action.type == 'CONVO_HISTORY') {
+      state = Object.assign({}, state, {messages: action.data});
+      console.log('reducer message for all', action.data);
+    }
 
   return state;
 

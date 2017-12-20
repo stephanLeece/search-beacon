@@ -40,9 +40,8 @@ class OtherUser extends React.Component {
 
   render() {
       console.log('other profile props on render', this.props);
-    let userType = this.props.OtherUserType;
     let content;
-    if (userType == 0) {
+    if (this.props.OtherUserType == 0) {
       content = <div className='main' id='otherProfile'>
 <h1>Charity</h1>
 <h1>{this.props.OtherUserTitle}</h1>

@@ -72,3 +72,19 @@ module.exports.search = function(aTerm, anId, aType) {
     }
   })
 };
+
+
+module.exports.getConvo = function(senderId, recevierId) {
+  return db.query(`SELECT * FROM messages WHERE senderId = $1 AND recevierId = $2 OR senderId = $2 AND recevierId = $1`, [senderId, recevierId]).then(function(results) {
+    if (!results.rows[0]) {
+      return 0
+    } else {
+      results.rows.forEach(function(row) {
+        row.image1 = config.s3Url + row.image1;
+        row.image2 = config.s3Url + row.image2;
+        row.image3 = config.s3Url + row.image3;
+      })
+      return results.rows;
+    }
+  })
+};

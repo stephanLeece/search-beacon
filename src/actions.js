@@ -81,6 +81,7 @@ export function fetchUserProfile(payload) {
 }
 
 export function fetchOtherUserProfile(payload) {
+  console.log('action getting other profile', + payload);
   return axios.get('/otherUserProfile.json/' + payload).then(function(results) {
     if (results.data.redirect) {
       location.replace('/')
@@ -135,8 +136,8 @@ export function postMessage(payload) {
 
 export function getMessagesFromConvo(payload) {
     console.log('action getting messages:', payload);
-  return axios.get('/convo', payload).then(function({data}) {
-    return {type: 'ALL_MESSAGES', messages: data};
+  return axios.get('/convoHistory.json/' + payload).then(function({data}) {
+    return {type: 'CONVO_HISTORY', data};
   });
 }
 

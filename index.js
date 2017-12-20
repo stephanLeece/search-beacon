@@ -168,6 +168,8 @@ app.get('/otherUserProfile.json/:id', function(req, res) {
           OtherImage3: results.image3,
           OtherUserId: results.userid
         };
+
+        if (otherUserProfileObj.OtherUserSkills.length > 0) {
         let skillsSplit = results.skills.split(' ');
         let trimmedSkills = []
         for (let i = 0; i < skillsSplit.length; i++) {
@@ -178,6 +180,7 @@ app.get('/otherUserProfile.json/:id', function(req, res) {
             otherUserProfileObj.OtherUserSkills.push(trimmedSkills[i])
           }
         }
+      }
         console.log('server sending back', otherUserProfileObj);
         res.json(otherUserProfileObj);
       }
@@ -249,7 +252,7 @@ app.post('/search.json', function(req, res) {
 });
 
 app.post('/convo.json', function(req, res) {
-  dbSets.saveMessage(req.body.message,req.body.senderId,req.body.recevierId).then(function(results){
+  dbSets.saveMessage(req.body.senderId, req.body.senderfname, req.body.senderlname, req.body.recevierId, req.body.receiverfname, req.body.receiverlname, req.body.message).then(function(results){
     res.json({error: false});
   }).catch(function(err) {
     console.log(err);
@@ -258,7 +261,16 @@ app.post('/convo.json', function(req, res) {
 });
 
 
-
+app.get('/convoHistory.json/:id', function(req, res) {
+  console.log('i got', req.params.id);
+  dbGets.getConvo(req.params.id, req.session.user.id).then(function(results){
+    console.log('history', results);
+    res.json(results);
+  }).catch(function(err) {
+    console.log(err);
+    res.json({error: 'Somethings gone wrong'});
+  });
+});
 
 
 

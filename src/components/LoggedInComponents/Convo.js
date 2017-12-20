@@ -22,8 +22,8 @@ const mapStateToProps = state => ({
   OtherUserId: state.OtherUserId,
   OtherUserFname: state.OtherUserFname,
   OtherUserLname: state.OtherUserLname,
-  message: state.message,
-  latestMessage: state.latestMessage
+  messages: state.messages,
+  newMessage: state.newMessage
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -53,9 +53,14 @@ class Convo extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const data = {
-      message: this.props.message,
+      message: this.props.newMessage,
       senderId: this.props.userId,
-      recevierId: this.props.OtherUserId
+      senderfname: this.props.userFname,
+      senderlname: this.props.userLname,
+      recevierId: this.props.OtherUserId,
+      receiverfname: this.props.OtherUserFname,
+      receiverlname: this.props.OtherUserLname
+
     };
     this.props.postMessage(data);
   }
@@ -63,15 +68,23 @@ class Convo extends React.Component {
   componentDidMount() {
     let id = this.props.params.id
     this.props.fetchOtherUserProfile(id)
+    this.props.getMessagesFromConvo(id)
   }
 
   render() {
 
+    let messageList;
+    if (this.props.messages) {
+      messageList = this.props.messages.map((message) => <div id='chatMessage'>
+      <p>{message.senderfname} {message.senderlname}: {message.message}</p>
+      </div>);
+    }
+
     return (<div className='main'>
       <h1>A convo!</h1>
       <div>Messages</div>
-      <h1>{this.props.latestMessage}</h1>
-      <textarea onChange={this.handleChange} name="message" rows="8" cols="80" value={this.props.message}/>
+      <div>{this.props.messages && messageList}</div>
+      <textarea onChange={this.handleChange} name="newMessage" rows="8" cols="80" value={this.props.newMessage}/>
       <button onClick={this.handleSubmit}>Send</button>
     </div>)
   }
