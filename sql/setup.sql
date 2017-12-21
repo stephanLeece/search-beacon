@@ -13,7 +13,8 @@ CREATE TABLE users(
     email VARCHAR(200) NOT NULL UNIQUE,
     hashedpass VARCHAR(200) NOT NULL,
     usertype INTEGER NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    timeSent CURRENT_DATE
 );
 
 
@@ -30,7 +31,8 @@ CREATE TABLE userProfile(
     address text,
     lat decimal,
     lng decimal,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    timeSent CURRENT_DATE
 );
 
 
@@ -43,5 +45,6 @@ CREATE TABLE convo(
     receivierfname text,
     receivierlname text,
     message text,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    timeSent CURRENT_DATE
 );

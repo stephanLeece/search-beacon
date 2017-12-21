@@ -45,7 +45,17 @@ class OtherUser extends React.Component {
     let content;
     if (this.props.OtherUserType == 0) {
       content = <div className='main' id='otherProfile'>
-        <h1>{this.props.OtherUserTitle}</h1>
+        <div className='viewProfileFormField'>
+        <h2>{this.props.OtherUserTitle}</h2>
+        </div>
+
+          <div className='viewProfileFormField'>
+          <h2>About: </h2><p>{this.props.OtherUserDescription}</p>
+        </div>
+      <div className='viewProfileFormField'>
+          <h2>What you'll be doing: </h2><p>{this.props.OtherUserResponsibilites}</p>
+        </div>
+
         <div className='imageBox'>
           <div className='singleImage'>
             {charPlaceHolder != this.props.OtherImage1 && <img src={this.props.OtherImage1} alt=""/>}
@@ -57,47 +67,32 @@ class OtherUser extends React.Component {
         {charPlaceHolder != this.props.OtherImage3 && <img src={this.props.OtherImage3} alt=""/>}
           </div>
         </div>
-        <div>
-          <p>About:
-            <h1>{this.props.OtherUserDescription}</h1>
-          </p>
-        </div>
-        <div>
-          <p>What you'll be doing:
-          </p>
-          <h1>{this.props.OtherUserResponsibilites}</h1>
-        </div>
-        <div>
-          <p>looking for the following skills:
-          </p>
-          <h1>{this.props.OtherUserSkills}</h1>
-        </div>
-{(this.props.userType != this.props.OtherUserType) && <Link to={`/convo/${this.props.OtherUserId}`}>Send a Message!</Link>}
+
+{(this.props.userType != this.props.OtherUserType) && <Link to={`/convo/${this.props.OtherUserId}`}><button type='button'>Send a Message!</button></Link>}
       </div>
     } else {
-      content = <div className='otherProfile'>
+      content = <div className='main' id='otherProfile'>
         <div>
           <h1>{this.props.OtherUserFname}{this.props.OtherUserLname}</h1>
           <img src={this.props.OtherImage1} alt=""/></div>
-        <div>
+        <div className='viewProfileFormField'>
           <p>About me:
           </p>
           <h1>{this.props.OtherUserDescription}</h1>
         </div>
-        <div>
+        <div className='viewProfileFormField'>
           <p>I'm interested in:
           </p>
           <h1>{this.props.OtherUserResponsibilites}</h1>
         </div>
-        <div>I'm good at:
+        <div className='viewProfileFormField'>I'm good at:
           <h1>{this.props.OtherUserSkills}</h1>
         </div>
-        {(this.props.userType != this.props.OtherUserType) && <Link to={`/convo/${this.props.OtherUserId}`}>Send a Message!</Link>}
-{(this.props.userType != this.props.OtherUserType) && <Link to={`/convo/${this.props.OtherUserId}`}>Send a Message!</Link>}
+        {(this.props.userType != this.props.OtherUserType) && <Link to={`/convo/${this.props.OtherUserId}`}><button type='button'>Send a Message!</button></Link>}
       </div>
     }
 
-    return (<div className='main' id='otherUser'>
+    return (<div className='main'>
       {content}
 
     </div>)

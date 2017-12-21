@@ -71,6 +71,11 @@ class Convo extends React.Component {
     this.props.getMessagesFromConvo(id)
   }
 
+  componentDidUpdate() {
+    this.elem.scrollTop = this.elem.scrollHeight - this.elem.clientHeight;
+    this.textArea.value = '';
+  }
+
   render() {
     const charPlaceHolder = "https://s3.amazonaws.com/bucketoftheether/zPw8bZdswK-3M-7MW0QTbQN-L3LGSRyl.png"
 
@@ -78,19 +83,27 @@ class Convo extends React.Component {
 
     let messageList;
     if (this.props.messages) {
-      messageList = this.props.messages.map((message) => <div>
-      <p>{message.senderfname} {message.senderlname}: {message.message}</p>
+      messageList = this.props.messages.map((message) => <div className='message'>
+    
+        <h2>{message.senderfname} {message.senderlname}: {message.message}</h2>
       </div>);
     }
 
-    return (<div className='main'>
-    <p>Chat with {this.props.OtherUserFname}</p>
-{charPlaceHolder != this.props.OtherImage2 && volPlaceHolder != this.props.OtherImage2 && <img src={this.props.OtherImage2} alt=""/>}
-      {!this.props.messages && <p>Why not say Hello?</p>}
-      <div id='messageList'>{this.props.messages && messageList}</div>
-      <textarea onChange={this.handleChange} name="newMessage" rows="8" cols="80" value={this.props.newMessage}/>
+    return (<div className='main' id='convo'>
+      <h2>Chat with {this.props.OtherUserFname}</h2>
+      <div id='convoContents'>
+      <div>
+      {charPlaceHolder != this.props.OtherImage1 && volPlaceHolder != this.props.OtherImage1 && <img id='convoImage' src={this.props.OtherImage1} alt=""/>}
+      <textarea ref={textArea => this.textArea = textArea} onChange={this.handleChange} name="newMessage" rows="8" cols="80" value={this.props.newMessage}/>
       <button onClick={this.handleSubmit}>Send</button>
-    </div>)
+      </div>
+      <div>
+        {!this.props.messages && <p>Why not say Hello?</p>}
+        <div ref={elem => this.elem = elem} id='messageList'>{this.props.messages && messageList}</div>
+
+      </div>
+    </div>
+  </div>)
   }
 }
 

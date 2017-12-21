@@ -63,25 +63,25 @@ class Messages extends React.Component {
 
     let messageList;
     if (this.props.showingSent && this.props.allMessages) {
-      messageList = this.props.allMessages.map((message) => <Link to={`/convo/${message.receiverid}`}>
-        <p>Message to: </p><p>{message.receivierfname}
-          {message.receivierlname}: {message.message}</p>
-      </Link>)
+      messageList = this.props.allMessages.map((message) => <div className ='message'> <Link to={`/convo/${message.receiverid}`}>
+        <p>{message.created_at}</p>
+        <p>Message to: {message.receivierfname}{message.receivierlname}</p><h2>{message.message}</h2>
+      </Link></div>)
     } else if (this.props.showingRecevied && this.props.allMessages) {
-      messageList = this.props.allMessages.map((message) => <Link to={`/convo/${message.senderid}`}>
-        <p>Message from: </p><p>{message.senderfname}
-          {message.senderlname}: {message.message}</p>
-      </Link>)
+      messageList = this.props.allMessages.map((message) => <div className ='message'><Link to={`/convo/${message.senderid}`}>
+        <p>{message.created_at}</p>
+    <p>Message to: {message.receivierfname}{message.receivierlname}</p><h2>{message.message}</h2>
+      </Link></div>)
     }
 
     return (<div className='main' id='messages'>
-      <h1>Your messages</h1>
+      <h1>Your Messages</h1>
 
       <div>
       <button type='button' onClick={this.props.getSent}>Show Sent</button>
       <button type='button' onClick={this.props.getReceived}>Show Received</button>
       </div>
-        <div>{messageList} {this.props.messageError && <p>No Messages yet...</p>}</div>
+        <div><div id='messageList'>{messageList}</div> {!messageList && this.props.messageError && <p>No Messages yet...</p>}</div>
     </div>)
   }
 }

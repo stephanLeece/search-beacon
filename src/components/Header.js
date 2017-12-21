@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
+import {Router, Route, Link, IndexRoute, redirect, hashHistory, browserHistory} from 'react-router';
 
 const mapStateToProps = state => ({
   userEmail: state.userEmail,
@@ -37,10 +37,13 @@ class HeaderLoggedIn extends React.Component {
   }
   render() {
     return (<div id='headerLoggedin'>
-    <img id='smallLogo' src="/images/logoSmall.png" alt=""/>
-<p>Hi {this.props.userFname}</p>
 
-<a href="/logout">Logout</a>
+    <img id='smallLogo' src="/images/logoSmall.png" alt=""/>
+
+    <p>Hi {this.props.userFname}</p>
+    {location.pathname != '/' && <Link to='/'>Main Menu</Link>}
+    <a href="/logout">Logout</a>
+
 </div>
     )
   }

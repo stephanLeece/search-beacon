@@ -41,17 +41,21 @@ class Search extends React.Component {
     if (this.props.userResults) {
 if(this.props.userType == 0) {
 
-userList = this.props.userResults.map((user) => <div key={user.id}>
-  <Link to={`/result/${user.id}`}>
-<p>{user.fname}{user.lname}</p><img src={user.image1} alt=""/>
-  </Link>
-
+userList = this.props.userResults.map((user) => <div className='result' key={user.id}>
+  <Link to={`/result/${user.id}`}><p>{user.fname}{user.lname}</p></Link>
+<img src={user.image1} alt=""/>
+{user.description && <p>About: {user.description}</p>}
+{user.responsibilites && <p>Looking for: {user.responsibilites}</p> }
     </div>);
+    
 } else {
-  userList = this.props.userResults.map((user) => <div key={user.id}>
-  <Link to={`/result/${user.id}`}>
-    <p>{user.title}</p><img src={user.image1} alt=""/>
-  </Link>
+  userList = this.props.userResults.map((user) => <div className='result' key={user.id}>
+  {user.title && <Link to={`/result/${user.id}`}><p>{user.title}</p></Link>}
+    {!user.title && <Link to={`/result/${user.id}`}><p>View Profile</p></Link>}
+    <img src={user.image1} alt=""/>
+    {user.description && <p>About: {user.description}</p>}
+  {user.responsibilites && <p>What you'll be doing: {user.responsibilites}</p> }
+
 
 
       </div>);
@@ -73,7 +77,7 @@ userList = this.props.userResults.map((user) => <div key={user.id}>
       <input onChange={this.handleChange} name="searchBox" type="text"/>
       <button onClick={this.handleSubmit}>Go</button>
     </label>
-    {this.props.userResults && !this.props.error && <div>{userList}</div>}
+    {this.props.userResults && !this.props.error && <div id='searchResults'>{userList}</div>}
       {this.props.error && <p>{this.props.error}</p>}
     </div>);
   }

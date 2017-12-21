@@ -76,6 +76,12 @@ module.exports.search = function(aTerm, anId, aType) {
 
 
 
+
+
+
+
+
+
 module.exports.getConvo = function(senderId, receiverid) {
   return db.query(`SELECT * FROM convo WHERE senderId = $1 AND receiverid = $2 OR senderId = $2 AND receiverid = $1`, [senderId, receiverid]).then(function(results) {
     if (!results.rows[0]) {

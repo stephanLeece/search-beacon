@@ -18,16 +18,28 @@ h1 {
   font-size: 2em;
 }
 
+h2 {
+  font-size: 1.2em;
+}
+
 Button, Link, p, a, input {
   font-size: 1em;
+
 }
+
+a {
+  text-decoration: none;
+}
+ a:hover {
+   text-decoration: underline;
+ }
 
 #reactBody {
   min-height: 100vh;
 display: flex;
 flex-direction: column;
 align-items: flex-start;
-background-color: rgb(78, 145, 231);
+background-color: rgb(101, 156, 211);
 }
 
 #reactBody > * {
@@ -43,12 +55,14 @@ justify-content: center;
 align-items: center;
 }
 
-#landing, #UserHome, #search, #messages, #otherUser{
+#landing, #UserHome, #search, #messages,#convo{
   justify-content: flex-start;
 }
 
-#editProfile {
-
+#otherProfile {
+  width: 80%;
+  min-height: 100%;
+justify-content: space-around;
 }
 
 .beaconForm {
@@ -99,6 +113,16 @@ align-items: center;
   border: 1px solid red;
 }
 
+.viewProfileFormField {
+  margin: 10px;
+  width: 80%;
+  /* border-top: 1px solid rgb(23, 12, 63) */
+}
+
+.viewProfileFormField > * {
+  margin: 5px;
+}
+
 .addressBox {
   width: 80%;
   display: flex;
@@ -118,26 +142,120 @@ align-items: center;
   align-items: center;
 }
 
+#messages > * {
+  margin:10px;
+}
 
+#messageList {
+ width: 50vw;
+ background-color: white;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: flex-start;
+ overflow-y: scroll;
+ max-height: 50vh;
+}
+
+.message {
+border-bottom: 1px solid rgb(23, 12, 63);
+  margin:10px;
+  width: 95%;
+}
+
+.message > * {
+  margin: 5px;
+}
+
+#convo {
+  width: 100%;
+
+}
+
+#convoImage {
+  max-width: 100%;
+}
+
+#convoContents {
+
+  width: 80%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+
+}
+
+#convoContents > div {
+  flex-grow: 1;
+    margin: 10px;
+}
 
 header {
   height: 10vh;
-  /* border-bottom: 1px solid rgb(27, 92, 176) */
+  border-bottom: 1px solid rgb(23, 12, 63);
 }
 
-#headerLoggedin {
+#headerLoggedin{
   height: inherit;
-  width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+}
+
+#headerLoggedin > * {
+  margin-right: 10px;
+}
+
+#smallLogo{
+  height: 90%;
+  margin-right: auto;
+  margin-left: 10px;
 }
 
 /* -----------------------upload file button styling------------------- */
 
 
+#infoWindow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
+#infoWindow > img {
+  max-height: 20vh;
+}
+
+
+ #searchResults {
+   background-color: white;
+   width: 60%;
+   min-height: 50vh;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: space-between;
+ }
+
+ #searchResults img {
+max-width: 60%;
+ }
+
+.result {
+border-bottom: 1px solid rgb(23, 12, 63);
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin: 10px;
+}
+
+.result > * {
+margin: 5px;
+}
 
 
 .imageBox {
@@ -173,14 +291,16 @@ border: 2px solid black;
   width: 100%;
 }
 
-
+#otherProfile {
+  background-color: white;
+}
 
 .fileContainer {
   overflow: hidden;
   position: relative;
 }
 
-.fileContainer:hover {
+.fileContainer:hover, button:hover {
   opacity: 0.8;
 }
 
@@ -200,12 +320,15 @@ border: 2px solid black;
 
 .fileContainer, button {
   background: white;
-  color: black;
+  color: rgb(23, 12, 63);
+  border:1px solid rgb(23, 12, 63);
   border-radius: 2px;
   padding: 4px;
   /* font-family: 'Special Elite', cursive; */
   font-weight: bold;
   font-size: 1em;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 .fileContainer [type=file] {
@@ -217,9 +340,7 @@ border: 2px solid black;
   width: 40%;
 }
 
-#smallLogo{
-  height: 90%;
-}
+
 
 #footerLogo  {
   height: 75%;
@@ -232,5 +353,5 @@ footer {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-    /* border-top: 1px solid rgb(26, 75, 138) */
+    border-top: 1px solid rgb(23, 12, 63)
 }

@@ -25,13 +25,12 @@ class UserHome extends React.Component {
   render() {
 
     return (<div className='main' id='UserHome'>
-{this.props.userType==0 && <h1>Hi {this.props.userLname}</h1>}
-{this.props.userType==1 && <h1>Hi {this.props.userFname}</h1>}
-from here you can:
+
+<p>What would you like to do?</p>
 {this.props.userType != 0 && <Link to='/map'>check the map</Link>}
 <Link to='/search'>search</Link>
 <Link to='/edit'>edit your profile</Link>
-<Link to='/messages'>check messages</Link>.
+<Link to='/messages'>check messages</Link>
     </div>)
   }
 }

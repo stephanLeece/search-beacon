@@ -64,12 +64,13 @@ class MapContainer extends React.Component {
     return (<Map google={this.props.google} style={style} onClick={this.onMapClicked}>
       {charities}
       <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
-        <div>
-
+        <div id='infoWindow'>
+{charPlaceHolder != this.state.selectedPlace.name && <img src={this.state.selectedPlace.name}/>}
           <a href={`/result/${this.state.selectedPlace.id}`}>
             <h1>{this.state.selectedPlace.title}</h1>
+            {!this.state.selectedPlace.title && <h1>View Profile</h1>}
           </a>
-              {charPlaceHolder != this.state.selectedPlace.name && <img src={this.state.selectedPlace.name}/>}
+
         </div>
 
       </InfoWindow>
