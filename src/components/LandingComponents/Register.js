@@ -56,7 +56,7 @@ class Register extends React.Component {
   render() {
 
     return (<div className='main' id='register'>
-<h1>First we need a few details.</h1>
+<h1>We'll need a few details to get started.</h1>
       <form className='beaconForm'>
           <p>First Name:</p>
           <input onChange={this.handleChange} name="fname" type="text"/>

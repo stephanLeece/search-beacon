@@ -74,7 +74,7 @@ app.post('/register', function(req, res) {
       });
     });
   } else {
-    res.json({error: 'Something is missing...'});
+    res.json({error: 'Looks like something\'s missing.'});
   }
 });
 
@@ -93,15 +93,15 @@ app.post('/authorize', function(req, res) {
           };
           res.redirect('/');
         } else {
-          res.json({error: 'There seems to be a mistake..'});
+          res.json({error: 'Seems to be a mistake...'});
         }
       });
     }).catch(function(err) {
       console.log(err);
-      res.json({error: 'Somethings gone wrong'});
+      res.json({error: 'Seems to be a mistake...'});
     })
   } else {
-    res.json({error: 'Somethings Missing...'});
+    res.json({error: 'Looks like something\'s missing.'});
   }
 });
 
@@ -207,7 +207,7 @@ app.post('/saveProfile', function(req, res) {
     res.json({error: false});
   }).catch(function(err) {
     console.log(err);
-    res.json({error: 'Somethings gone wrong'});
+    res.json({error: 'Whoops! Somethings gone a bit wrong...'});
   });
 });
 
@@ -218,7 +218,7 @@ app.post('/saveAddress', function(req, res) {
     res.json({error: false});
   }).catch(function(err) {
     console.log(err);
-    res.json({error: 'Somethings gone wrong'});
+    res.json({error: 'Whoops! Somethings gone a bit wrong...'});
   });
 });
 
@@ -235,7 +235,7 @@ app.post('/uploadImage', uploader.single('image'), function(req, res) {
       });
     });
   } else {
-    res.json({error: 'A smaller picture, perhaps?'});
+    res.json({error: 'Shrink it down a bit!'});
   }
 });
 
@@ -251,7 +251,7 @@ app.post('/search.json', function(req, res) {
     }
   }).catch(function(err) {
     console.log(err);
-    res.json({error: 'Somethings gone wrong'});
+    res.json({error: 'Whoops! Somethings gone a bit wrong...'});
   });
 });
 
@@ -260,7 +260,7 @@ app.post('/convo.json', function(req, res) {
     res.json({error: false});
   }).catch(function(err) {
     console.log(err);
-    res.json({error: 'Somethings gone wrong'});
+    res.json({error: 'Whoops! Somethings gone a bit wrong...'});
   });
 });
 
@@ -272,7 +272,7 @@ app.get('/convoHistory.json/:id', function(req, res) {
     res.json(results);
   }).catch(function(err) {
     console.log(err);
-    res.json({error: 'Somethings gone wrong'});
+    res.json({error: 'Whoops! Somethings gone a bit wrong...'});
   });
 });
 
@@ -285,12 +285,11 @@ if(req.body.msg ==0 ) {
       console.log('nowt there');
       res.json({error: 'No Results...'});
     } else {
-      console.log('all history', results);
       res.json(results);
     }
   }).catch(function(err) {
     console.log(err);
-    res.json({error: 'Somethings gone wrong'});
+    res.json({error: 'Whoops! Somethings gone a bit wrong...'});
   });
 } else {
   console.log('getting received');
@@ -304,7 +303,7 @@ if(req.body.msg ==0 ) {
     }
   }).catch(function(err) {
     console.log(err);
-    res.json({error: 'Somethings gone wrong'});
+    res.json({error: 'Whoops! Somethings gone a bit wrong...'});
   });
 }
 

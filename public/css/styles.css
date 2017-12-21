@@ -17,10 +17,12 @@ font-family: 'Ubuntu', sans-serif;
 h1 {
   font-weight: bold;
   font-size: 2em;
+  color: rgb(23, 12, 63);
 }
 
 h2 {
   font-size: 1.2em;
+    color: rgb(23, 12, 63);
 }
 
 Button, Link, p, a, input {
@@ -30,7 +32,7 @@ Button, Link, p, a, input {
 
 a {
   text-decoration: none;
-  color: rgb(23, 12, 63);
+  color: black;
 }
  a:hover {
    text-decoration: underline;
@@ -102,6 +104,14 @@ justify-content: space-around;
   justify-content: space-around;
 }
 
+#checkboxes > div {
+  margin: 10px;
+}
+
+#checkboxes > div > * {
+  margin: 5px;
+}
+
 #homeMenu {
   display: flex;
   flex-direction: row;
@@ -134,6 +144,7 @@ justify-content: space-around;
     justify-content: flex-start;
     align-items: center;
 align-items: center;
+ border-radius: 3px;
 }
 
 .profileForm > * {
@@ -185,6 +196,7 @@ align-items: center;
 #messageList {
  width: 50vw;
  background-color: white;
+ border-radius: 3px;
  display: flex;
  flex-direction: column;
  justify-content: center;
@@ -232,6 +244,7 @@ border-bottom: 1px solid rgb(23, 12, 63);
  align-items: flex-start;
  overflow-y: scroll;
 max-height: 60vh;
+ border-radius: 3px;
 }
 
 #convoContents > div {
@@ -286,8 +299,12 @@ header {
   max-height: 20vh;
 }
 
+#search > * {
+  margin: 10px;
+}
 
  #searchResults {
+    border-radius: 3px;
    background-color: white;
    width: 60%;
    min-height: 50vh;
@@ -349,6 +366,7 @@ border: 2px solid black;
 }
 
 #otherProfile {
+   border-radius: 3px;
   background-color: white;
 }
 
@@ -375,11 +393,11 @@ border: 2px solid black;
   top: 0;
 }
 
-.fileContainer, button {
+.fileContainer, button, input {
   background: white;
   color: rgb(23, 12, 63);
   border:1px solid rgb(23, 12, 63);
-  border-radius: 2px;
+  border-radius: 3px;
   padding: 4px;
   /* font-family: 'Special Elite', cursive; */
   font-weight: bold;

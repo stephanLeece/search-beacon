@@ -47,7 +47,7 @@ userList = this.props.userResults.map((user) => <div className='result' key={use
 {user.description && <p>About: {user.description}</p>}
 {user.responsibilites && <p>Looking for: {user.responsibilites}</p> }
     </div>);
-    
+
 } else {
   userList = this.props.userResults.map((user) => <div className='result' key={user.id}>
   {user.title && <Link to={`/result/${user.id}`}><p>{user.title}</p></Link>}
@@ -71,12 +71,12 @@ userList = this.props.userResults.map((user) => <div className='result' key={use
 
     return (<div className='main' id='search'>
 
-    <label>
+
     <h1>What are you looking for?</h1>
-      Search Beacon:
+      <div>
       <input onChange={this.handleChange} name="searchBox" type="text"/>
-      <button onClick={this.handleSubmit}>Go</button>
-    </label>
+      <button onClick={this.handleSubmit}>Search Beacon</button>
+  </div>
     {this.props.userResults && !this.props.error && <div id='searchResults'>{userList}</div>}
       {this.props.error && <p>{this.props.error}</p>}
     </div>);
