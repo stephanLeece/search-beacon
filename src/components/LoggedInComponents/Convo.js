@@ -84,7 +84,7 @@ class Convo extends React.Component {
     let messageList;
     if (this.props.messages) {
       messageList = this.props.messages.map((message) => <div className='message'>
-    
+
         <h2>{message.senderfname} {message.senderlname}: {message.message}</h2>
       </div>);
     }
@@ -99,7 +99,7 @@ class Convo extends React.Component {
       </div>
       <div>
         {!this.props.messages && <p>Why not say Hello?</p>}
-        <div ref={elem => this.elem = elem} id='messageList'>{this.props.messages && messageList}</div>
+        <div ref={elem => this.elem = elem} id='convoList'>{this.props.messages && messageList}</div>
 
       </div>
     </div>

@@ -59,9 +59,15 @@ class MapContainer extends React.Component {
 
     const style = {
       width: '100vw',
-      height: '100vh'
+      height: '100vh',
+    
     }
-    return (<Map google={this.props.google} style={style} onClick={this.onMapClicked}>
+    return (<Map google={this.props.google} initialCenter={{
+            lat: 52.5200,
+            lng: 13.4050
+          }}
+          zoom={4}
+          style={style} onClick={this.onMapClicked}>
       {charities}
       <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
         <div id='infoWindow'>

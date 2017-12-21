@@ -11,6 +11,7 @@
 body {
 min-height: 99vh;
 font-size:24px;
+font-family: 'Ubuntu', sans-serif;
 }
 
 h1 {
@@ -29,17 +30,33 @@ Button, Link, p, a, input {
 
 a {
   text-decoration: none;
+  color: rgb(23, 12, 63);
 }
  a:hover {
    text-decoration: underline;
  }
+
+#landingImageStrip {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+#landingImageStrip > img {
+max-height: 37vh;
+}
+
+#landing > * {
+  margin: 10px;
+}
 
 #reactBody {
   min-height: 100vh;
 display: flex;
 flex-direction: column;
 align-items: flex-start;
-background-color: rgb(101, 156, 211);
+background-color: rgb(32, 136, 238);
 }
 
 #reactBody > * {
@@ -48,14 +65,13 @@ width: 100%;
 
 .main {
 flex-grow:1;
-
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
 }
 
-#landing, #UserHome, #search, #messages,#convo{
+#landing, #search, #messages,#convo{
   justify-content: flex-start;
 }
 
@@ -86,6 +102,28 @@ justify-content: space-around;
   justify-content: space-around;
 }
 
+#homeMenu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  width: 80%;
+}
+
+#homeMenu  div {
+  margin: 10px;
+  flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.homeIcon{
+  max-height: 20vh;
+}
+
 .profileForm {
   /* min-height: 50vh; */
   width: 90%;
@@ -110,7 +148,6 @@ align-items: center;
   justify-content: center;
   align-items: center;
   height: 10%;
-  border: 1px solid red;
 }
 
 .viewProfileFormField {
@@ -135,7 +172,6 @@ align-items: center;
 
 .addressBox > div {
   width: 50%;
-    border: 1px solid green;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -156,6 +192,7 @@ align-items: center;
  overflow-y: scroll;
  max-height: 50vh;
 }
+
 
 .message {
 border-bottom: 1px solid rgb(23, 12, 63);
@@ -179,22 +216,38 @@ border-bottom: 1px solid rgb(23, 12, 63);
 #convoContents {
 
   width: 80%;
-  height: 100vh;
+  height: 80vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
+}
 
+#convoList {
+ width: 50vw;
+ background-color: white;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: flex-start;
+ overflow-y: scroll;
+max-height: 60vh;
 }
 
 #convoContents > div {
-  flex-grow: 1;
     margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#convoContents > div > * {
+  margin: 5px;
 }
 
 header {
   height: 10vh;
-  border-bottom: 1px solid rgb(23, 12, 63);
 }
 
 #headerLoggedin{
@@ -209,8 +262,12 @@ header {
   margin-right: 10px;
 }
 
-#smallLogo{
-  height: 90%;
+#smallLogo img{
+  height: 8vh;
+
+}
+
+#smallLogo {
   margin-right: auto;
   margin-left: 10px;
 }
@@ -353,5 +410,5 @@ footer {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-    border-top: 1px solid rgb(23, 12, 63)
+    /* border-top: 1px solid rgb(23, 12, 63) */
 }

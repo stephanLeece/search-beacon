@@ -38,10 +38,10 @@ class HeaderLoggedIn extends React.Component {
   render() {
     return (<div id='headerLoggedin'>
 
-    <img id='smallLogo' src="/images/logoSmall.png" alt=""/>
+      <Link id='smallLogo' to='/'><img src="/images/logoSmall.png" alt=""/></Link>
 
     <p>Hi {this.props.userFname}</p>
-    {location.pathname != '/' && <Link to='/'>Main Menu</Link>}
+
     <a href="/logout">Logout</a>
 
 </div>

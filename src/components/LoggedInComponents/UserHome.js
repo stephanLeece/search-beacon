@@ -26,12 +26,17 @@ class UserHome extends React.Component {
 
     return (<div className='main' id='UserHome'>
 
-<p>What would you like to do?</p>
-{this.props.userType != 0 && <Link to='/map'>check the map</Link>}
-<Link to='/search'>search</Link>
-<Link to='/edit'>edit your profile</Link>
-<Link to='/messages'>check messages</Link>
-    </div>)
+<h1>What would you like to do?</h1>
+
+
+<div id='homeMenu'>
+{this.props.userType != 0 && <Link to='/map'><div><img className='homeIcon' src="/images/map.png" alt=""/><p>Check the map</p></div></Link>}
+<Link to='/search'><div><img className='homeIcon' src="/images/search.png" alt=""/><p>Search</p></div></Link>
+<Link to='/edit'><div><img className='homeIcon' src="/images/profile.png" alt=""/><p>Edit your profile</p></div></Link>
+<Link to='/messages'><div><img className='homeIcon' src="/images/mail.png" alt=""/><p>Check messages</p></div></Link>
+    </div>
+
+  </div>)
   }
 }
 
