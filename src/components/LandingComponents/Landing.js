@@ -17,11 +17,9 @@ export class Landing extends React.Component {
 
 <img id='bigLogo' src="/images/logoFull.png" alt=""/>
 
-<div id='landingImageStrip'>
-<img src="/images/landingImage.png" alt=""/>
-<img src="/images/landingImage2.png" alt=""/>
-<img src="/images/landingImage3.png" alt=""/>
-</div>
+
+<img id='landingImage' src="/images/landingLong.png" alt=""/>
+
 <h2>Beacon connects volunteers with charities and non-profits across the world.</h2>
 <div><Link to="/register">Register</Link> or <Link to="/login">Login</Link> to get started.</div>
 

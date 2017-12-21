@@ -68,7 +68,7 @@ class Messages extends React.Component {
       </Link></div>)
     } else if (this.props.showingRecevied && this.props.allMessages) {
       messageList = this.props.allMessages.map((message) => <div className ='message'><Link to={`/convo/${message.senderid}`}>
-    <p>Message to: {message.receivierfname}{message.receivierlname}</p><h2>{message.message}</h2>
+    <p>Message from: {message.senderfname}{message.senderfname}</p><h2>{message.message}</h2>
       </Link></div>)
     }
 

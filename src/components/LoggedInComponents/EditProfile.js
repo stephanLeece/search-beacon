@@ -128,12 +128,12 @@ class EditProfile extends React.Component {
         </div>
 
           <div className='profileFormField'>
-        <label for="description">Tell the world about your Organisation:</label>
+        <label for="description">Tell the world what you do!</label>
         <textarea onChange={this.handleChange} name="userDescription" rows="8" cols="80" value={this.props.userDescription}/>
 </div>
 
   <div className='profileFormField'>
-        <label for="responsibilities">What will volunteers be doing?:</label>
+        <label for="responsibilities">What will volunteers be doing?</label>
         <textarea onChange={this.handleChange} name="userResponsibilites" rows="8" cols="80" value={this.props.userResponsibilites}/>
         </div>
 
@@ -193,9 +193,9 @@ class EditProfile extends React.Component {
             <button name="image1b" onClick={this.handleSubmitPicture}>Save</button>
           </div>
         </div>
-        <label for="description">Tell the world about yourself:</label>
+        <label for="description">Tell the world about yourself!</label>
         <textarea onChange={this.handleChange} name="userDescription" rows="8" cols="80" value={this.props.userDescription}/>
-        <label for="responsibilities">What are you looking to do:</label>
+        <label for="responsibilities">What are you looking to do?</label>
         <textarea onChange={this.handleChange} name="userResponsibilites" rows="8" cols="80" value={this.props.userResponsibilites}/>
         <label>What are you good at? (single words, seperated by a space please! e.g teaching painting etc)</label>
         <textarea onChange={this.handleChange} name="userSkills" rows="8" cols="80" value={this.props.userSkills}/>

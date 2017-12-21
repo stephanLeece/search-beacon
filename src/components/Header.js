@@ -40,7 +40,7 @@ class HeaderLoggedIn extends React.Component {
 
       <Link id='smallLogo' to='/'><img src="/images/logoSmall.png" alt=""/></Link>
 
-    <p>Hi {this.props.userFname} | </p>
+    <p>Hi {this.props.userFname}! | </p>
 
     <a href="/logout">Logout</a>
 

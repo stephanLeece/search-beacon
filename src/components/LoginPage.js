@@ -47,13 +47,13 @@ class LoginPage extends React.Component {
 
     return (
       <div className='main' id='loginPage'>
-      <h1>Almost there!</h1>
+      <h1>Almost there! Please Login</h1>
       <form className='beaconForm'>
 
           <p>Email:</p>
           <input onChange={this.handleChange} name="email" type="text"/>
 
-        <p>Password:</p> 
+        <p>Password:</p>
           <input onChange={this.handleChange} name="pword" type="password"/>
 
         <button onClick={this.handleSubmit}>Submit</button>

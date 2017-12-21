@@ -38,19 +38,16 @@ a {
    text-decoration: underline;
  }
 
-#landingImageStrip {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
-}
 
-#landingImageStrip > img {
-max-height: 37vh;
+
+#landingImage {
+
+width: 100vw;
+
 }
 
 #landing > * {
-  margin: 10px;
+  margin: 2vh 0;
 }
 
 #reactBody {
@@ -76,6 +73,8 @@ align-items: center;
 #landing, #search, #messages,#convo{
   justify-content: flex-start;
 }
+
+
 
 #otherProfile {
   width: 80%;
@@ -159,6 +158,10 @@ align-items: center;
   justify-content: center;
   align-items: center;
   height: 10%;
+}
+
+.profileFormField > * {
+  margin: 5px;
 }
 
 .viewProfileFormField {

@@ -82,7 +82,7 @@ console.log('prop address', this.props);
       googleLogo={false}/>
 
   <button type='button' onClick={this.showState}>  {!this.props.addressSaved && <p>Submit</p>}
-    {this.props.addressSaved && <p>Location updated</p>}</button>
+    {this.props.addressSaved && <p>Saved</p>}</button>
 
     </div>)
   }
