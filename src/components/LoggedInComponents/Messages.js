@@ -64,12 +64,10 @@ class Messages extends React.Component {
     let messageList;
     if (this.props.showingSent && this.props.allMessages) {
       messageList = this.props.allMessages.map((message) => <div className ='message'> <Link to={`/convo/${message.receiverid}`}>
-        <p>{message.created_at}</p>
         <p>Message to: {message.receivierfname}{message.receivierlname}</p><h2>{message.message}</h2>
       </Link></div>)
     } else if (this.props.showingRecevied && this.props.allMessages) {
       messageList = this.props.allMessages.map((message) => <div className ='message'><Link to={`/convo/${message.senderid}`}>
-        <p>{message.created_at}</p>
     <p>Message to: {message.receivierfname}{message.receivierlname}</p><h2>{message.message}</h2>
       </Link></div>)
     }
