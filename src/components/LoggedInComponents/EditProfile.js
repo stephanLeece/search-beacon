@@ -19,7 +19,6 @@ const mapStateToProps = state => ({
   image2: state.image2,
   image3: state.image3,
   address: state.address,
-  profileSaved: state.profileSaved,
   userAddress: state.userAddress
 });
 
@@ -33,7 +32,8 @@ const mapDispatchToProps = dispatch => ({
 class EditProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {imageChange: false,
+    profileSaved: false};
     this.handleChange = this.handleChange.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -61,10 +61,11 @@ class EditProfile extends React.Component {
 
   handleImageChange(e) {
     this.setState({
-      [e.target.name]: e.target.files[0]
+      [e.target.name]: e.target.files[0],
+      imageChange: false
 
     }, () => {
-      console.log('new state', this.state);
+
     })
   }
 
@@ -78,6 +79,7 @@ class EditProfile extends React.Component {
       userSkills
     };
     this.props.saveProfile(data);
+    this.setState({profileSaved: true})
   }
 
   handleUpdateAddress() {
@@ -91,6 +93,7 @@ class EditProfile extends React.Component {
   }
 
   handleSubmitPicture(event) {
+    this.setState({imageChange: true})
     let imageNo = event.target.name
     event.preventDefault();
     let data = new FormData();
@@ -105,6 +108,7 @@ class EditProfile extends React.Component {
       data.append('imageNo', `image3`);
     }
     this.props.submitPicture(data);
+
   }
 
   componentDidMount() {
@@ -177,8 +181,8 @@ class EditProfile extends React.Component {
             </div>
           </div>
         </div>
-        {!this.props.profileSaved && <button onClick={this.handleSubmit}>Save Details</button>}
-        {this.props.profileSaved && <button onClick={this.handleSubmit}>Saved!</button>}
+        {!this.state.profileSaved && <button onClick={this.handleSubmit}>Save Details</button>}
+        {this.state.profileSaved && <button onClick={this.handleSubmit}>Saved!</button>}
       </form>
 
     } else {
@@ -190,7 +194,7 @@ class EditProfile extends React.Component {
               Change Profile Picture
               <input onChange={this.handleImageChange} name="image1" type="file"/>
             </div>
-            <button name="image1b" onClick={this.handleSubmitPicture}>Save</button>
+            <button name="image1b" onClick={this.handleSubmitPicture}>{this.state.imageChange && 'Saved'}{!this.state.imageChange && 'Save'}</button>
           </div>
         </div>
         <label for="description">Tell the world about yourself!</label>
@@ -199,8 +203,8 @@ class EditProfile extends React.Component {
         <textarea onChange={this.handleChange} name="userResponsibilites" rows="8" cols="80" value={this.props.userResponsibilites}/>
         <label>What are you good at? (single words, seperated by a space please! e.g teaching painting etc)</label>
         <textarea onChange={this.handleChange} name="userSkills" rows="8" cols="80" value={this.props.userSkills}/>
-          {!this.props.profileSaved && <button onClick={this.handleSubmit}>Save Details</button>}
-          {this.props.profileSaved && <button onClick={this.handleSubmit}>Saved!</button>}
+        {!this.state.profileSaved && <button onClick={this.handleSubmit}>Save Details</button>}
+        {this.state.profileSaved && <button onClick={this.handleSubmit}>Saved!</button>}
       </form>
     }
 
