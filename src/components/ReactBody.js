@@ -36,7 +36,7 @@ class ReactBody extends React.Component {
 
       {this.props.main}
 
-      <footer><img id='footerLogo' src="/images/footerLogo.png" alt=""/></footer>
+      <footer><img id='footerLogo' src="/images/footerLogo.png" title="Made by Stephan Leece, 2017"/></footer>
 </div>
     )
   }

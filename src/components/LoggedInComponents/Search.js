@@ -75,7 +75,7 @@ userList = this.props.userResults.map((user) => <div className='result' key={use
     <h1>What are you looking for?</h1>
       <div>
       <input onChange={this.handleChange} name="searchBox" type="text"/>
-      <button onClick={this.handleSubmit}>Search Beacon</button>
+      <button onClick={this.handleSubmit}>Search beacon</button>
   </div>
     {this.props.userResults && !this.props.error && <div id='searchResults'>{userList}</div>}
       {this.props.error && <p>{this.props.error}</p>}

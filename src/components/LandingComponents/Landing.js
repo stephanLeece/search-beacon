@@ -20,7 +20,7 @@ export class Landing extends React.Component {
 
 <img id='landingImage' src="/images/landingLong.png" alt=""/>
 
-<h2>Beacon connects volunteers with charities and non-profits across the world.</h2>
+<h2>beacon connects volunteers with charities and non-profits across the world.</h2>
 <div><Link to="/register">Register</Link> or <Link to="/login">Login</Link> to get started.</div>
 
 </div>
