@@ -99,7 +99,14 @@ module.exports.getConvo = function(senderId, receiverid) {
 
 
 module.exports.getReceived = function(userId) {
-  return db.query(`SELECT * FROM  (SELECT DISTINCT ON (senderId) * FROM  convo WHERE  receiverid = $1) p ORDER BY created_at DESC;`, [userId]).then(function(results) {
+  return db.query(`SELECT * FROM
+  (
+    SELECT DISTINCT ON (senderId) convo.senderId, convo.*
+    FROM "convo"
+    WHERE "convo"."receiverid" = $1
+    ORDER BY convo.senderId DESC
+  ) distinct_convo
+  order by distinct_convo.created_at ASC;`, [userId]).then(function(results) {
     if (!results.rows[0]) {
       return 0
     } else {
@@ -114,8 +121,17 @@ module.exports.getReceived = function(userId) {
 };
 
 
+
+
 module.exports.getSent = function(userId) {
-  return db.query(`SELECT * FROM  (SELECT DISTINCT ON (receiverid)  * FROM  convo WHERE  senderId = $1) p ORDER BY created_at DESC;`, [userId]).then(function(results) {
+  return db.query(`SELECT * FROM
+  (
+    SELECT DISTINCT ON (receiverid) convo.receiverid, convo.*
+    FROM "convo"
+    WHERE "convo"."senderid" = $1
+    ORDER BY convo.receiverid DESC
+  ) distinct_convo
+  order by distinct_convo.created_at ASC;`, [userId]).then(function(results) {
     if (!results.rows[0]) {
       return 0
     } else {

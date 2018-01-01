@@ -70,7 +70,7 @@ justify-content: center;
 align-items: center;
 }
 
-#landing, #search, #messages,#convo{
+#landing, #search, #messages,#convo, #register{
   justify-content: flex-start;
 }
 
@@ -83,9 +83,8 @@ justify-content: space-around;
 }
 
 .beaconForm {
-  height: 60vh;
   width: 50%;
-
+  border: 1px solid red;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,7 +93,7 @@ justify-content: space-around;
 }
 
 .beaconForm > * {
-  margin: 1%;
+  margin: 0.5%;
 }
 
 #checkboxes {
@@ -197,7 +196,8 @@ align-items: center;
 }
 
 #messageList {
- width: 50vw;
+  border: 1px solid red;
+ width: 90vw;
  background-color: white;
  border-radius: 3px;
  display: flex;
@@ -229,12 +229,12 @@ border-bottom: 1px solid rgb(23, 12, 63);
  background-color: white;
  display: flex;
  flex-direction: column;
- justify-content: center;
+ justify-content: flex-start;
  align-items: flex-start;
  overflow-y: scroll;
  border-radius: 3px;
  width: 100%;
- max-height: 75%;
+ height: 75%;
 margin-bottom: 2%;
 }
 
