@@ -1,5 +1,4 @@
 import React from 'react';
-import * as io from 'socket.io-client';
 import ReactDOM from 'react-dom';
 import {Router, Route, Link, IndexRoute, redirect, hashHistory, browserHistory} from 'react-router';
 import ReactBody from './components/ReactBody';
