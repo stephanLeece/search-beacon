@@ -221,46 +221,47 @@ border-bottom: 1px solid rgb(23, 12, 63);
 
 #convo {
   width: 100%;
-
+  height: 85vh;
 }
 
-#convoImage {
-  max-width: 100%;
-}
-
-#convoContents {
-
-  width: 80%;
-  height: 80vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-}
 
 #convoList {
- width: 50vw;
  background-color: white;
  display: flex;
  flex-direction: column;
  justify-content: center;
  align-items: flex-start;
  overflow-y: scroll;
-max-height: 60vh;
  border-radius: 3px;
+ width: 100%;
+ max-height: 75%;
+margin-bottom: 2%;
 }
 
-#convoContents > div {
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+#chatBox {
+  /* background-color: white; */
+   border-radius: 5px;
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  height: 25%;
+  overflow: hidden;
 }
 
-#convoContents > div > * {
-  margin: 5px;
+#chatBox > textarea {
+  width: 95%;
+  height: 100%;
 }
+
+
+#sendChat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+
 
 header {
   height: 10vh;

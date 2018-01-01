@@ -33,6 +33,8 @@ CREATE TABLE userProfile(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- either make a seperate table for latestMessages or update existing with convoId
+-- convo id = senderId** + receiverid**
 
 CREATE TABLE convo(
     id SERIAL PRIMARY KEY,

@@ -90,20 +90,19 @@ class Convo extends React.Component {
     }
 
     return (<div className='main' id='convo'>
-      <h2>Chat with {this.props.OtherUserFname}</h2>
-      <div id='convoContents'>
-      <div>
-      {charPlaceHolder != this.props.OtherImage1 && volPlaceHolder != this.props.OtherImage1 && <img id='convoImage' src={this.props.OtherImage1} alt=""/>}
-      <textarea ref={textArea => this.textArea = textArea} onChange={this.handleChange} name="newMessage" rows="8" cols="80" value={this.props.newMessage}/>
-      <button onClick={this.handleSubmit}>Send</button>
-      </div>
-      <div>
-        {!this.props.messages && <p>Why not say Hello?</p>}
-        <div ref={elem => this.elem = elem} id='convoList'>{this.props.messages && messageList}</div>
 
-      </div>
-    </div>
-  </div>)
+      {!this.props.messages && <p>Why not say Hello?</p>}
+      <div ref={elem => this.elem = elem} id='convoList'>{this.props.messages && messageList}</div>
+
+
+
+      <div id = 'chatBox'>
+
+        <textarea ref={textArea => this.textArea = textArea} onChange={this.handleChange} name="newMessage" rows="8" cols="80" value={this.props.newMessage}/>
+          <div id='sendChat'><h2>Chat with {this.props.OtherUserFname}</h2>
+  <button onClick={this.handleSubmit}>Send</button></div>
+        </div>
+    </div>)
   }
 }
 
