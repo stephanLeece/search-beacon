@@ -13,8 +13,6 @@ Search Beacon lets charites and non profits find volunteers, and vice versa. Onc
 ![Landing](https://github.com/stephanLeece/search-beacon/blob/master/public/beaconLanding.png)
 --
 ![Map](https://github.com/stephanLeece/search-beacon/blob/master/public/beaconMap.png)
---
-![Profile](https://github.com/stephanLeece/grimgur-image-board/blob/master/public/grimgurMobile.png)
 
 ## Notes:
 Improvments still to be made to the messaging functions and mobile layout.
