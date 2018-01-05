@@ -10,9 +10,9 @@ Search Beacon lets charities and non profits find volunteers, and vice versa. On
 - **Databases**: PostgreSQL, AWS S3
 
 ## Preview
-![Landing](https://github.com/stephanLeece/search-beacon/blob/master/public/beaconLanding.png)
+![Landing](https://github.com/stephanLeece/search-beacon/blob/master/public/beaconLandingNew.png)
 --
-![Map](https://github.com/stephanLeece/search-beacon/blob/master/public/beaconMap.png)
+![Map](https://github.com/stephanLeece/search-beacon/blob/master/public/beaconMapNew.png)
 
 ## Notes:
 Improvements still to be made to the messaging functions and mobile layout.
