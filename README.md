@@ -1,7 +1,7 @@
 # Search Beacon
-My final project whilst i was at Spiced Academy - a 12 week full stack coding bootcamp.
+My final project whilst I was at Spiced Academy - a 12 week full stack coding bootcamp.
 
-Search Beacon lets charites and non profits find volunteers, and vice versa. Once registered, users can set up a profile, message each other and search for oppurtunities via a map or by keywords. 
+Search Beacon lets charities and non profits find volunteers, and vice versa. Once registered, users can set up a profile, message each other and search for opportunities via a map or by keywords. 
 
 ## Technologies
 - **Language**: Javascript
@@ -15,8 +15,7 @@ Search Beacon lets charites and non profits find volunteers, and vice versa. Onc
 ![Map](https://github.com/stephanLeece/search-beacon/blob/master/public/beaconMap.png)
 
 ## Notes:
-Improvments still to be made to the messaging functions and mobile layout.
-
+Improvements still to be made to the messaging functions and mobile layout.
 
 
 
