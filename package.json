@@ -50,7 +50,7 @@
     "redux-promise": "^0.5.3",
     "spiced-pg": "spicedacademy/spiced-pg",
     "uid-safe": "^2.1.4",
-    "webpack": "^2.2.0",
+    "webpack": "^3.0.0",
     "webpack-dev-middleware": "^1.8.4"
   },
   "keywords": [],
